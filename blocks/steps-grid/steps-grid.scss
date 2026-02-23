@@ -1,0 +1,177 @@
+.section-steps-grid {
+	--border-radius: 1rem;
+	--box-shadow: 0 2px 2px rgba(var(--color-text-dark-rgb), 0.15);
+	--content-padding: 2.5rem;
+	--icon-size: 100px;
+	--text-align: center;
+	--link-align: center;
+	
+	.section-image {
+		margin-bottom: 1.5rem;
+	}
+
+	.content-card {
+		--color-text-primary: var(--color-text-dark);
+		
+		background: #fff;
+		border-radius: var(--border-radius);
+		box-shadow: var(--box-shadow);
+		padding: var(--content-padding);
+		text-align: var(--text-align);
+		height: 100%;
+		display: flex;
+    	flex-direction: column;
+	}
+
+	.columns-text {
+		.content {
+			text-align: center;
+		}
+	}
+
+	.content-image {
+		width: var(--icon-size);
+		height: var(--icon-size);
+		margin:0 auto 1.5rem;
+
+		img {
+			object-fit: contain;
+		}
+	}
+	.content-title {
+		margin: 0 0 1rem;
+	}
+	.content-text p {
+		// font-size: 0.875rem;
+
+		&.subtitle {
+			font-weight: 500;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+
+			&+ p {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.content-action {
+		margin:1.5rem 0 0 0;
+		flex-direction: column;
+		flex-grow:1;
+		align-items: var(--link-align);
+		justify-content: flex-end;
+		.link {
+			font-size: var(--p-font-size);
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+
+		.column {
+			&+ .column {
+				margin-top: 1rem;
+			}
+		}
+		.columns-steps {
+			--content-padding: 1.5rem 1rem;
+			--icon-size: 5rem;
+
+			.content-card {
+				--h3-font-size: 1.25rem;
+				--p-font-size: 1rem;
+			}
+			.content-image {
+				margin-bottom: 1rem;
+			}
+		}
+		.columns-steps[data-amount-per-row-mobile="2"] {
+			display: flex;
+			flex-wrap: wrap;
+			margin-left:  calc(-1 * var(--column-padding));
+			margin-right:  calc(-1 * var(--column-padding));
+
+			.column {
+				flex-basis: 50%;
+				min-width: 50%;
+				max-width: 50%;
+				margin:0;
+				padding:0 var(--column-padding);
+				max-width: 400px;
+
+				&+ .column:nth-child(n+3) {
+					margin-top: calc(2 * var(--column-padding));
+				}
+			}
+		}
+
+
+	}
+	@media only screen and (min-width: $sm-min) {
+		
+		.columns {
+			justify-content: center;
+		}
+		.columns-text {
+			
+			.column {
+				@include grid(8,0,0);
+			}
+
+		}
+
+	}
+	@media only screen and (min-width: $sm-min) and (max-width: $sm-max) {
+
+		.columns-steps[data-amount-per-row-mobile="1"] {
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			justify-content: center;
+
+			.column {
+				@include grid($grid);
+				margin:0;
+				min-width: auto;
+				max-width: 400px;
+
+				&+ .column {
+					margin-top: calc(2 * var(--column-padding));
+				}
+			}
+		}
+		.columns-steps[data-amount-per-row-mobile="2"] {
+			.column {
+				@include grid(6);
+				margin:0;
+				min-width: auto;
+				max-width: 400px;
+
+				&+ .column:nth-child(n+3) {
+					margin-top: calc(2 * var(--column-padding));
+				}
+			}
+		}
+
+	}
+	@media only screen and (min-width: $md-min) {
+		.container {
+			max-width: 1400px;
+		}
+		.columns-steps {
+
+			.column {
+				@include grid(4,0,0);
+				min-width: auto;
+				max-width: 400px;
+
+				&+ .column:nth-child(n+4) {
+					margin-top: calc(2 * var(--column-padding));
+				}
+			}
+
+			
+
+		}
+	}
+}

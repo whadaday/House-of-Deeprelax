@@ -1,0 +1,91 @@
+.content-action {
+  --btn-spacer: 0.375rem;
+
+  @media only screen and (min-width: $sm-min) {
+    --btn-spacer: 0.5rem;
+  }
+
+  position: relative;
+  display: flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+
+  margin-left: calc(-1 * var(--btn-spacer));
+  margin-right: calc(-1 * var(--btn-spacer));
+  margin-top: calc(var(--cta-spacer) - (2 * var(--btn-spacer)));
+
+  &[data-align="align-left"] {justify-content: flex-start;}
+  &[data-align="align-center"] {justify-content: center;}
+  &[data-align="align-right"] {justify-content: flex-end;}
+
+  .btn, .link {
+    margin: calc(2 * var(--btn-spacer)) var(--btn-spacer) 0 var(--btn-spacer);
+
+    &+ .btn[data-btn-color="transparent"] {
+      margin-left: calc(2 * var(--btn-spacer));
+    }
+  }
+
+  .content-text & {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  &:first-child {
+    margin-top: 0;
+  }
+  
+}
+
+.btn[data-btn-color="transparent"] {
+  --btn-text-color: var(--color-text-primary);
+  height: auto;
+  padding:0;
+  background: transparent;
+  transition: 0.24s ease-out opacity;
+  border-radius: 0;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+
+.link-chev {
+  position: relative;
+  display: block;
+  padding-right: 1.5rem;
+
+  svg {
+    position: absolute;
+    right:0;
+    top:50%;
+    transform: translateY(-50%);
+  }
+}
+
+.btn:has(.icon-play) {
+  padding-left: 2.625rem;
+
+  svg {
+    stroke-width: 1px;
+    circle {
+      fill: transparent;
+    }
+    polygon {
+    fill: transparent;
+    stroke: #fff;
+    }
+  }
+
+  .icon-play {
+    --color-text-primary: var(--color-text-light);
+
+    position: absolute;
+    left: 0.625rem;
+    top:50%;
+    transform: translateY(-50%);
+  }
+}

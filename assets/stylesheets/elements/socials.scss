@@ -1,0 +1,50 @@
+.list-socials {
+	--social-links-size: 50px;
+	--social-icon-size: 50px;
+	--gap: 5px;
+
+	margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+	padding:0;
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none ;
+
+	.section-linktree & {
+		justify-content: center;
+	}
+
+	li { 
+		display: grid;
+		margin: var(--gap);
+		padding:0;
+	}
+
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: var(--social-links-size);
+		height: var(--social-links-size);
+		transition:0.32s ease-out opacity;      
+	}
+
+	svg {
+		width: var(--social-icon-size);
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		margin-top: 1.5rem;
+	}
+	@media only screen and (min-width: $sm-min) {
+		margin-top: 1rem;
+
+		&:hover {
+			a {
+				opacity: 0.4;
+				&:hover {
+					opacity: 1;
+				}
+			}
+		} 
+	}
+} 

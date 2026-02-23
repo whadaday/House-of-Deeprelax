@@ -1,0 +1,135 @@
+{
+    "key": "group_627e23dae3652",
+    "title": "Call to action options",
+    "fields": [
+        {
+            "key": "field_64ad9cf706605",
+            "label": "Kleur button",
+            "name": "color-btn",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "choose-bg",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_627e23dae8308",
+            "label": "Kleur secundaire button",
+            "name": "color-btn2",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "choose-bg color-button2",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_627e35bdc3e48",
+            "label": "Button uitlijning",
+            "name": "btn-align",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "De buttons kun je links, in het midden of rechts uitlijnen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "choose-options",
+                "id": ""
+            },
+            "choices": {
+                "align-left": "Links",
+                "align-center": "Gecentreerd",
+                "align-right": "Rechts"
+            },
+            "default_value": "align-left",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_637f6c73aa74e",
+            "label": "Video in lightbox",
+            "name": "btn-video",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Door deze te activeren wordt de link naar video van de button geopend in een lightbox",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_657061492ec0e",
+            "label": "Toon Appstore buttons",
+            "name": "show-appstore",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Indien geactiveerd, worden de andere buttons overschreden",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "Options",
+    "show_in_rest": 0,
+    "modified": 1704124320
+}

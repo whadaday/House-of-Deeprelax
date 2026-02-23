@@ -1,0 +1,45 @@
+{
+    "key": "group_65def35a8f248",
+    "title": "Inhoudsopgave",
+    "fields": [
+        {
+            "key": "field_65def35a62638",
+            "label": "Toon inhoudsopgave",
+            "name": "show-toc",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Door dit veld dat activeren wordt de inhoudsopgave getoond.\r\nHierin wordt automatisch een lijst gegenereerd van alle 'h2' elementen uit het artikel.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1709110204
+}

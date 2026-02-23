@@ -1,0 +1,110 @@
+{
+    "key": "group_666c0d6742f34",
+    "title": "Background inside",
+    "fields": [
+        {
+            "key": "field_666c0d9798521",
+            "label": "Toon achtergrondkleur binnenkant",
+            "name": "show-inner-color",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Door deze optie te activeren kun je de \"binnenkant\" van deze bouwsteen een andere kleur geven",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_666c0d6744030",
+            "label": "Kleur",
+            "name": "bg-inner-color",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_666c0d9798521",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-group-title group-color",
+                "id": ""
+            },
+            "clone": [
+                "group_65e76a74467bc"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_6762dd92d2633",
+            "label": "Positie",
+            "name": "bg-inner-position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_666c0d9798521",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "container": "Container",
+                "fullscreen": "Volledige breedte"
+            },
+            "default_value": "container",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "Element",
+    "show_in_rest": 0,
+    "modified": 1736412826
+}

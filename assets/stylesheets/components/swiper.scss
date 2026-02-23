@@ -1,0 +1,16 @@
+.swiper {
+	.swiper-slide {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0); /* Fallback/standard property */
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden; /* Fallback/standard property */
+		z-index: 1;
+		overflow: hidden;
+		will-change: transform;
+
+		* {
+			 -webkit-backface-visibility: hidden;
+  			backface-visibility: hidden;
+		}
+	}
+}

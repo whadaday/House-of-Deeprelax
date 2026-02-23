@@ -1,0 +1,39 @@
+.swiper-container {
+  --swiper-preloader-color: var(--color-text-primary);
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 0.375rem;
+  --swiper-pagination-bullet-inactive-color: var(--color-lightgrey);
+  --swiper-pagination-color: var(--color-cta);
+  --swiper-offset-pagination: 3rem;
+  
+  @media only screen and (max-width: $xs-max) {
+
+  }
+  @media only screen and (min-width: $sm-min) {
+    --swiper-offset-pagination: 4rem;
+  }
+
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  &.swiper-initialized {
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullets {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    bottom: 0;
+
+    .swiper-pagination-bullet {
+      margin: calc(0.5 * var(--swiper-pagination-bullet-horizontal-gap)) var(--swiper-pagination-bullet-horizontal-gap);
+    }
+  }
+
+  @media only screen and (max-width: $xs-max) {
+
+  }
+}
+

@@ -1,0 +1,106 @@
+.fancybox__container {
+
+	.is-close-btn {
+		right: auto;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.carousel__button {
+		color: var(--color-text-light);
+		background: transparent;
+		transition: 0.24s ease-out background-color;
+
+		svg {
+			transition: 0.24s ease-out transform;
+		}
+
+		&:hover {
+			background: rgba(var(--color-text-light-rgb), 0.2);
+		}
+	}
+
+	.carousel__button.is-next {
+		&:hover {
+			svg {
+				transform: translateX(0.15rem);
+			}
+		}
+	}
+	.carousel__button.is-prev {
+		&:hover {
+			svg {
+				transform: translateX(-0.15rem);
+			}
+		}
+	}
+	.carousel__button.is-close {
+		top:-3rem;
+		right: 50%;
+		transform: translateX(50%);
+
+		&:hover {
+			svg {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+	.fancybox__backdrop {
+		background: rgba(var(--color-text-dark-rgb), 0.97);
+	}
+
+	.fancybox__iframe {
+		border-radius: 0.75rem;
+		overflow: hidden;
+		transform-style: preserve-3d;
+		width: 100%;
+		  aspect-ratio: 16 / 9;
+		  max-width: 800px;
+		  height: auto;
+	}
+
+	.fancybox__content {
+		background: transparent;
+		// width: 100% !important;
+		// height: 56.25%;
+		// max-width: 800px;
+	}
+
+}
+
+.cards-nav-container {
+		display: none;
+
+		@media only screen and (min-width: $sm-min) {
+			display: flex;
+			position: absolute;
+			right:0;
+			bottom: 0;
+			z-index: 1000;
+		}
+	}	
+	.cards-nav {
+		position: relative;
+		width: 2.625rem;
+		height: 2.625rem;
+		border-radius: 50%;
+		background-repeat: no-repeat;
+		background-size: contain;
+		cursor: pointer;
+		transition: 0.24s ease-out opacity;
+
+		&.swiper-button-disabled {
+			opacity: 0.4;
+			cursor: default;
+		}
+
+		svg {
+			display: block;
+		}
+
+
+		&+ .cards-nav {
+			margin-left: 1rem;
+		}
+	}

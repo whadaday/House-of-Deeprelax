@@ -1,0 +1,72 @@
+/* -------------------------------- 
+
+File#: _1_countdown
+Title: CountDown
+Descr: Widget to display a timer
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.countdown {
+  --countdown-item-margin: 0.75rem;
+  @media only screen and (min-width: $sm-min) {
+    --countdown-item-margin: 1.5rem;
+  }
+
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin:1.5rem calc(-1 * var(--countdown-item-margin));
+
+  &[data-align="center"] {
+    justify-content: center;
+  }
+
+  .countdown__timer {
+    display: flex;
+  }
+
+  .countdown__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:0 var(--countdown-item-margin);
+
+    @media only screen and (max-width: $xs-max) {
+     
+    }
+    @media only screen and (min-width: $sm-min) {
+
+    }
+  }
+
+  .countdown__value {
+    font-size: 2.5rem;
+
+    @media only screen and (max-width: $xs-max) {
+     
+    }
+    @media only screen and (min-width: $sm-min) {
+      font-size: 4rem;
+    }
+  }
+
+  .countdown__label {
+    font-family: var(--font-third);
+    font-weight: 400;
+    color: var(--color-text-main);
+    margin: 0;
+    letter-spacing: 0.14rem;
+    text-transform: uppercase;
+    line-height: 1.4;
+    display: block;
+    font-size: 8px;
+
+    @media only screen and (max-width: $xs-max) {
+     
+    }
+    @media only screen and (min-width: $sm-min) {
+      font-size: 10px;
+    }
+  }
+}

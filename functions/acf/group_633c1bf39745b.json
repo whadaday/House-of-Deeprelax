@@ -1,0 +1,130 @@
+{
+    "key": "group_633c1bf39745b",
+    "title": "Pagina opties",
+    "fields": [
+        {
+            "key": "field_633c1c1ed1eeb",
+            "label": "Kleur navigatie",
+            "name": "navigation-color",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "Selecteer hier de kleur van de navigatie.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "choose-bg",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 1,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_64d2014ba30a6",
+            "label": "Toon call to action",
+            "name": "show-cta",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Deze call to action wordt (indien geactiveerd) onderaan de pagina getoond en is in te stellen in \"Site options\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_641193d79a405",
+            "label": "Sales pagina",
+            "name": "hide-nav-footer",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Selecteer om de navigatie en de footer te verbergen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_642ed7c4783d9",
+            "label": "Call to action link",
+            "name": "cta-overrule",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Vul hier een url in om alle call to actions op deze pagina te overschrijven.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_641193d79a405",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "book"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landingpage"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1737552556
+}

@@ -1,0 +1,136 @@
+.section-benefits {
+
+	--link-font-size: 1.125rem;
+
+	.content-image {
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom: 0;
+	}
+
+	.link {
+		font-weight: var(--body-font-weight-bold);
+	}
+
+	.image-benefits {
+		position: relative;
+
+
+		&[data-ratio="portrait"] {
+	    padding-bottom: var(--ratio-portrait);
+	  }
+	  &[data-ratio="square"] {
+	    padding-bottom: var(--ratio-square);
+	  }
+	  &[data-ratio="landscape"] {
+	   padding-bottom: var(--ratio-landscape);
+	  }
+	}
+	
+	.section-image {
+		margin-bottom: 1.5rem;
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		.content-title {
+			margin-top: 1.5rem;
+		}
+	}
+	@media only screen and (min-width: $sm-min) {
+		
+		.columns {
+			justify-content: center;
+		}
+		.columns-text {
+			
+			.column {
+				@include grid(8,0,0);
+			}
+			.content {
+				text-align: center;
+			}
+
+		}
+		.columns-benefits {
+			--column-padding: 1.5rem;
+			margin-top: calc(0.75 * var(--section-padding));
+		}
+
+	}
+	@media only screen and (min-width: $sm-min) and (max-width: $sm-max) {
+		.columns-benefits {
+			&[data-columns="2"],
+			&[data-columns="3"],
+			&[data-columns="4"] {
+				.column {
+					@include grid(6,0,0);
+
+					&:nth-child(n+3) {
+						margin-top: var(--column-y-spacer);
+					}
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: $md-min) {
+		.columns-benefits {
+			&[data-columns="2"] {
+				justify-content: flex-start;
+
+				.column {
+					@include grid(4,0,0);
+
+					&:nth-child(2n+1) {
+						margin-left: var(--grid-2-column);
+					}
+					&:nth-child(2n) {
+						margin-right: var(--grid-2-column);
+					}
+
+					&:nth-child(n+3) {
+						margin-top: var(--column-y-spacer);
+					}
+				}
+			}
+			&[data-columns="3"] {
+				.column {
+					@include grid(4,0,0);
+					
+					&:nth-child(n+4) {
+						margin-top: var(--column-y-spacer);
+					}
+				}	
+			}
+			&[data-columns="4"] {
+				.column {
+					@include grid(3,0,0);
+
+					&:nth-child(n+5) {
+						margin-top: var(--column-y-spacer);
+					}
+				}	
+			}
+		}
+	}
+	@media only screen and (min-width: $lg-min) {
+		.columns-text {
+			
+			.column {
+				@include grid(5,0,0);
+			}
+
+		}
+		// .columns-benefits {
+
+		// 	.column {
+		// 		@include grid(3,0,0);
+		// 	}
+
+		// }
+	}
+	@media only screen and (min-width: $xl-min) {
+		
+	}
+}

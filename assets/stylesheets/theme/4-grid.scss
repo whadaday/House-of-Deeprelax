@@ -1,0 +1,55 @@
+@mixin grid($size, $offsetLeft: 0, $offsetRight: 0) {
+    flex-basis:var(--grid-#{$size}-column);
+    min-width:var(--grid-#{$size}-column);
+    max-width:var(--grid-#{$size}-column);
+
+    @if $offsetLeft != 0 {
+        margin-left: var(--grid-#{$offsetLeft}-column);
+    } @else {
+        margin-left: 0;
+    }
+
+    @if $offsetRight != 0 {
+        margin-right: var(--grid-#{$offsetRight}-column);
+    } @else {
+        margin-right: 0;
+    }
+}
+
+$i: 1;
+$grid: 12;
+
+:root {
+    @while $i <= $grid {
+       --grid-#{$i}-column: #{devide($i, $grid)};
+       $i: $i + 1;
+    }
+
+    --grid-1-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 1 ) - (2 * var(--column-padding)) );
+    --grid-2-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 2 ) - (2 * var(--column-padding)) );
+    --grid-3-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 3 ) - (2 * var(--column-padding)) );
+    --grid-4-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 4 ) - (2 * var(--column-padding)) );
+    --grid-5-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 5 ) - (2 * var(--column-padding)) );
+    --grid-6-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 6 ) - (2 * var(--column-padding)) );
+    --grid-7-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 7 ) - (2 * var(--column-padding)) );
+    --grid-8-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 8 ) - (2 * var(--column-padding)) );
+    --grid-9-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 9 ) - (2 * var(--column-padding)) );
+    --grid-10-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 10 ) - (2 * var(--column-padding)) );
+    --grid-11-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 11 ) - (2 * var(--column-padding)) );
+    --grid-12-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 12 ) - (2 * var(--column-padding)) );
+
+    // @media only screen and (min-width: 1640px) {
+    //     --grid-1-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 1 ) - (2 * var(--column-padding)) );
+    //     --grid-2-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 2 ) - (2 * var(--column-padding)) );
+    //     --grid-3-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 3 ) - (2 * var(--column-padding)) );
+    //     --grid-4-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 4 ) - (2 * var(--column-padding)) );
+    //     --grid-5-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 5 ) - (2 * var(--column-padding)) );
+    //     --grid-6-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 6 ) - (2 * var(--column-padding)) );
+    //     --grid-7-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 7 ) - (2 * var(--column-padding)) );
+    //     --grid-8-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 8 ) - (2 * var(--column-padding)) );
+    //     --grid-9-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 9 ) - (2 * var(--column-padding)) );
+    //     --grid-10-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 10 ) - (2 * var(--column-padding)) );
+    //     --grid-11-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 11 ) - (2 * var(--column-padding)) );
+    //     --grid-12-column-vw: calc( ( (1640px - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 12 ) - (2 * var(--column-padding)) );
+    // }
+}

@@ -1,0 +1,7 @@
+@function devide($a, $b) {
+  @return percentage($a / $b);
+}
+
+@function hexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
+}

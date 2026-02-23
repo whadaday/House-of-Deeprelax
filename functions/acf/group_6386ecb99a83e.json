@@ -1,0 +1,102 @@
+{
+    "key": "group_6386ecb99a83e",
+    "title": "Kennisbank artikelen",
+    "fields": [
+        {
+            "key": "field_6386ecb99e603",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6386ecb99e60a",
+            "label": "Filter op",
+            "name": "kennisbank-filter",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Filter op categorie of selecteer handmatig artikelen",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "latest": "Laatste berichten",
+                "custom": "Handmatig"
+            },
+            "default_value": "latest",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6386ecb99e615",
+            "label": "Artikelen",
+            "name": "kennisbank-filter-articles",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Selecteer welke artikelen je wilt tonen.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6386ecb99e60a",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "kennisbank"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 1,
+            "allow_null": 0,
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "widget",
+                "operator": "==",
+                "value": "widget_kennisbank"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Widget",
+    "show_in_rest": 0,
+    "modified": 1669787181
+}

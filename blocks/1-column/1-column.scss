@@ -1,0 +1,128 @@
+.section-1-column {
+
+	&:not([data-whitespace-top]) {
+		--noheader-padding: 0;
+	}
+
+	.image-holder,
+	.video-holder {
+		position: absolute;
+	}
+
+	.image-link-overlay {
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom: 0;
+		display: flex;
+		justify-content: center; 
+		align-items: center;
+		transition: 0.24s ease-out background-color;
+		overflow: hidden;
+		transform : translateZ(0);
+		transform-style: preserve-3d;
+		border-radius: var(--border-radius);
+
+		&:hover {
+			background-color: rgba(0,0,0,0.12);
+
+			.btn-video {
+				transform: scale3d(1.1,1.1,1);
+				background: var(--color-text-light);
+			}
+		}
+	}
+
+	.btn-video {
+		width: 4rem;
+		height: 4rem;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items:center;
+		transition: 0.24s ease-out transform, 0.24s ease-out background-color;
+	} 
+
+	.icon-play {
+		--color-text-primary: var(--btn-text-color);
+
+		svg {
+			display: block;
+			width:1.25rem;
+			margin-left: 0.25rem;
+		}
+
+		path {
+			fill: var(--color-text-dark);
+		}
+	}
+
+	.columns {
+
+		// Set min height
+		&[data-height="large"] {min-height: 50vw;}
+		&[data-height="fullscreen"] {min-height: 100vh;}
+		&[data-height="large"] {
+			.column {
+				padding-top: var(--section-padding);
+				padding-bottom: var(--section-padding);
+			}
+		}
+		&[data-height="fullscreen"] {
+			.column {
+				padding-top: calc(1.5 * var(--section-padding));
+				padding-bottom: calc(1.5 * var(--section-padding));
+			}
+		}
+
+		&[data-width="fullscreen"] {
+			--border-radius: 0;
+		}
+
+		// Blurred
+		&[data-blurred="1"] {
+			.content {
+				padding: 3.25rem;
+				background-color: rgba(255,255,255,0.3);
+				backdrop-filter: blur(10px);
+				border-radius: var(--border-radius);
+			}
+		}
+	}
+	
+	@media only screen and (max-width: $xs-max) {
+		.columns {
+
+			// Blurred
+			&[data-blurred="1"] {
+				.content {
+					padding: 1.5rem;
+				}
+			}
+
+		}
+	}
+	@media only screen and (min-width: $sm-min) {}
+	@media only screen and (min-width: $md-min) {}
+	@media only screen and (min-width: $lg-min) {}
+
+	@media only screen and (min-width: $xxl-min) {
+
+		// Bypass for larger screens
+		// .columns {
+		// 	&[data-height="large"],
+		// 	&[data-height="fullscreen"] {
+		// 		min-height: 75vh;
+		// 	}
+		// }
+		// .content-image {
+		// 	width: 100vw;
+		// 	right: auto;
+		// 	// left: calc(-1 * ( (100vw - var(--site-width)) / 2 ));
+		// 	left:0;
+		// }
+	}
+}

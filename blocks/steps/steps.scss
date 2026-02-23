@@ -1,0 +1,250 @@
+.section-steps {
+	overflow: hidden;
+
+	.columns-text {
+		text-align: center;
+	}
+	.column-text {
+		opacity: 1;
+	}
+
+	.content + .content {
+		padding-top: 0;
+	}
+
+	.content-image {
+		width: 100%;
+		.image-holder {
+			position: absolute;
+		}
+	}
+
+	.column-image {
+		&[data-ratio="landscape"] {
+			.content-image,
+			.steps-pagination-container {
+				padding-bottom: 75%;
+			}
+		}
+		&[data-ratio="square"] {
+			.content-image,
+			.steps-pagination-container {
+				padding-bottom: 100%;
+			}
+		}
+		&[data-ratio="portrait"] {
+			.content-image,
+			.steps-pagination-container {
+				padding-bottom: 120%;
+			}
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+
+		.column {
+			flex-basis:100%;
+		}
+
+		.columns-steps {
+			margin-top: var(--column-y-spacer);
+		}
+
+		.swiper-slide {
+			flex-basis: calc(100vw - (2 * var(--container-padding)) - (2 * var(--column-padding)) );
+			width: calc(100vw - (2 * var(--container-padding)) - (2 * var(--column-padding)) );
+		}
+
+		.step-image {
+			overflow: hidden;
+	    	border-radius: var(--border-radius);
+		}
+
+		.column-image {
+			&[data-ratio="landscape"],
+			&[data-ratio="square"],
+			&[data-ratio="portrait"] {
+				.content-image,
+				.steps-pagination-container {
+					padding-bottom: 75%;
+				}
+			}
+		}
+
+
+		.steps-text-holder {
+			padding-bottom: var(--swiper-offset-pagination);
+		}
+
+		.columns-steps {
+			margin-left: calc(-1 * var(--container-padding));
+			margin-right: calc(-1 * var(--container-padding));
+		}
+
+		.swiper-container {
+			padding-left: var(--container-padding);
+			padding-right: var(--container-padding);
+		}
+		
+	}
+	@media only screen and (min-width: $sm-min) {
+
+		.columns-text {
+			justify-content: center;
+		}
+
+		.columns-steps {
+			align-items: flex-start;
+		}
+
+		.swiper-pagination {
+			display: none;
+		}
+		/* Swiper js bug fixes */
+		.column-image {
+			position: relative;
+			top:0;
+
+			.content {
+				overflow: visible;
+			}
+		}
+		.column-text {
+			@include grid(4,2);
+			order:-1;
+
+			.gallery-inner {
+				flex-direction: column;
+			}
+		}
+		.content-step {
+			max-width: 340px;
+			transition: 0.48s ease-out opacity;
+			opacity: 0;
+
+			&.active {
+				opacity: 1;
+			}
+		}
+
+		.column-image {
+			@include grid(4);
+		}
+
+	}
+}
+
+
+
+.steps-images-holder {
+	list-style: none;
+	margin:0;
+	padding:0;
+	position: relative;
+
+	@media only screen and (max-width: $xs-max) {
+
+	}	
+
+	@media only screen and (min-width: $sm-min) {
+
+		.step-image-holder {
+			overflow: hidden;
+	    	border-radius: var(--border-radius);
+	    	backface-visibility: hidden;
+    		transform: translate3d(0, 0, 0);
+			max-height: calc(100vh - (2 * var(--section-padding)));
+			display: flex;
+			align-items: center;
+		}
+
+		.img-background {
+			bottom: -10%;
+		}
+
+		.step-image {
+			position: relative;
+			opacity: 0;
+			transition:0.64s ease-out opacity;
+
+			&:nth-child(1) {z-index: 1;}
+			&:nth-child(2) {z-index: 2;}
+			&:nth-child(3) {z-index: 3;}
+			&:nth-child(4) {z-index: 4;}
+			&:nth-child(5) {z-index: 5;}
+			&:nth-child(6) {z-index: 6;}
+			&:nth-child(7) {z-index: 7;}
+			&:nth-child(8) {z-index: 8;}
+			&:nth-child(9) {z-index: 9;}
+			&:nth-child(10) {z-index: 10;}
+
+			&.active {
+				opacity: 1;
+			}
+
+			&:not(:first-child) {
+				position: absolute;
+				left:0;
+				right:0;
+				top:0;
+				bottom:0;
+			}
+		}
+	}
+}
+
+.steps-text-holder {
+	@media only screen and (min-width: $sm-min) {
+		.content-step {
+			height: calc(100vh - (2 * var(--section-padding)));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
+
+.column-pagination {
+	@include grid(1);
+	height: 411px;
+	background: red;
+}
+
+
+.steps-pagination-container {
+	@media only screen and (max-width: $xs-max) {
+		display: none;
+	}
+	@media only screen and (min-width: $sm-min) {
+		position: relative;
+		@include grid(3);
+		z-index: 10;
+		padding-bottom: 100%;
+	}
+}
+
+.steps-pagination {
+	position: absolute;
+	right:0;
+	top:50%;
+	transform: translateY(-50%);
+	margin:0;
+	padding:0;
+	list-style: none;
+
+	li {
+		width:10px;
+		height: 10px;
+		border-radius: 50%;
+		border:0;
+		background: rgba(var(--color-cta-rgb), 0.2);
+
+		&+ li {
+			margin-top: 0.5rem;
+		}
+
+		&.active {
+			background: var(--color-cta);
+		}
+	}
+}

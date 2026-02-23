@@ -1,0 +1,131 @@
+.section-guides {
+
+	.btn-container {
+		overflow: hidden;
+		border-radius: 2rem;
+		background: #E6E1DC;
+	}
+	.btn-group {
+		overflow: hidden;
+		border-radius: 2rem;
+		padding:5px;
+		display: flex;
+		overflow-x: scroll;
+		
+		.btn {
+			--btn-text-color: var(--color-text-dark);
+			transition: none;
+
+			&:not(.active) {
+				background: transparent;
+				box-shadow: none;
+			}
+			&.active {
+				background: #fff;
+				pointer-events: none;
+			}
+
+			&:hover {
+				transform: none;
+			}
+
+			&+ .btn {
+				margin-left: 0.5rem;
+			}
+		}
+	}
+
+	.content-guide {
+		background: var(--color-guide);
+		padding-bottom: 100%;
+		padding: 2.5rem 2.25rem;
+		border-radius: var(--border-radius);
+		display: none;
+
+		&.show {
+			display: block;
+		}
+
+		.content-image {
+			max-width: 80%;
+			margin-bottom: 3.5rem;
+
+			picture {
+				position: relative;
+			}
+		}
+		h3 {
+			margin-bottom: 3rem;
+		}
+	}
+
+	.list-guides {
+		margin:0;
+		padding:0;
+		list-style: none;
+		li {
+			padding:1.5rem 0;
+			margin:0;
+			font-size: 1.5rem;
+			line-height: 1;
+			border-bottom: 1px solid #E6E1DC;
+			cursor: pointer;
+			display: none;
+
+			&.show {
+				display: block;
+			}
+
+			&.active {
+				font-weight: 700;
+			}
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+
+	}
+	@media only screen and (min-width: $sm-min) {
+		.columns-text {
+			text-align: center;
+			.column {
+				@include grid($grid);
+			}
+			p {
+				max-width: var(--content-width-l);
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		.columns-guides-buttons {
+			.column {
+				@include grid($grid);
+				.content {
+					display: flex;
+					justify-content: center;
+				}
+			}
+		}
+		.columns-guides {
+			justify-content: center;
+		}
+		.column-guide {
+			@include grid(4,1);
+			order:-1;
+		}
+		.column-guide-list {
+			@include grid(4,1);
+		}
+		.content-guide {
+			margin-left: calc(-2 * var(--column-padding));
+			margin-right: calc(-2 * var(--column-padding));
+		}
+		.btn-group {
+			.btn {
+				&+ .btn {
+					margin-left: 1.25rem;
+				}
+			}
+		}
+	}
+}

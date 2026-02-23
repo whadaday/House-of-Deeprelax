@@ -1,0 +1,21 @@
+{
+  "scripts": {},
+  "repository": {},
+  "description": "CodeKit created this starter package.json file. You should customize it appropriately.",
+  "version": "1.0.0",
+  "dependencies": {
+    "@fancyapps/ui": "^5.0.33",
+    "@tinymce/tinymce-jquery": "^2.1.0",
+    "eric-meyer-reset": "^2.0.0",
+    "feather-icons": "^4.29.1",
+    "gsap": "^3.11.3",
+    "headroom.js": "^0.12.0",
+    "jquery": "^3.6.1",
+    "scrollmagic": "^2.0.8",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.0.6"
+  },
+  "name": "codekit-project",
+  "license": "UNLICENSED",
+  "author": ""
+}

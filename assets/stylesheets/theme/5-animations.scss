@@ -1,0 +1,66 @@
+.content-animate {
+  .content {
+    opacity: 0;
+    transition: opacity 0.32s ease-in-out;
+  }
+  &.show .content {
+    opacity: 1;
+  }
+}
+
+.content-animate-reveal {
+
+  @media only screen and (max-width: $xs-max) {
+    --animation-speed-backwards: 0.48s;
+    --animation-speed-forwards: 0.48s;
+
+    .content-image {
+      transition: var(--animation-speed-backwards) clip-path ease 0s,
+            var(--animation-speed-backwards) transform ease 0s,
+            var(--animation-speed-backwards) opacity ease 0s;
+      clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+      opacity: 0;
+    }
+
+    &.show {
+      .content-image {
+        transition: var(--animation-speed-forwards) clip-path ease 0.24s,
+              var(--animation-speed-forwards) transform ease 0s,
+              var(--animation-speed-forwards) opacity ease 0s;
+
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+        opacity: 1;
+      }
+    }
+  }
+  @media only screen and (min-width: $sm-min) {
+    --animation-speed-backwards: 0.96s;
+    --animation-speed-forwards: 0.96s;
+
+    .content-image {
+      transition: var(--animation-speed-backwards) clip-path ease 0s,
+            var(--animation-speed-backwards) transform ease 0s,
+            var(--animation-speed-backwards) opacity ease 0s;
+      clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    [data-reverse="1"] & {
+      .content-image {
+        clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+        transform: translateX(100%);
+      }
+    }
+    &.show {
+      .content-image {
+        transition: var(--animation-speed-forwards) clip-path ease 0s,
+              var(--animation-speed-forwards) transform ease 0s,
+              var(--animation-speed-forwards) opacity ease 0s;
+
+        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
+}

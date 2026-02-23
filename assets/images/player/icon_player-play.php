@@ -1,0 +1,7 @@
+<svg class="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 94 94" style="enable-background:new 0 0 94 94;" xml:space="preserve">
+<g>
+	<path d="M61.6,44.5L41.5,32.7c-0.5-0.3-1-0.4-1.5-0.4c-1.7,0-3,1.3-3,3V59c0,0.5,0.1,1.1,0.4,1.5c0.8,1.4,2.7,1.9,4.1,1l20.1-11.9
+		c0.4-0.3,0.8-0.6,1.1-1.1c0,0,0,0,0,0C63.5,47.2,63,45.4,61.6,44.5z"/>
+</g>
+</svg>

@@ -1,0 +1,51 @@
+.tooltip {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dotted var(--color-cta);
+  text-decoration: none;
+
+  &:before {
+  	content: attr(data-title);
+  	visibility: hidden;
+	width: 300px;
+	font-size: 0.875rem;
+	padding:1rem;
+	background-color: var(--color-text-dark);
+	color: #fff;
+	text-align: center;
+	border-radius: 0.5rem;
+
+	left:50%;
+	bottom: calc(100% + 0.75rem);
+	transform:translateX(-50%);
+
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-index: 1000;
+	pointer-events:none;
+  }
+
+  &:after {
+  	content: " ";
+  	visibility: hidden;
+  	pointer-events:none;
+	position: absolute;
+	bottom: 100%; /* At the bottom of the tooltip */
+	transform: translateY(0.25rem) translateX(calc(-50% + 0.5rem));
+	left: 50%;
+	margin-left: -0.5rem;
+	border-width: 0.5rem;
+	border-style: solid;
+	border-color: var(--color-text-dark) transparent transparent transparent;
+  }
+
+  	@media only screen and (min-width: $sm-min) and (hover: hover) and (pointer: fine) {
+		&:hover {
+			border-bottom: 1px dotted var(--color-cta);
+		  	text-decoration: none;
+		  	&:before, &:after {
+		  		visibility: visible;
+		  	}
+		}
+	}
+}

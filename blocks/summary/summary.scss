@@ -1,0 +1,154 @@
+ .single-guide {
+ 	 .section-summary .list-toc {
+ 	 	max-width: 100%;
+
+ 	 	li {
+ 	 		counter-increment: section;
+ 	 		padding-left: 2.25rem;
+
+ 	 		&:after {
+	 			content: counter(section, decimal-leading-zero);
+	 			letter-spacing: 0.016rem;
+	 			font-size: 0.875rem;
+	 			text-transform: uppercase;
+	 			position: absolute;
+	 			display: flex;
+	 			align-items: center;
+	 			left: 0;
+	 			right:0;
+	 			bottom: -1px;
+	 			height: 100%;
+	 			border-bottom: 1px solid var(--border-color);
+	 		}
+ 	 	}
+
+ 	 	@media only screen and (min-width: $sm-min) {
+	 		column-count: 2;
+		 	column-gap: 1.25rem;
+		 	column-break-inside: avoid;
+		 	counter-reset: section;
+	 	}
+ 	 }
+ }
+
+ .section-summary {
+
+ 	.list-toc {
+	 	--border-color: var(--color-lightgrey);
+
+	 	position: relative;
+	 	list-style: none;
+	 	margin:1.75rem 0 0 0;
+	 	padding:0;
+	 	
+
+	 	li {
+	 		position: relative;
+	 		margin:0;
+	 		padding:1rem 0 1rem 0;
+	 		font-size: 0.875rem;
+	 		
+
+	 		&:before {
+	 			content: "";
+	 			position: absolute;
+	 			left: 0;
+	 			right:0;
+	 			top: 0;
+	 			height: 1px;
+	 			background: var(--border-color);
+	 		}
+	 	}
+
+	 	@media only screen and (max-width: $xs-max) {
+
+		}
+		@media only screen and (min-width: $sm-min) {
+			max-width: var(--content-width-s);
+		}
+
+	 	
+	}
+
+	picture {
+		position: relative;
+	}
+
+
+ 	.columns {
+ 		&:before {
+			content: "";
+			position: absolute;
+			top:4.5rem;
+			bottom: 0;
+			background: #fff;
+			box-shadow: var(--box-shadow-small);
+			border-radius: var(--guide-border-radius);
+		}
+ 	}
+
+ 	img {
+ 		margin:0 auto;
+ 	}
+ 	
+ 	p {
+ 		max-width: var(--content-width-s);
+ 	}
+
+ 	@media only screen and (max-width: $xs-max) {
+	 	.columns {
+	 		&:before {
+	 			left: calc(-1 * var(--container-padding) + 1rem);
+				right: calc(-1 * var(--container-padding) + 1rem);
+	 		}
+	 	}
+	 	.column-image {
+	 		padding:0 3rem;
+	 	}
+	 	.column-text {
+	 		.content {
+	 			padding: 0 1.75rem 3rem;
+	 		}
+	 	}
+	 	.content-toc {
+	 		margin-top: 3rem;
+	 	}
+	}
+
+ 	@media only screen and (min-width: $sm-min) {
+ 		.columns {
+ 			align-items: stretch;
+
+ 			&:before {
+ 				left: var(--column-padding);
+				right: var(--column-padding);
+ 			}
+	 	}
+	 	.column {
+	 		@include grid(6);
+	 	}
+	 	.column-text {
+	 		.content {
+	 			padding: calc(var(--section-padding) + 4.5rem) 3rem calc(0.5 * var(--section-padding));
+	 		}
+	 	}
+	 	.column-image {
+	 		@include grid(5,1);
+	 		padding-right: 3rem;
+	 		.content {
+	 			position: sticky;
+	 			top: var(--section-padding);
+	 			padding-bottom: calc(0.5 * var(--section-padding));
+	 		}
+	 	}
+
+	 	.content-toc {
+	 		margin-top: 4rem;
+	 	}
+ 	}
+ 	@media only screen and (min-width: $xl-min) {
+ 		.column-image {
+	 		@include grid(4,1,1);
+	 	}
+ 	}
+ }

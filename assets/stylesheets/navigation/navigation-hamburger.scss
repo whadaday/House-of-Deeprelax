@@ -1,0 +1,110 @@
+.toggle-menu {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    position: relative;
+    z-index: 1001;
+    background-color: transparent;
+    margin-left: auto;
+    padding:0;
+    right:0;
+    height: var(--hamburger-holder-size);
+    width: var(--hamburger-holder-size);
+    border-radius: 50%;
+    transition:0.24s ease-out background-color;
+
+    &:hover {
+        --color-text-primary: var(--color-text-dark);
+        background: var(--color-lightgrey);
+    }
+
+    &:active {
+        .hamburger-holder {
+            transform: scale(0.8);
+        }
+    }
+}
+
+.hamburger-holder {
+    position: relative;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    transition: 0.16s ease transform;
+}
+
+.hamburger {
+
+    display: inline-block;
+    position: relative;
+    width: var(--hamburger-size);
+    height: 1.5px;
+    background-color: var(--color-text-primary);
+    transition: 0.16s ease background-color;
+
+    &::before,
+    &:after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: var(--color-text-primary);
+        right: 0;
+        transition: 0.16s ease background-color;
+    }
+
+    &::before {
+        top: -6px;
+    }
+
+    &::after {
+        top: 6px;
+    }
+
+    .hamburger-close &,
+    .hamburger-close:hover & {
+        transform: rotate(45deg);
+        background-color: transparent !important;
+
+        &::before {
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+        &::after {
+            top: 0;
+            transform: rotate(0deg);
+
+        }
+
+        &::before,
+        &::after {
+            background-color: var(--color-text-primary);
+        }
+    }
+
+    @media only screen and (max-width: $xs-max) {
+        .menu-open & {
+            transform: rotate(45deg);
+            background-color: transparent !important;
+
+            &::before {
+                top: 0;
+                transform: rotate(90deg);
+            }
+
+            &::after {
+                top: 0;
+                transform: rotate(0deg);
+
+            }
+
+            &::before,
+            &::after {
+                background-color: var(--color-text-primary);
+            }
+        }
+    }
+
+}

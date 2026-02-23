@@ -1,0 +1,51 @@
+// .list-404 {
+// 	display: inline-block;
+// 	list-style: none;
+// 	padding:0;
+// 	margin:1.5rem 0 0 0;
+
+// 	li {
+// 		position: relative;
+// 		line-height: 1;
+
+// 		&+ li {
+// 			margin-top: 1rem;
+// 		}
+
+// 		&:before {
+// 			content: "-";
+// 			line-height: 1;
+// 			display: block;
+// 			position: absolute;
+// 			top:50%;
+// 			transform: translateY(-50%);
+// 			left:0;
+// 			transition: 0.24s ease-out opacity;
+// 		}
+// 		padding-left: 1.25rem;
+// 	}
+
+// 	a {
+// 		transition: 0.24s ease-out opacity;
+// 		line-height: 1;
+// 	}
+
+// 	&:hover {
+// 		a {
+// 			opacity: 0.4;
+// 			&:hover {
+// 				opacity: 1;
+// 			}
+// 		}
+// 		li {
+// 			&:before {
+// 				opacity: 0.4;
+// 			}
+// 			&:hover {
+// 				&:before {
+// 					opacity: 1;
+// 				}
+// 			}
+// 		}
+// 	}
+// }

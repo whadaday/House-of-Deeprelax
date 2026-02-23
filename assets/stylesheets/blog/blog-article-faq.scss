@@ -1,0 +1,18 @@
+.content-article-faq {
+	.columns-accordion {
+		margin:0;
+		display: block;
+	
+		.column {
+			padding:0;
+			max-width: 100%;
+			min-width: auto;
+			margin:0;
+		}
+		.column-text {
+			margin-bottom: 2rem;
+			text-align: left;
+		}
+
+	}
+}

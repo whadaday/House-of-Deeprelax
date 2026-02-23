@@ -1,0 +1,1 @@
+<?php include( locate_template( 'partials/elements/embed.php', false, false ) ); ?>

@@ -1,0 +1,114 @@
+.section-blog-carousel,
+.section-blog-related {
+
+	overflow: hidden;
+
+	--progressbar-height: 3px;
+
+	.swiper-pagination-progressbar { 
+		bottom: 0;
+		top: auto;
+	}
+	.swiper-container {
+		padding-bottom: 5rem;
+
+		&:has(.swiper-pagination-lock) {
+			padding-bottom: 0;
+
+			.guide-nav-container {
+				display: none;
+			}
+		}
+	}
+	.swiper-pagination-progressbar {
+		background: rgba(204,200,196,0.35);
+		height: var(--progressbar-height);
+		border-radius: 2rem;
+		overflow: hidden;
+		width: auto;
+		
+		bottom: 1.5rem;
+
+		.swiper-pagination-progressbar-fill {
+			background: rgba(147,154,167,0.35);	
+		}
+	}
+
+	.columns-blog {
+		margin-left: 0; 
+		margin-right: 0;
+
+		.swiper-container {
+			@include grid(12); 
+		}
+	} 
+
+	.swiper-slide {
+		&:nth-child(3n + 1) {
+			.card-image-holder {
+				background: var(--color-lightgrey);
+				&:before {
+					content: none;
+				}
+			}
+			.content-image {
+				display: none;
+			}
+			.card-content {
+				--color-text-primary: var(--color-text-dark);
+			}
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		.guide-nav-container {
+			display: none;
+		}
+		.swiper-pagination-progressbar {
+			right: 0;
+		}
+		.swiper-slide {
+			flex-basis: calc(100vw - (2 * var(--container-padding)) - (2 * var(--column-padding)) );
+			width: calc(100vw - (2 * var(--container-padding)) - (2 * var(--column-padding)) );
+		}
+		.columns-header {
+			--column-y-spacer: 1rem;
+		}
+	}
+	@media only screen and (min-width: $sm-min) {	
+		.columns-header {
+			display: flex;
+			align-items: flex-end;
+
+			&+ .columns-blog {
+				margin-top: 2rem;
+			}
+
+			.column {
+				flex-basis: auto;
+				min-width: auto;
+				max-width: 100%;
+			}
+			.column-action {
+				display: flex;
+				align-items: flex-end;
+				margin-top: 0;
+				margin-left: 0.25rem;
+				padding-bottom: 0.625rem;
+			}
+		}
+		.guide-nav-container {
+			position: absolute;
+			right:0;
+			bottom: calc(var(--progressbar-height) / 2);
+
+			.guide-nav {
+				left: auto;
+				right: calc(-0.33 * var(--guide-nav-size));
+			}
+		}
+		.swiper-pagination-progressbar {
+			right: 5.75rem;
+		}
+	}
+}

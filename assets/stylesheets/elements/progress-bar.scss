@@ -1,0 +1,18 @@
+.bar-progress {
+  --bar-progress-height: 0.5rem;
+  position: fixed;
+  left:0;
+  top:var(--nav-menu-height);
+  width: 0%;
+  height: var(--bar-progress-height);
+  background-color: var(--color-cta);
+  margin:0;
+  padding:0;
+  z-index: 999;
+  transform:translateY(-100%);
+  transition:0.64s cubic-bezier(.16,1.08,.38,.98) transform, 0.64s cubic-bezier(.16,1.08,.38,.98) top;
+
+  &.bar-show {
+    transform:translateY(0%);
+  }
+}

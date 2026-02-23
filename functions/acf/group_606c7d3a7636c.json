@@ -1,0 +1,56 @@
+{
+    "key": "group_606c7d3a7636c",
+    "title": "Image crop",
+    "fields": [
+        {
+            "key": "field_606c7d42c6e62",
+            "label": "Uitsnede",
+            "name": "crop",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "center": "Midden",
+                "left-center": "Links midden",
+                "right-center": "Rechts midden",
+                "left-top": "Links boven",
+                "right-top": "Rechts boven",
+                "center-top": "Midden boven",
+                "left-bottom": "Links onder",
+                "right-bottom": "Rechts onder",
+                "center-bottom": "Midden onder"
+            },
+            "default_value": "center",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "image"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617726513
+}

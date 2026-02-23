@@ -1,0 +1,17 @@
+.bg-gradient {
+	position: absolute;
+	left:0;
+	right:0;
+	bottom: 0;
+	height: var(--section-padding);
+	background: linear-gradient(0deg, rgba(var(--color-background-rgb),1) 0%, rgba(var(--color-background-rgb),0) 85%);
+
+	&[data-size="large"] {
+		height: calc(3 * var(--section-padding));
+	}
+	&[data-position="top"] {
+		top: 0;
+		bottom: auto;
+		background: linear-gradient(180deg, rgba(var(--color-background-rgb),1) 0%, rgba(var(--color-background-rgb),0) 85%);
+	}
+}

@@ -1,0 +1,370 @@
+// FORMS ------------------------------------------------------------------------------------
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(var(--color-text-primary), 0.7);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(var(--color-text-primary), 0.7);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(var(--color-text-primary), 0.7);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(var(--color-text-primary), 0.7);
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+ -webkit-box-shadow: 0 0 0 30px var(--color-text-light) inset !important;
+}
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+ -webkit-text-fill-color: var(--color-text-dark) !important;
+}
+
+input[type=checkbox] {
+  width: 1rem !important;
+  outline: none;
+}
+
+// SELECTION ------------------------------------------------------------------------------------
+
+::selection {
+  background-color: var(--color-cta);
+  color: var(--color-text-light);
+}
+
+img::selection {
+  background-color: rgba(var(--color-cta-rgb), 0.4);
+  color: var(--color-text-light);
+}
+
+.grecaptcha-badge { 
+    visibility: hidden !important;
+}
+
+.content,
+.popup-content {
+	.wpforms-container-full:not(:empty) {
+		// Layout
+		--form-max-width: 420px;
+		--column-padding: 10px;
+		--field-spacer: 1.125rem;
+
+		// Input
+		--input-height: 3.25rem;
+		--input-border-radius: 0.25rem;
+		--input-border: 0;
+		--input-outline-width: 0;
+		--input-outline-color: rgba(var(--color-text-light-rgb), 0);
+		--input-outline-color-focus: rgba(var(--color-text-light-rgb), 0.5);
+		--input-outline-color-error: rgba(255,0,0, 0.5);
+		--input-padding: 1.25rem;
+		--input-text-color: var(--color-text-dark);
+		--input-background: #fff;
+		--input-font-family: var(--p-font-family);
+    --input-font-size: var(--p-font-size);
+    --input-font-weight: var(--p-font-weight);
+    --input-font-style: var(--p-font-style);
+    --input-letter-spacing: var(--p-letter-spacing);
+    --input-text-transform: var(--p-text-transform);
+    --input-text-decoration: var(--p-text-decoration);
+
+		// Button
+		--btn-background-color: var(--color-text-light);
+		--btn-background-color-hover: var(--color-text-light);
+		--btn-text-color: var(--color-text-dark);
+		--btn-min-width: 11.5rem;
+
+		--wpforms-button-background-color: var(--color-cta);
+
+		@media only screen and (min-width: $sm-min) {
+			--field-spacer: 1rem;
+		}
+
+		margin:3rem 0 0;
+		width:100%;
+		max-width: 380px;
+
+		.wpforms-form {
+			max-width: var(--form-max-width);
+			margin-left: auto;
+			margin-right: auto;
+			
+			// General  
+			* {
+				word-break: break-word;
+    		hyphens: none;
+    	}
+
+			// Layout
+			.wpforms-field-layout {
+				position: relative;
+
+				.wpforms-field-layout-columns {
+					position: relative;
+					margin:0;
+
+					.wpforms-layout-column {
+						position: relative;
+					}
+
+					@media only screen and (max-width: $xs-max) {
+						display: block;
+						margin:0;
+						
+						.wpforms-layout-column {
+							width: 100%;
+							padding:0;
+
+							&+ .wpforms-layout-column {
+								margin-top: var(--field-spacer);
+							}
+						}
+					}
+					@media only screen and (min-width: $sm-min) {
+						display: flex;
+						margin:0 calc(-1 * var(--column-padding));
+
+						.wpforms-layout-column {
+							padding: 0 var(--column-padding);
+						}
+					}
+				}
+			}
+
+			// Field
+			.wpforms-field {
+				padding:0;
+				overflow: visible !important;
+				&+ .wpforms-field {
+					margin-top: var(--field-spacer);
+				}
+			
+
+				// Label
+				.wpforms-field-label {
+					@include style(h6);
+					position: absolute;
+					left: var(--input-padding);
+					color: var(--color-text-dark-secondary);
+					font-weight: 400;
+					font-size: 1rem;
+					margin:0;
+					line-height: 1;
+					transition:0.16s ease-out all;
+					pointer-events:none;
+					top:1.15rem;
+				}
+
+				// Required label
+				.wpforms-required-label {
+					display: none;
+				}
+
+				&.active, &.filled {
+					.wpforms-field-label {
+						font-size: 10px;
+						top:0.75rem;
+					}
+					select.wpforms-field-medium {
+						color: var(--color-text-primary) !important;
+					}
+				}
+
+				&.wpforms-has-error {
+					.wpforms-field-label {
+						color: red;
+					}
+				}
+
+				// Input
+				input[type=date],
+				input[type=datetime],
+				input[type=datetime-local],
+				input[type=email],
+				input[type=month],
+				input[type=number],
+				input[type=password],
+				input[type=range],
+				input[type=search],
+				input[type=tel],
+				input[type=text],
+				input[type=time],
+				input[type=url],
+				input[type=week] {
+					height: var(--input-height);
+					padding-left: var(--input-padding);
+					padding-right: var(--input-padding);
+				}
+				select {
+					
+				}
+				textarea {
+					padding-left: var(--input-padding);
+					padding-right: var(--input-padding);
+					padding-top: 1.125rem;
+					resize: none;
+				}
+
+				input[type=date],
+				input[type=datetime],
+				input[type=datetime-local],
+				input[type=email],
+				input[type=month],
+				input[type=number],
+				input[type=password],
+				input[type=range],
+				input[type=search],
+				input[type=tel],
+				input[type=text],
+				input[type=time],
+				input[type=url],
+				input[type=week],
+				select,
+				textarea {
+					--input-color-placeholder-rgb: var(--color-text-dark-rgb);
+					border-radius: var(--input-border-radius);
+					border: var(--input-border);
+					background: var(--input-background);
+					outline: var(--input-outline-width) solid var(--input-outline-color);
+					color: var(--input-text-color);
+					line-height: 1;
+					margin:0;
+			    font-family: var(--input-font-family);
+			    font-size: var(--input-font-size);
+			    font-weight: var(--input-font-weight);
+			    font-style: var(--input-font-style);
+			    letter-spacing: var(--input-letter-spacing);
+			    text-transform: var(--input-text-transform);
+			    text-decoration: var(--input-text-decoration);
+			    box-shadow: none;
+			    max-width: 100%;
+			    height: 3.5rem;
+			    padding-top: 0.75rem;
+
+					&.wpforms-error {
+						 box-shadow: none;
+						border: var(--input-border);
+						outline: var(--input-outline-width) solid var(--input-outline-color-error);
+					}
+
+					&:focus {
+						 box-shadow: none;
+						outline: var(--input-outline-width) solid var(--input-outline-color-focus);
+					}
+				}
+
+				// Error label
+				em.wpforms-error {
+					display: none !important;
+				}
+
+			}
+
+			// Consent
+			.consent {
+				.wpforms-field-label {
+					display: none;
+				}
+				label {
+					color: var(--color-text-primary);
+					font-size: 0.75rem;
+				}
+				a {
+					color: var(--color-text-primary);
+				}
+			}
+
+			// Submit
+			.wpforms-submit-container {
+				padding:0;
+				margin-top: var(--field-spacer);
+				position: relative;
+				display: flex;
+				justify-content: center;
+
+				@media only screen and (min-width: $sm-min) {
+					justify-content: flex-end;
+				}
+				@media only screen and (min-width: $lg-min) {
+					
+				}
+			
+				.wpforms-submit-spinner {
+					position: absolute;
+			    margin: 0;
+			    top: 50%;
+			    transform: translate(-50%, -50%);
+			    left: 50%;
+			    display: none;
+				}
+				.wpforms-submit,
+				input[type=submit],
+				button[type=submit], 
+				.wpforms-page-button {
+					@include btn;
+					min-width: auto;
+					background: var(--color-cta);
+					color: var(--color-text-light);
+					outline: none;
+
+					&:hover {
+						background: var(--color-cta-darker);
+						color: var(--color-text-light);
+					}
+
+					[data-color="sunshine"] & {
+						background: var(--color-text-light);
+						color: var(--color-text-dark);
+						outline: none;
+
+						&:hover {
+							background: var(--color-text-light-secondary);
+							color: var(--color-text-dark);
+						}
+					}
+
+					&:before,
+					&:after {
+						display: none;
+					}
+				}
+			}
+
+			// Terms
+			.wpforms-field.terms {
+				margin-top: 1rem;
+				p {
+					@include style(small);
+					text-align: left;
+				}
+
+				@media only screen and (max-width: $xs-max) {
+
+				}
+				@media only screen and (min-width: $sm-min) {
+			
+				}
+				@media only screen and (min-width: $lg-min) {
+					
+				}
+			}
+
+		}
+
+		.wpforms-confirmation-container-full {
+			background: #fff;
+			border-radius: 0.25rem;
+			border:0;
+			box-shadow: none;
+			outline: none;
+			padding:1.5rem;
+		}
+	}
+
+
+}

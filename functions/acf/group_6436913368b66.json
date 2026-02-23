@@ -1,0 +1,54 @@
+{
+    "key": "group_6436913368b66",
+    "title": "Volgorde",
+    "fields": [
+        {
+            "key": "field_6436913334067",
+            "label": "Volgorde",
+            "name": "order",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Hoe lager het getal, hoe eerder dit item wordt getoond",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "guide"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "guide_type"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1700554963
+}

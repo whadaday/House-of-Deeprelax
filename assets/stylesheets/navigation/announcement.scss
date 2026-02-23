@@ -1,0 +1,32 @@
+#nav-announcement {
+
+	@media only screen and (max-width: $xs-max) {
+		--p-font-size: 0.75rem;
+	}
+	@media only screen and (min-width: $sm-min) {
+		--p-font-size: 0.875rem;
+	}
+
+	--p-line-height: 1.1;
+	--color-text-link: var(--color-text-primary);
+	pointer-events:all;
+
+	a {
+		text-decoration: none;
+		font-weight: var(--body-font-weight-bold);
+		transition: 0.24s ease-out opacity;
+
+		&:hover {
+			opacity: 0.4;
+		}
+	}
+
+	background: var(--color-background);
+	.content {
+		text-align: center;
+		height: var(--announcement-height);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

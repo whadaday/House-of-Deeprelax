@@ -1,0 +1,60 @@
+/*!
+Theme Name: House of Deeprelax
+Theme URI: 
+Version: 0.8.7.6
+Author: Angelo Vaudo
+Author URI: https://www.beamthe.me
+Description: House of Deeprelax Wordpress Theme 
+License: 
+License URI: 
+Text Domain: let.it.beam 
+Tags: 
+*/
+
+@import '../../node_modules/eric-meyer-reset/eric-meyer-reset';
+@import '../../node_modules/@fancyapps/ui/dist/fancybox/fancybox';
+@import '../../node_modules/swiper/swiper-bundle';
+
+@import 'theme/*.scss';
+@import '../../../../plugins/beam-popup/beam-popup.scss';  
+      
+@import 'components/*.scss'; 
+@import 'elements/*.scss';
+@import '../../blocks/**/*';
+@import 'blog/*.scss';  
+@import 'reviews/*.scss';   
+@import 'navigation/*.scss'; 
+@import 'shortcodes/*.scss'; 
+@import 'kennisbank/*.scss'; 
+@import 'klantenservice/*.scss'; 
+@import 'guide/*.scss'; 
+
+
+.grid-view {
+	display: none;
+	
+	@media only screen and (min-width: $sm-min) {
+		position: fixed; 
+		left:0;
+		right:0;
+		top:0;
+		bottom: 100vh;
+		z-index: 100000;
+		pointer-events: none;
+
+		&.active {
+			display: block;
+		}
+
+		.column {
+			@include grid(1);
+		}
+
+		.content {
+			background: rgba(144,255,255,0.4);
+			height: 100vh;
+			border-left: 1px solid rgba(144,255,255,0.2);
+			border-right: 1px solid rgba(144,255,255,0.2);
+		}
+	}
+}

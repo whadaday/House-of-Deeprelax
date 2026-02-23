@@ -1,0 +1,122 @@
+:root {
+
+    --body-font-weight-bold: 600;
+    --color-text-link: var(--color-cta);
+
+    --ratio-landscape: 56.25%;
+    --ratio-square: 100%;
+    --ratio-portrait: 115%;
+
+    // List styles
+    --list-margin: 1rem 0;
+    --list-padding: 0 0 0 1rem;
+    --list-item-spacer: 1.6125rem;
+
+    --li-font-family: var(--p-font-family);
+    --li-font-size: var(--p-font-size);
+    --li-font-weight: var(--p-font-weight);
+    --li-font-style: var(--p-font-style);
+    --li-line-height: var(--p-line-height);
+    --li-letter-spacing: var(--p-letter-spacing);
+    --li-text-transform: var(--p-text-transform);
+    --li-text-decoration: var(--p-text-decoration);
+    --li-margin: 0;
+
+
+    // Btn styles
+    --btn-font-family:            var(--font-primary);
+    --btn-font-style:             normal;
+    --btn-font-weight:            400;
+    --btn-font-size:              0.875rem;
+    --btn-background-color:       var(--color-text-dark);
+    --btn-background-color-hover: #60504d;
+    --btn-text-color:             var(--color-text-light);
+    --btn-height:                 2.625rem;
+    --btn-min-width:              auto;
+    --btn-border-radius:          2rem;
+    --btn-padding:                0 1.25rem;
+    --btn-letter-spacing:         0;
+    --btn-border:                 0;
+    --btn-text-transform:         normal;
+    --btn-shadow:                 none; //0 2px 2px rgba(0,0,0,0.16);
+
+    // Link styles
+    --link-font-family:            var(--p-font-family);
+    --link-font-style:             var(--p-font-style);
+    --link-font-weight:            500;
+    --link-font-size:              var(--btn-font-size);
+    --link-text-color:             var(--color-text-primary);
+    --link-text-color-hover:       var(--color-text-primary);
+    --link-text-color:             var(--color-text-primary);
+    --link-height:                 auto;
+    --link-border-radius:          0;
+    --link-text-transform:         normal;
+    --link-padding:                0;
+    --link-letter-spacing:         0;
+    --link-border:                 0;
+
+    /* Link */
+    --link-font-family: var(--font-primary);
+
+    --border-radius: 1rem;
+    --border-radius-small: 0.5rem;
+    --border-radius-xl: 2.875rem;
+    --guide-border-radius: 2.625rem;
+
+    --site-width: 100%;
+    --site-width: 1440px;
+
+    --content-width-s: 330px;
+    --content-width-m: 450px;
+    --content-width-l: 580px;
+    --content-width-xl: 680px;
+
+    --color-background: var(--body-background-color);
+
+    --color-error: #b00020;
+
+    --fancybox-accent-color: var(--color-cta);
+
+
+    --box-shadow: 0 2px 2px rgba(0,0,0,0.16);
+    --box-shadow-small: 0 10px 10px rgba(var(--color-text-dark-rgb), 0.08);     
+}
+@media screen and (max-width: $xs-max) {
+    :root {
+        --noheader-padding: var(--nav-height);
+        --column-padding: 0.5rem;
+        --column-y-spacer: 2.5rem;
+        --container-padding: 1rem;
+        --container-padding-small: 1rem;
+        --section-padding: 3rem;
+    }
+}
+@media screen and (min-width: $sm-min) {
+    :root {
+        --btn-font-size: 1rem;
+
+        --noheader-padding: var(--nav-height);
+        --column-padding: 0.5rem;
+        --column-y-spacer: 3rem;
+        --container-padding: 4.125rem;
+        --container-padding-small: 1.5rem;
+        --section-padding: 5rem; 
+    }
+}
+@media screen and (min-width: $lg-min) {
+    :root {
+        --section-padding: 7.5rem;
+    }
+}
+
+
+.icon-arrow {
+    width: 1.15rem;
+    margin-left: 0.75rem;
+
+    svg {
+        width:100%;
+        transition: 0.24s ease-out transform;
+        height: auto;
+    }
+}

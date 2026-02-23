@@ -1,0 +1,85 @@
+.section-compare {
+	--border-color: rgba(var(--color-text-primary-rgb), 0.4);
+
+	h2 {
+		@include style(h1);
+	}
+
+	p {
+		max-width: var(--content-width-s);
+	}
+
+	@media only screen and (min-width: $sm-min) {
+		.columns-header {
+			.column {
+				@include grid($grid);
+			}
+		}
+		.columns-contradictions {
+			
+			.column-text {
+				@include grid(5,0);
+			}
+			.column-contradictions {
+				@include grid(6,1);
+			}
+		}
+	}
+
+	@media only screen and (min-width: $md-min) {
+		.columns-contradictions {
+			margin-top: var(--section-padding);
+
+			.column-contradictions {
+				@include grid(5,1);
+			}
+		}
+	}
+	@media only screen and (min-width: $lg-min) {
+		.columns-header {
+			.column {
+				@include grid(10,1);
+			}
+		}
+		.columns-contradictions {
+
+			.column-text {
+				@include grid(4,1);
+			}
+		}
+	}
+}
+
+.list-contradictions {
+	position: relative;
+	border-bottom: 1px solid var(--border-color);
+	margin:0;
+	padding:0;
+	counter-reset: section;
+
+	li {
+		counter-increment: section;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding:2.5rem 0 2.5rem 1.625rem;
+		border-top: 1px solid var(--border-color);
+
+		&:before {
+			position: absolute;
+			content: counter(section, decimal-leading-zero);
+			font-size: 0.875rem;
+			letter-spacing: 0.016rem;
+			text-transform: uppercase;
+			left:0;
+			top:1.5rem;
+		}
+	}
+}
+.contradiction-title {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+.contradiction-subtitle {
+	font-size: 1rem;
+}

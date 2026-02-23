@@ -1,0 +1,82 @@
+.section-marquee {
+    --section-padding: 1.75rem;
+    .container {
+        max-width: 100%;
+        padding:0;
+    }
+
+    &[data-color="forest-green"] {
+        --color-text-primary: var(--color-conscious-green);
+    }
+
+}
+.marquee {
+    position: relative;
+    overflow: hidden;
+    --amount: 7;
+    --offset: 20vw;
+    --move-initial: calc(-14.2857142857% + var(--offset));
+    --move-final: calc(-28.5714285714% + var(--offset));
+
+    &[data-size="large"] {
+        --move-duration: 15s;
+        --marquee-font-size: 40px;
+        h4 {
+            @include style(h1);
+            font-size: var(--marquee-font-size);
+            margin-right: 5rem;
+        }
+    }
+    &[data-size="small"] {
+        --move-duration: 20s;
+        --marquee-font-size: 1.125rem;
+        h4 {
+            font-weight: 400;
+            font-family: var(--font-primary);
+            font-size: var(--marquee-font-size);
+
+            b,strong {
+                font-weight: 800;
+                font-family: var(--font-secondary);
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
+    @media only screen and (min-width: $sm-min) {
+        &[data-size="large"] {
+             --move-duration: 20s;
+            --marquee-font-size: 80px;
+        }
+        &[data-size="small"] {
+
+        }
+    }
+}
+
+.marquee__inner {
+    width: fit-content;
+    display: flex;
+    position: relative;
+    transform: translate3d(var(--move-initial), 0, 0);
+    animation: marquee var(--move-duration) linear infinite;
+    animation-play-state: running;
+}
+
+.marquee h4 {
+    position: relative;
+    line-height: 1;
+    margin:0;
+    white-space: nowrap;
+    margin-right: 5rem;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate3d(var(--move-initial), 0, 0);
+    }
+
+    100% {
+        transform: translate3d(var(--move-final), 0, 0);
+    }
+}

@@ -1,0 +1,67 @@
+.content-article-share {
+	display: flex;
+
+	.share-title {
+		font-family:var(--font-primary);
+	  font-weight: 600;
+	  color: var(--color-text-primary);
+	  text-transform: uppercase;
+	  letter-spacing: 0.08em;
+	  font-size: 12px;
+	  height: 2.25rem;
+	  display: flex;
+	  align-items: center;
+	  margin:0.25rem 0.5rem 0.25rem 0;
+	}
+
+	.heateor_sss_sharing_ul {
+		display: flex !important;
+		flex-wrap: wrap;
+		a {
+			margin:0 !important;
+			&:hover {
+				.heateor_sss_svg {
+					background: transparent !important;
+				}
+			}
+		}
+	}
+
+	.heateor_sss_svg {
+		width:2.25rem !important;
+		height: 2.25rem !important;
+		background: #fff !important;
+		border:1px solid #fff !important;
+		transition: 0.24s ease-out background-color !important;
+
+		svg {
+			padding:3px;
+		}
+	}
+	.heateor_sss_s_linkedin {
+		svg {
+			padding:6px;
+		}
+	}
+	.heateor_sss_no_fill {
+		fill:none;
+		stroke: var(--color-text-primary);
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		margin-top: 1.5rem;
+		flex-direction: column;
+		align-items: center;
+
+		.heateor_sss_svg {
+			margin:0.25rem !important;
+		}
+	}
+	@media only screen and (min-width: $sm-min) {
+		margin-top: 2.5rem;
+
+		.heateor_sss_svg {
+			margin:0.25rem 0.5rem !important;
+		}
+	}
+}

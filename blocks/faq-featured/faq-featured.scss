@@ -1,0 +1,135 @@
+.section-faq-featured {
+	--column-padding: 1rem;
+
+	.column {
+		.content {
+			background: var(--color-white);
+			border-radius: var(--border-radius);
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+		}
+	}
+
+	.content {
+		&:hover {
+			.faq-title {
+				color: var(--color-cta);
+			}
+			.icon-play {
+				--color-icon: var(--color-cta);
+			}
+		}
+	}
+
+	.faq-title {
+		display: block;
+		@include style(h3);
+		margin:0;
+		position: relative;
+		text-align: left;
+		text-wrap: pretty; 
+		transition: 0.24s ease-out color;
+		padding: 2rem;
+	}
+	.faq-title-link {
+		padding-left: 5.25rem;
+		&+ .content-action {
+	  	padding-left: 5.25rem;
+	  }
+	}
+
+	.icon-play {
+		--color-icon: var(--color-text-dark);
+		display: block;
+		position: absolute;
+	    left: 2rem;
+	    top:50%;
+	    transform: translateY(-50%);
+	    z-index: 1;
+
+		svg {
+		    width: 2.25rem;
+			height: auto;
+		    stroke-width: 1px;
+		    stroke: var(--color-icon);
+		    transition: 0.24s ease-out stroke;
+		    circle {
+		      
+		    }
+		    polygon {
+			    stroke: var(--color-icon);
+			    fill: transparent;
+			    transition: 0.24s ease-out stroke;
+		    }
+		}
+	}
+
+	.content-action {
+		// display: none;
+		margin-top: 0;
+		justify-content: flex-start;
+
+		.link {
+			margin-top: 0.75rem;
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		.column {
+			&+ .column {
+				margin-top: 1rem;
+			}
+		}
+	}
+	@media only screen and (min-width: $sm-min) {
+		.content {
+			height: 100%;
+			display: flex;
+    		flex-direction: column;
+		}
+		.content-action {
+			flex-grow: 1;
+    		align-items: flex-end;
+		}
+	}
+	@media only screen and (min-width: $sm-min) and (max-width: $sm-max) {
+		.columns {
+
+		}
+		.column {
+			@include grid(12);
+			
+			&+ .column {
+				margin-top: 2rem;
+			}
+
+			.content {
+				max-width: 440px;
+    			margin: 0 auto;
+			}
+		}
+		
+	}
+	@media only screen and (min-width: $md-min) and (max-width: $md-max) {
+		.column {
+			@include grid(6);
+			
+			&:nth-child(n+3) {
+				margin-top: 2rem;
+			}
+		}
+		
+		
+	}
+	@media only screen and (min-width: $lg-min) {
+		.column {
+			@include grid(4);
+			
+			&:nth-child(n+4) {
+				margin-top: 2rem;
+			}
+		}
+	}
+	@media only screen and (min-width: $xl-min) {
+	
+	}
+}

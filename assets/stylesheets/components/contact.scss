@@ -1,0 +1,16 @@
+.section.section-contact {
+	background: var(--color-lightgrey);
+	text-align: center;
+
+	@media only screen and (max-width: $xs-max) {
+	
+	}
+	@media only screen and (min-width: $sm-min) {
+		.columns {
+			justify-content: center;
+		}
+		.column {
+			@include grid(6);
+		}
+	}
+}

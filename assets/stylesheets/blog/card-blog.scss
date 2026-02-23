@@ -1,0 +1,238 @@
+.card-blog {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: var(--border-radius);
+	transform: translateZ(0) translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    perspective: none;
+    transition: 0.24s ease-out box-shadow;
+
+    &:hover {
+    	box-shadow: var(--box-shadow);
+
+    	.card-date span span {
+			transform: translateY(-100%);
+		}
+		img {
+			opacity: 0.9;
+		}
+		.content-image {
+			transform: scale3d(1.025,1.025,1) translateZ(0);
+		}
+		.card-btn {
+			width: var(--card-width);
+			&:after {
+				opacity: 0;
+			}
+			span {
+				opacity: 1;
+				transform: translateX(0);
+				transition: 0.16s ease-out opacity 0.12s, 0.24s ease-out transform;
+			}
+		}
+    }
+
+	.card-btn {
+		--btn-size: 3rem;
+		
+		position: absolute;
+		background: #fff;
+		box-shadow: var(--box-shadow-small);
+		width: var(--btn-size);
+		height: var(--btn-size);
+		border-radius: 2rem;
+		cursor: pointer;
+		z-index:10;
+		bottom: 0;
+		left:0;
+		display: flex;
+		align-items: center;
+		transition: 0.24s ease-out width;
+
+		&:after {
+			content: "";
+			position: absolute;
+			left:0;
+			right:0;
+			top:0;
+			bottom: 0;
+			background-size: 1rem;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url('assets/images/icon-arrow-right.svg');
+			opacity: 1;
+			transition:0.12s ease-out opacity;
+		}
+
+		span {
+			white-space: nowrap;
+			color: var(--color-text-dark);
+			padding:0 1.5rem;
+			opacity: 0;
+			transform: translateX(-10%);
+			transition: 0.12s ease-out opacity, 0.12s ease-out transform;
+		}
+	}
+
+	img {
+		transition: 0.24s ease-out opacity;
+	}
+
+	.card-link {
+		display: block;
+		cursor: pointer;
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom: 0;
+		z-index: 2;
+	}
+
+	.card-image-holder {
+		position: relative;
+    	padding-bottom: 120%;
+    	box-shadow: 0;
+		border-radius: var(--border-radius);
+		transform: translateZ(0) translate3d(0,0,0);
+	    -webkit-backface-visibility: hidden;
+	    perspective: none;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left:0;
+			right:0;
+			top:0;
+			bottom: 2.125rem;
+			opacity: 0.94;
+			z-index: 1;
+			background: rgba(var(--color-text-dark-rgb),0.4);
+			background: linear-gradient(0deg, rgba(var(--color-text-dark-rgb), 0) 0%, rgba(var(--color-text-dark-rgb), 0.16) 46%, rgba(var(--color-text-dark-rgb), 0.8) 100%);
+			mix-blend-mode: multiply;
+			transform: translate3d(0,0,0);
+			z-index: 10;
+		}
+	}
+
+	.content-image {
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		transition: 0.24s ease-out transform;
+	}
+
+	img {
+		bottom: 0;
+	}
+
+	.card-content {
+		--color-text-primary: var(--color-text-light);
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: absolute;
+		left:2rem;
+		right:2rem;
+		top:2.625rem;
+		bottom: 2.125rem;
+		transform: translate3d(0,0,0);
+	}
+
+	.card-category {
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+
+	.card-title {
+		font-weight: 600;
+		transition: 0.24s ease-out color;
+	}
+
+	.card-text {
+		font-size: 0.75rem;
+		margin:0 0 1rem;
+		opacity: 0.6;
+	}
+
+	.card-date {
+		position: relative;
+		padding-top: 0.875rem;
+		min-width: 75px;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left:0;
+			right:0;
+			top:0;
+			height: 1px;
+			background: var(--color-brand-primary);
+		}
+
+		> span {
+			position: relative;
+			display: block;
+			height: 10px;
+			overflow: hidden;
+
+			> span {
+				position: relative;
+				display: block;
+				font-size: 10px;
+				letter-spacing: 0.08em;
+				line-height: 1;
+				transition: 0.24s ease-out transform;
+
+				&:after {
+					content: "Lees verder";
+					position: absolute;
+					left:0;
+					right:0;
+					font-size: 10px;
+					height: 10px;
+					letter-spacing: 0.08em;
+					line-height: 1;
+					transform:translateY(100%);
+					transition: 0.24s ease-out transform;
+					color: var(--color-text-primary);
+				}
+			}
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		.card-title {
+			font-size: 1.75rem;
+		}
+		.card-category {
+			font-size: 0.75rem;
+		}
+	}
+	@media only screen and (min-width: $sm-min) {
+		.card-title {
+			font-size: 2rem;
+		}
+		.card-category {
+			font-size: 0.875rem;
+		}
+	}
+	@media only screen and (min-width: $md-min) {
+		.card-title {
+			font-size: 2rem;
+		}
+	}
+	@media only screen and (min-width: $xl-min) {
+
+	}
+}

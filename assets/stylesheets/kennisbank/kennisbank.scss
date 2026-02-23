@@ -1,0 +1,114 @@
+.section-kennisbank-az {
+	@media only screen and (min-width: $sm-min) {
+		.columns-kennisbank-az,
+		.columns-header {
+			justify-content: center;
+			.column {
+				@include grid($grid);
+				min-width: auto;
+				max-width: 524px;
+			}
+		}
+	}
+}
+
+.kennisbank-article {
+	position: relative;
+	padding-bottom: 1.5rem;
+	&+ .kennisbank-article {
+		&:before {
+			content: "";
+			position: absolute;
+			height: 1px;
+			top:0;
+			background: var(--color-coconut);
+			left: calc(-2 * var(--column-padding));
+			right: calc(-2 * var(--column-padding));
+		}
+		padding-top: 1.5rem;
+	}
+	&:last-child {
+		padding-bottom: 0;
+	}
+}
+
+.kennisbank-character {
+	h3 {
+		font-family: var(--font-primary);
+	}
+
+	&+ .kennisbank-character {
+		margin-top: 3.75rem;
+	}
+}
+
+.list-alphabet {
+	position: sticky;
+	z-index: 10;
+	top:0;
+	display: flex;
+	margin:0;
+	padding:1.25rem 0;
+	list-style: none;
+	margin-bottom: 2.5rem;
+
+	a,span {
+		line-height: 1;
+		font-size: 1.15rem;
+		text-transform: uppercase;
+		display: block;
+		font-weight: 400;
+		padding:0 0.25rem;
+	}
+
+	li {
+		display: block;
+		line-height: 1;
+
+		&+ li {
+			margin-top: 0;
+		}
+	}
+
+	span {
+		color: rgba(var(--color-text-dark-rgb), 0.6);
+	}
+
+	a {
+		font-weight: 700;
+		color: var(--color-text-dark);
+		&:hover {
+			color: var(--color-cta);
+		}
+	}
+
+	@media only screen and (max-width: $xs-max) {
+		overflow: scroll;
+		margin-left: calc(-1 * var(--container-padding));
+		margin-right: calc(-1 * var(--container-padding));
+		background: var(--color-silver);
+
+		li {
+			&:first-child {
+				padding-left: calc(1 * var(--container-padding) - 0.25rem);
+			}
+			&:last-child {
+				padding-right: calc(1 * var(--container-padding) - 0.25rem);
+			}
+		}
+	}
+	@media only screen and (min-width: $sm-min) {
+		justify-content: space-between;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: calc(-2 * var(--column-padding));
+			right: calc(-2 * var(--column-padding));
+			top:0;
+			bottom: 0;
+			background: var(--color-silver);
+			z-index: -1;
+		}
+	}
+}

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# CodeKit
+.codekit-cache/
+config.codekit3
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Claude Code
+.claude/
+
+# Log files
+*.log

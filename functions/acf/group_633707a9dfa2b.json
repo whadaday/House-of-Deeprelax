@@ -1,0 +1,133 @@
+{
+    "key": "group_633707a9dfa2b",
+    "title": "Blog artikelen",
+    "fields": [
+        {
+            "key": "field_633707a9e77f0",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_633707a9f3046",
+            "label": "Filter op",
+            "name": "blog-filter",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Filter op categorie of selecteer handmatig artikelen",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "latest": "Laatste berichten",
+                "custom": "Handmatig"
+            },
+            "default_value": "latest",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_633707a9f304b",
+            "label": "Categorie",
+            "name": "blog-filter-category",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Optioneel. Laat leeg om alle categorieën te tonen.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_633707a9f3046",
+                        "operator": "==",
+                        "value": "latest"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_633707a9f3051",
+            "label": "Artikelen",
+            "name": "blog-filter-articles",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Selecteer welke artikelen je wilt tonen.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_633707a9f3046",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "post"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "id",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "widget",
+                "operator": "==",
+                "value": "widget_blog"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Widget",
+    "show_in_rest": 0,
+    "modified": 1669787193
+}

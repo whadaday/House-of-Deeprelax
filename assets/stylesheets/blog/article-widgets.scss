@@ -1,0 +1,93 @@
+aside {
+	// max-width: 260px;
+
+	@media only screen and (max-width: $xs-max) {
+		margin:0 auto;	
+	}
+	@media only screen and (min-width: $sm-min) {
+		position: sticky;
+		top: 1.5rem;
+	}
+}
+
+.widget {
+	position: relative;
+
+	.widget-image {
+		transition:0.24s ease-out opacity;
+	}
+
+	.widget-content {
+		padding:1.375rem 1rem;
+	}
+
+	.widget-title {
+		margin-bottom: 1.375rem;
+	}
+
+	.content-action {
+		margin-top: 1.375rem;
+	}
+}
+
+.widget-ad {
+	--color-text-primary: var(--color-text-light);
+	background: var(--color-lever);
+	box-shadow: 0 6px 16px rgba(0,0,0,0.16);
+	border-radius: var(--border-radius);
+
+	.widget-link {
+		display: block;
+		background: #fff;
+		padding-bottom: 66%;
+
+		&:hover {
+			.widget-image {
+				opacity: 0.9;
+			}
+		}
+	}
+
+	@media only screen and (min-width: $sm-min) {
+		margin-left: calc(-2 * var(--column-padding));
+   	 margin-right: calc(-2 * var(--column-padding));
+  }
+  @media only screen and (min-width: $sm-min) and (max-width: $sm-max) {
+  	position: relative;
+  	left: calc(-2 * var(--column-padding));
+  }
+}
+
+.widget-blog {
+
+}
+
+.list-featured {
+	margin:-1rem 0 0 0;
+	padding:0;
+	list-style: none;
+	counter-reset: custom-counter;
+
+	li {
+		counter-increment: custom-counter;
+		padding-left: 1.5rem;
+		position: relative;
+		&+ li {
+			border-top: 1px solid rgba(var(--color-text-primary-rgb), 0.16);
+		}
+		&:before {
+			content: counter(custom-counter)".";
+			position: absolute;
+			left:0;
+			width: 1.5rem;
+			font-size: 13px;
+			top:1rem;
+		}
+	}
+	a {
+		font-size: 13px;
+		line-height: 1.5;
+		padding:1rem 0;
+		display: block;
+	}
+}

@@ -1,0 +1,824 @@
+{
+    "key": "group_63f6095726e9a",
+    "title": "2 columns",
+    "fields": [
+        {
+            "key": "field_63f60957299e3",
+            "label": "Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_63f60957299f3",
+            "label": "Content",
+            "name": "content",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "remove-group-label",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_65e9745131a95",
+                    "label": "Soort media",
+                    "name": "media-type",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "Je kunt hier een afbeelding, YouTube\/Vimeo embed of een achtergrond video tonen.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "choose-options",
+                        "id": ""
+                    },
+                    "choices": {
+                        "image": "Afbeelding",
+                        "embed": "Embed",
+                        "video": "Video",
+                        "text": "Tekst"
+                    },
+                    "default_value": "image",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_65e974dc31a96",
+                    "label": "Afbeelding",
+                    "name": "media-image",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "hide-group-title group-image",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_65e74fdbd80bd"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 1
+                },
+                {
+                    "key": "field_65e9755531a97",
+                    "label": "Video",
+                    "name": "media-video",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "video"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "hide-group-title group-video",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_65e70a7fb027b"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 1
+                },
+                {
+                    "key": "field_63f609572aa43",
+                    "label": "YouTube \/ Vimeo",
+                    "name": "embed",
+                    "aria-label": "",
+                    "type": "oembed",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "embed"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "width": "",
+                    "height": ""
+                },
+                {
+                    "key": "field_6705ea340cee3",
+                    "label": "Tekst",
+                    "name": "text-2",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_63f609572df98",
+                    "label": "Tekst",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_63f609572df9d",
+                    "label": "Call to action",
+                    "name": "cta",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_627e1ed9c853e"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_666c954399e22",
+                    "label": "Toon secundaire afbeelding",
+                    "name": "show-image-overlay",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_666c956d99e23",
+                    "label": "Secundaire afbeelding",
+                    "name": "image-overlay",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65e9745131a95",
+                                "operator": "==",
+                                "value": "image"
+                            },
+                            {
+                                "field": "field_666c954399e22",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium"
+                }
+            ]
+        },
+        {
+            "key": "field_63f60957299f8",
+            "label": "Opties",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_63f60957299fd",
+            "label": "Options",
+            "name": "options",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "remove-group-label",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_63f60957306d3",
+                    "label": "2 kolommen",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_63f60957306d9",
+                    "label": "Kolommen omdraaien",
+                    "name": "reverse",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Door de kolommen om te draaien wordt de tekst als eerst getoond in plaats van de afbeelding.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_662df6bd9c09d",
+                    "label": "Kolom afbeelding",
+                    "name": "column-image",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_662df7c59c09e",
+                            "label": "Breedte",
+                            "name": "column-width",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "Aantal kolommen in het grid van 12 kolommen",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33.33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "3": "3",
+                                "4": "4",
+                                "5": "5",
+                                "6": "6"
+                            },
+                            "default_value": 4,
+                            "return_format": "value",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_662df8099c09f",
+                            "label": "Offset",
+                            "name": "column-offset",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "Stel hier het aantal kolommen in dat de afbeelding vanaf de zijkant opschuift.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33.33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "0",
+                                "1",
+                                "2"
+                            ],
+                            "default_value": 1,
+                            "return_format": "value",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_63f60957306dd",
+                            "label": "Afbeelding uit container",
+                            "name": "off-container",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "Indien geactiveerd blijft wordt de afbeelding verplaatst tegen de rand aan van het scherm",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_662df8099c09f",
+                                        "operator": "==",
+                                        "value": "0"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "33.33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        }
+                    ]
+                },
+                {
+                    "key": "field_662f645d3dea8",
+                    "label": "Extra afbeelding",
+                    "name": "image-extra",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Door optie te activeren wordt de afbeelding niet getoond op smartphone schermen.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_63f60957306dd",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_662df8099c09f",
+                                "operator": "==",
+                                "value": "0"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_662dfb4a2f7fb",
+                    "label": "Kolom tekst",
+                    "name": "column-text",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_662dfb4a2f7fc",
+                            "label": "Breedte",
+                            "name": "column-width",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "Aantal kolommen in het grid van 12 kolommen",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33.33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "4": "4",
+                                "5": "5",
+                                "6": "6"
+                            },
+                            "default_value": 5,
+                            "return_format": "value",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_662dfb4a2f7fd",
+                            "label": "Offset",
+                            "name": "column-offset",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "Stel hier het aantal kolommen in dat de tekst vanaf de zijkant opschuift.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33.33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "0",
+                                "1",
+                                "2"
+                            ],
+                            "default_value": 1,
+                            "return_format": "value",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_63f60957306e8",
+                    "label": "Hoogte afbeelding",
+                    "name": "image-height",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "Selecteer de hoogte van de afbeelding. Standaard wordt de daadwerkelijke verhouding van de afbeelding gebruikt. Je kunt ook kiezen voor de verhouding van een landscape, portrait of vierkante afbeelding. Ook kun je kiezen voor een fullscreen afbeelding, of maak de afbeelding net zo hoog als de tekst.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_63f609572aa39",
+                                "operator": "!=",
+                                "value": "embed"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "choose-options",
+                        "id": ""
+                    },
+                    "choices": {
+                        "standard": "Standaard",
+                        "landscape": "Horizontaal",
+                        "square": "Vierkant",
+                        "portrait": "Verticaal",
+                        "content": "Content",
+                        "fullscreen": "Fullscreen"
+                    },
+                    "default_value": "standard",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_6591372b7b3e4",
+                    "label": "Tekst uitlijning",
+                    "name": "text-align",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "De tekst kun je links, in het midden of rechts uitlijnen.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "choose-options",
+                        "id": ""
+                    },
+                    "choices": {
+                        "align-left": "Links",
+                        "align-center": "Gecentreerd",
+                        "align-right": "Rechts"
+                    },
+                    "default_value": "align-left",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_65928d0ec04aa",
+                    "label": "Tekst verticale uitlijning",
+                    "name": "align-vertical",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "Selecteer de uitlijning van de tekst. Standaard wordt deze in het midden van de afbeelding uitgelijnd. Je kunt er ook voor kiezen om deze boven of onder uit te lijnen. Met de optie \"content\" wordt de tekst boven uitgelijnd en een eventuele button wordt onder uitgelijnd.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "choose-options",
+                        "id": ""
+                    },
+                    "choices": {
+                        "top": "Boven",
+                        "center": "Midden",
+                        "bottom": "Onder",
+                        "content": "Content"
+                    },
+                    "default_value": "center",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_6543942ac10bf",
+                    "label": "Parralax",
+                    "name": "parralax",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui_on_text": "Aan",
+                    "ui_off_text": "Uit",
+                    "ui": 1
+                },
+                {
+                    "key": "field_662f2886c7ec5",
+                    "label": "Verberg afbeelding op mobiel",
+                    "name": "image-hide-mobile",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Door optie te activeren wordt de afbeelding niet getoond op smartphone schermen.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_6705e9f30cee2",
+                    "label": "Toon rechter kolom als eerst op mobiel",
+                    "name": "text-first-mobile",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Door optie te activeren wordt de tekst kolom als eerst getoond op smartphone schermen. Standaard wordt de media kolom als eerst getoond.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_63f60957306ed",
+                    "label": "General",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_63f60957306f2",
+                    "label": "Section options",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_627e252af41eb"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_63f60957306f7",
+                    "label": "Call to action",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_63f60957306fd",
+                    "label": "Call to action",
+                    "name": "cta-options",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "remove-group-label",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_627e23dae3652"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "Bouwsteen",
+    "show_in_rest": 0,
+    "modified": 1734531411
+}
