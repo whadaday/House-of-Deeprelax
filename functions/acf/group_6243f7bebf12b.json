@@ -1014,7 +1014,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "33.33",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
@@ -1035,7 +1035,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "33.33",
+                        "width": "15",
                         "class": "",
                         "id": ""
                     },
@@ -1069,7 +1069,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "33.33",
+                        "width": "15",
                         "class": "",
                         "id": ""
                     },
@@ -1088,7 +1088,7 @@
                 },
                 {
                     "key": "field_624462a566d5e",
-                    "label": "Woff2 file",
+                    "label": "Font file",
                     "name": "file-woff2",
                     "aria-label": "",
                     "type": "file",
@@ -1096,7 +1096,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "33.33",
+                        "width": "45",
                         "class": "",
                         "id": ""
                     },
@@ -1105,48 +1105,6 @@
                     "min_size": "",
                     "max_size": "",
                     "mime_types": "woff2",
-                    "parent_repeater": "field_6244613666d58"
-                },
-                {
-                    "key": "field_624462b666d5f",
-                    "label": "Woff file",
-                    "name": "file-woff",
-                    "aria-label": "",
-                    "type": "file",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33.33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "library": "uploadedTo",
-                    "min_size": "",
-                    "max_size": "",
-                    "mime_types": "woff",
-                    "parent_repeater": "field_6244613666d58"
-                },
-                {
-                    "key": "field_624462f066d60",
-                    "label": "Ttf file",
-                    "name": "file-ttf",
-                    "aria-label": "",
-                    "type": "file",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33.33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "library": "uploadedTo",
-                    "min_size": "",
-                    "max_size": "",
-                    "mime_types": "ttf",
                     "parent_repeater": "field_6244613666d58"
                 }
             ]

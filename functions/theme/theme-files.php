@@ -5,8 +5,6 @@ function custom_mime_types( $mimes ) {
     // New allowed mime types.
     $mimes['svg']   = 'image/svg+xml';
     $mimes['svgz']  = 'image/svg+xml';
-    $mimes['ttf']   = 'font/ttf';
-    $mimes['woff']  = 'font/woff';
     $mimes['woff2'] = 'font/woff2';
  
     // Optional. Remove a mime type.
@@ -28,21 +26,6 @@ function divi_engine_font_correct_filetypes( $data, $file, $filename, $mimes, $r
     $wp_file_type = wp_check_filetype( $filename, $mimes );
 
     // Check for the file type you want to enable, e.g. 'svg'.
-    if ( 'ttf' === $wp_file_type['ext'] ) {
-        $data['ext'] = 'ttf';
-        $data['type'] = 'font/ttf';
-    }
-
-    if ( 'otf' === $wp_file_type['ext'] ) {
-        $data['ext'] = 'otf';
-        $data['type'] = 'font/otf';
-    }
-
-    if ( 'woff' === $wp_file_type['ext'] ) {
-        $data['ext'] = 'woff';
-        $data['type'] = 'font/woff';
-    }
-
     if ( 'woff2' === $wp_file_type['ext'] ) {
         $data['ext'] = 'woff2';
         $data['type'] = 'font/woff2';

@@ -26,14 +26,10 @@ function add_fonts() {
 				$weight = $font['weight'];
 				$style 	= $font['style'];
 				$woff2 	= $font['file-woff2'];
-				$woff 	= $font['file-woff'];
-				$ttf 	= $font['file-ttf'];
 				?>
 				@font-face {
 				    font-family:"<?php echo $name; ?>";
-				    src: url("<?php echo $woff2; ?>") format("woff2"),
-				         url("<?php echo $woff; ?>") format("woff"),
-				         url("<?php echo $ttf; ?>") format("opentype");
+				    src: url("<?php echo $woff2; ?>") format("woff2");
 				    font-style: <?php echo $style; ?>;
 				    font-weight: <?php echo $weight; ?>;
 				    font-display: block;
