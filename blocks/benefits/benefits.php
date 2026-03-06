@@ -21,15 +21,16 @@
 	<?php
 		foreach($columns as $column):
 
-			$title = $column['title'];
-			$text  = $column['text']; 
-			$link  = $column['link'];
-			$image = $column['image'];
+			$benefit = $column['benefit'];
+			$title   = $column['title'];
+			$text    = $column['text'];
+			$link    = $column['link'];
+			$image   = $column['image'];
 	?>
-			
+
 			<div class="column">
 				<div class="content">
-					
+
 					<?php if($image):
 						$content['image'] = $image;
 					?>
@@ -42,8 +43,12 @@
 						</div>
 					<?php endif; ?>
 
-					<h3 class="content-title"><?php echo $title; ?></h3>
-					<div class="content-text"><p><?php echo $text; ?></p></div>
+					<?php if($benefit): ?>
+						<div class="content-benefit"><?php echo $benefit; ?></div>
+					<?php else: ?>
+						<h3 class="content-title"><?php echo $title; ?></h3>
+						<div class="content-text"><p><?php echo $text; ?></p></div>
+					<?php endif; ?>
 					
 					<?php if($link): ?>
 						<div class="content-action">

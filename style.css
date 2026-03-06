@@ -1,7 +1,8 @@
+@charset "UTF-8";
 /*!
 Theme Name: House of Deeprelax
 Theme URI: 
-Version: 0.8.7.6
+Version: 0.8.8.0
 Author: Angelo Vaudo
 Author URI: https://www.beamthe.me
 Description: House of Deeprelax Wordpress Theme 
@@ -1940,6 +1941,14 @@ button.swiper-pagination-bullet {
   --grid-11-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 11 ) - (2 * var(--column-padding)) );
   --grid-12-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 12 ) - (2 * var(--column-padding)) ); }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem); }
+  to {
+    opacity: 1;
+    transform: translateY(0); } }
+
 .content-animate .content {
   opacity: 0;
   transition: opacity 0.32s ease-in-out; }
@@ -2454,6 +2463,59 @@ td {
   -webkit-text-decoration: var(--small-text-decoration);
           text-decoration: var(--small-text-decoration);
   display: block; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--badge-bg, var(--color-coconut));
+  border-radius: 2rem;
+  padding: 0.375rem 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--badge-color, var(--color-text-dark));
+  margin-bottom: 0.5rem;
+  animation: fadeInUp 0.8s ease both; }
+  .badge[data-color-text="dark"] {
+    --badge-color: var(--color-text-dark); }
+  .badge[data-color-text="light"] {
+    --badge-color: var(--color-text-light); }
+  .badge + * {
+    margin-top: 0; }
+  .badge:has(+ h2), .badge:has(p .style-h2) {
+    margin-bottom: 1.5rem; }
+
+.stats-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr; }
+  @media only screen and (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr); }
+      .stats-grid[data-columns="3"] {
+        grid-template-columns: repeat(3, 1fr); }
+      .stats-grid[data-columns="4"] {
+        grid-template-columns: repeat(4, 1fr); } }
+.stat-card {
+  background: var(--stat-bg, rgba(var(--color-text-primary-rgb), 0.05));
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center; }
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--stat-color, var(--color-text-primary));
+  margin-bottom: 0.5rem; }
+  @media only screen and (min-width: 768px) {
+    .stat-value {
+      font-size: 2.5rem; } }
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--stat-color, rgba(var(--color-text-primary-rgb), 0.6));
+  opacity: 0.6; }
 
 ol, ul {
   margin: var(--list-margin);
@@ -3695,6 +3757,11 @@ body {
   position: relative;
   padding-top: var(--whitespace-top);
   padding-bottom: var(--whitespace-bottom); }
+  .section[data-whitespace-top="extra-small"] {
+    --whitespace-top: calc(0.5 * var(--section-padding)); }
+    @media only screen and (min-width: 768px) {
+      .section[data-whitespace-top="extra-small"] {
+        --whitespace-top: calc(0.25 * var(--section-padding)); } }
   .section[data-whitespace-top="small"] {
     --whitespace-top: calc(0.75 * var(--section-padding)); }
     @media only screen and (min-width: 768px) {
@@ -3704,6 +3771,11 @@ body {
     --whitespace-top: var(--section-padding); }
   .section[data-whitespace-top="large"] {
     --whitespace-top: calc(1.5 * var(--section-padding)); }
+  .section[data-whitespace-bottom="extra-small"] {
+    --whitespace-bottom: calc(0.5 * var(--section-padding)); }
+    @media only screen and (min-width: 768px) {
+      .section[data-whitespace-bottom="extra-small"] {
+        --whitespace-bottom: calc(0.25 * var(--section-padding)); } }
   .section[data-whitespace-bottom="small"] {
     --whitespace-bottom: calc(0.75 * var(--section-padding)); }
     @media only screen and (min-width: 768px) {
@@ -3713,6 +3785,11 @@ body {
     --whitespace-bottom: var(--section-padding); }
   .section[data-whitespace-bottom="large"] {
     --whitespace-bottom: calc(1.5 * var(--section-padding)); }
+  .section:has([data-whitespace-bottom] + .section[data-move="move-top"][data-whitespace-top="extra-small"]), .section:has([data-whitespace-bottom] + .section[data-move="move-bottom"][data-whitespace-top="extra-small"]) {
+    padding-bottom: calc(0.5 * var(--section-padding) + var(--section-padding)); }
+    @media only screen and (min-width: 768px) {
+      .section:has([data-whitespace-bottom] + .section[data-move="move-top"][data-whitespace-top="extra-small"]), .section:has([data-whitespace-bottom] + .section[data-move="move-bottom"][data-whitespace-top="extra-small"]) {
+        padding-bottom: calc(0.25 * var(--section-padding) + var(--section-padding)); } }
   .section:has([data-whitespace-bottom] + .section[data-move="move-top"][data-whitespace-top="small"]), .section:has([data-whitespace-bottom] + .section[data-move="move-bottom"][data-whitespace-top="small"]) {
     padding-bottom: calc(0.75 * var(--section-padding) + var(--section-padding)); }
     @media only screen and (min-width: 768px) {
@@ -4409,6 +4486,34 @@ audio {
     right: 0;
     top: 50%;
     transform: translateY(-50%); }
+
+.cta-usps {
+  --li-font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--color-text-primary); }
+  .cta-usps[data-align="align-left"] {
+    justify-content: flex-start; }
+  .cta-usps[data-align="align-center"] {
+    justify-content: center; }
+  .cta-usps[data-align="align-right"] {
+    justify-content: flex-end; }
+  .cta-usps li {
+    white-space: nowrap;
+    color: rgba(var(--color-text-primary-rgb), 0.8); }
+  .cta-usps strong, .cta-usps b {
+    color: rgba(var(--color-text-primary-rgb), 1); }
+  .cta-usps li + li::before {
+    content: '·';
+    margin-right: 1rem; }
 
 .btn:has(.icon-play), .list-nav > li.list-btn a:has(.icon-play), .list-overlay li.list-btn a:has(.icon-play) {
   padding-left: 2.625rem; }
@@ -5878,6 +5983,8 @@ video {
     right: 0;
     top: 0;
     bottom: 0; }
+  .section-benefits .content-benefit {
+    margin-top: 1.5rem; }
   .section-benefits .link {
     font-weight: var(--body-font-weight-bold); }
   .section-benefits .image-benefits {
@@ -9084,6 +9191,10 @@ video {
     max-width: var(--grid-4-column);
     margin-left: var(--grid-1-column);
     margin-right: var(--grid-1-column); } }
+
+.section-usps-banner .cta-usps {
+  justify-content: center;
+  margin: 0; }
 
 .content-article-share {
   display: flex; }

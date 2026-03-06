@@ -79,12 +79,13 @@ function my_mce_before_init_insert_formats( $init_array ) {
             'wrapper' => true, 
         ),  
 
-        array(  
-            'title' => 'Style H6',  
-            'block' => 'span',  
+        array(
+            'title' => 'Style H6',
+            'block' => 'span',
             'classes' => 'style-h6',
-            'wrapper' => true, 
-        ),  
+            'wrapper' => true,
+        ),
+
     );  
     // Insert the array, JSON ENCODED, into 'style_formats'
     $init_array['style_formats'] = json_encode( $style_formats );  
@@ -100,6 +101,15 @@ function custom_editor_styles() {
 }
 
 add_action('init', 'custom_editor_styles');
+
+function custom_mce_css( $mce_css ) {
+	if ( ! empty( $mce_css ) ) {
+		$mce_css .= ',';
+	}
+	$mce_css .= get_template_directory_uri() . '/style-editor.css?v=' . THEME_VERSION;
+	return $mce_css;
+}
+add_filter( 'mce_css', 'custom_mce_css' );
 
 
 add_filter( 'wp_editor_settings', 'wp_editor_settings' );

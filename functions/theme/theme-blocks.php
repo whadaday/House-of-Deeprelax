@@ -207,6 +207,7 @@ function add_pagebuilder_fields() {
                 $key = $json['key'];
                 $blockSlug = $block;
                 $blockFile = glob($base_dir.$dir.'/'.$block.'/*.php');
+                if(empty($blockFile)): continue; endif;
                 $blockFile = $blockFile[0];
                 $source = file_get_contents($blockFile);
                 $blockName = get_string_between($source, '/* Block Name: ', ' */');

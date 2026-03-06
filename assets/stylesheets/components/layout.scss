@@ -51,6 +51,12 @@ body {
   padding-bottom: var(--whitespace-bottom);
 
 
+  &[data-whitespace-top="extra-small"]  {
+    --whitespace-top: calc(0.5 * var(--section-padding));
+    @media only screen and (min-width: $sm-min) {
+      --whitespace-top: calc(0.25 * var(--section-padding));
+    }
+  }
   &[data-whitespace-top="small"]  {
     --whitespace-top: calc(0.75 * var(--section-padding));
     @media only screen and (min-width: $sm-min) {
@@ -60,6 +66,12 @@ body {
   &[data-whitespace-top="normal"] {--whitespace-top: var(--section-padding);}
   &[data-whitespace-top="large"]  {--whitespace-top: calc(1.5 * var(--section-padding));}
 
+  &[data-whitespace-bottom="extra-small"]  {
+    --whitespace-bottom: calc(0.5 * var(--section-padding));
+    @media only screen and (min-width: $sm-min) {
+      --whitespace-bottom: calc(0.25 * var(--section-padding));
+    }
+  }
   &[data-whitespace-bottom="small"]  {
     --whitespace-bottom: calc(0.75 * var(--section-padding));
     @media only screen and (min-width: $sm-min) {
@@ -68,6 +80,14 @@ body {
   }
   &[data-whitespace-bottom="normal"] {--whitespace-bottom: var(--section-padding);}
   &[data-whitespace-bottom="large"]  {--whitespace-bottom: calc(1.5 * var(--section-padding));}
+
+  &:has([data-whitespace-bottom] + .section[data-move="move-top"][data-whitespace-top="extra-small"]),
+  &:has([data-whitespace-bottom] + .section[data-move="move-bottom"][data-whitespace-top="extra-small"])  {
+    padding-bottom: calc(0.5 * var(--section-padding) + var(--section-padding));
+    @media only screen and (min-width: $sm-min) {
+      padding-bottom: calc(0.25 * var(--section-padding) + var(--section-padding));
+    }
+  }
 
   &:has([data-whitespace-bottom] + .section[data-move="move-top"][data-whitespace-top="small"]),
   &:has([data-whitespace-bottom] + .section[data-move="move-bottom"][data-whitespace-top="small"])  {

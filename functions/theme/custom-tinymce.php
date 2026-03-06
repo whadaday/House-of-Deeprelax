@@ -24,7 +24,7 @@ function format_value_wysiwyg( $value, $post_id, $field ) {
 	return $value;
 }
 
-/** 
+/**
  * Add a 'Add rel="nofollow" to link' checkbox to the WordPress link editor
  *
  * @see https://danielbachhuber.com/tip/rel-nofollow-link-modal/

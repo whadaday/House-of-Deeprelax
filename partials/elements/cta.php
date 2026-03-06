@@ -72,8 +72,20 @@
 
 			</div>
 
+			<?php
+				$showUsps = isset($cta['show-usps']) ? $cta['show-usps'] : false;
+				$usps = isset($cta['usps']) ? $cta['usps'] : null;
+				if($showUsps && $usps):
+			?>
+			<ul class="cta-usps" data-align="<?php echo $align; ?>">
+				<?php foreach($usps as $usp): ?>
+					<li><?php echo wp_kses($usp['text'], array('strong' => array(), 'b' => array())); ?></li>
+				<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+
 <?php
-		endif; 
+		endif;
 
 	endif;
 ?>

@@ -337,6 +337,9 @@ add_filter('acf/prepare_field/name=color-text-light',           'acf_load_bg_col
 add_filter('acf/prepare_field/name=color-text-light-secondary', 'acf_load_bg_color_field_choices');
 add_filter('acf/prepare_field/name=color-cta',                  'acf_load_bg_color_field_choices');
 add_filter('acf/prepare_field/name=color-cta-secondary',        'acf_load_bg_color_field_choices');
+add_filter('acf/prepare_field/name=color-cta-third',            'acf_load_bg_color_field_choices');
+add_filter('acf/prepare_field/name=color-cta-fourth',           'acf_load_bg_color_field_choices');
+add_filter('acf/prepare_field/name=color-cta-fifth',            'acf_load_bg_color_field_choices');
 
 add_filter('acf/prepare_field/name=body-background-color',      'acf_load_bg_color_field_choices');
 add_filter('acf/prepare_field/name=footer-background-color',    'acf_load_bg_color_field_choices');
@@ -379,8 +382,11 @@ function acf_load_btn_color_field_choices( $field ) {
     $colorLight         = $themeStyles['color-text-light'];
     $colorCta           = $themeStyles['color-cta'];
     $colorCtaSecondary  = $themeStyles['color-cta-secondary'];
+    $colorCtaThird      = $themeStyles['color-cta-third'];
+    $colorCtaFourth     = $themeStyles['color-cta-fourth'];
+    $colorCtaFifth      = $themeStyles['color-cta-fifth'];
 
-    $btnColors = array($colorLight, $colorDark, $colorCta, $colorCtaSecondary);
+    $btnColors = array($colorLight, $colorDark, $colorCta, $colorCtaSecondary, $colorCtaThird, $colorCtaFourth, $colorCtaFifth);
     $field['choices'] = array();
 
     $field['choices']['transparent'] = '<span class="color-indicator color-transparent"></span>';

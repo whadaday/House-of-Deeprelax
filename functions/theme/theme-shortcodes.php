@@ -263,3 +263,79 @@ function countdown_shortcode($atts) {
     data-labels="Dagen, Uren, Minuten, Seconden"></div>';
 }
 add_shortcode('countdown', 'countdown_shortcode');
+
+function badge_shortcode($atts) {
+
+  $atts = shortcode_atts(array(
+    'text'  => '',
+    'color' => 'dark',
+    'bg'    => 'coconut',
+  ), $atts);
+
+  $text  = esc_html($atts['text']);
+  $color = sanitize_title($atts['color']);
+  $bg    = sanitize_title($atts['bg']);
+
+  $color_var = $color === 'light' ? 'var(--color-text-light)' : 'var(--color-text-dark)';
+
+  $output = '<p class="badge" style="--badge-color: ' . $color_var . '; --badge-bg: var(--color-' . $bg . ')">' . $text . '</p>';
+
+  return $output;
+}
+
+add_shortcode('badge', 'badge_shortcode');
+
+function stats_shortcode($atts, $content = null) {
+
+  $atts = shortcode_atts(array(
+    'columns' => '2',
+    'color'   => '',
+    'bg'      => '',
+  ), $atts);
+
+  $columns = intval($atts['columns']);
+
+  $styles = '';
+  if($atts['color']) {
+    $color = sanitize_title($atts['color']);
+    $color_var = ($color === 'light') ? 'var(--color-text-light)' : (($color === 'dark') ? 'var(--color-text-dark)' : 'var(--color-' . $color . ')');
+    $styles .= '--stat-color: ' . $color_var . ';';
+  }
+  if($atts['bg']) {
+    $bg = sanitize_title($atts['bg']);
+    $styles .= '--stat-bg: var(--color-' . $bg . ');';
+  }
+
+  $style_attr = $styles ? ' style="' . $styles . '"' : '';
+
+  $inner = do_shortcode(shortcode_unautop($content));
+  $inner = preg_replace('/<br\s*\/?>\s*/', '', $inner);
+
+  $output = '<div class="stats-grid" data-columns="' . $columns . '"' . $style_attr . '>';
+  $output .= $inner;
+  $output .= '</div>';
+
+  return $output;
+}
+
+add_shortcode('stats', 'stats_shortcode');
+
+function stat_shortcode($atts) {
+
+  $atts = shortcode_atts(array(
+    'value' => '',
+    'label' => '',
+  ), $atts);
+
+  $value = wp_kses($atts['value'], array('strong' => array(), 'b' => array()));
+  $label = esc_html($atts['label']);
+
+  $output  = '<div class="stat-card">';
+  $output .= '<div class="stat-value">' . $value . '</div>';
+  $output .= '<div class="stat-label">' . $label . '</div>';
+  $output .= '</div>';
+
+  return $output;
+}
+
+add_shortcode('stat', 'stat_shortcode');

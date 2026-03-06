@@ -66,6 +66,40 @@
   }
 }
 
+.cta-usps {
+  --li-font-size: 1rem;
+  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+
+  &[data-align="align-left"] { justify-content: flex-start; }
+  &[data-align="align-center"] { justify-content: center; }
+  &[data-align="align-right"] { justify-content: flex-end; }
+
+  li {
+    white-space: nowrap;
+    color: rgba(var(--color-text-primary-rgb), 0.8);
+  }
+
+  strong,b {
+    color: rgba(var(--color-text-primary-rgb), 1);
+  }
+
+  li + li::before {
+    content: '·';
+    margin-right: 1rem;
+  }
+}
+
 .btn:has(.icon-play) {
   padding-left: 2.625rem;
 
