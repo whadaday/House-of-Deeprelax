@@ -5,7 +5,7 @@
 :root {
   --body-font-weight-bold: 600;
   --color-text-link: var(--color-cta);
-  --ratio-landscape: 56.25%;
+  --ratio-landscape: 70%;
   --ratio-square: 100%;
   --ratio-portrait: 115%;
   --list-margin: 1rem 0;
@@ -23,14 +23,14 @@
   --btn-font-family:            var(--font-primary);
   --btn-font-style:             normal;
   --btn-font-weight:            400;
-  --btn-font-size:              0.875rem;
+  --btn-font-size:              1rem;
   --btn-background-color:       var(--color-text-dark);
   --btn-background-color-hover: #60504d;
   --btn-text-color:             var(--color-text-light);
-  --btn-height:                 2.625rem;
+  --btn-height:                 3.5rem;
   --btn-min-width:              auto;
   --btn-border-radius:          2rem;
-  --btn-padding:                0 1.25rem;
+  --btn-padding:                0 1.5rem;
   --btn-letter-spacing:         0;
   --btn-border:                 0;
   --btn-text-transform:         normal;
@@ -122,6 +122,14 @@
   --grid-10-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 10 ) - (2 * var(--column-padding)) );
   --grid-11-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 11 ) - (2 * var(--column-padding)) );
   --grid-12-column-vw: calc( ( (100vw - (2 * var(--container-padding)) + (2 * var(--column-padding)) ) / 12 * 12 ) - (2 * var(--column-padding)) ); }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem); }
+  to {
+    opacity: 1;
+    transform: translateY(0); } }
 
 .content-animate .content {
   opacity: 0;

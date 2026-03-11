@@ -54,7 +54,7 @@ h4,
   
   &+ h1, &+ h2,
   &+ .style-h1, &+ .style-h2 {
-    margin-top: 1rem;
+    margin-top: 0.625rem;
   }
 
   &+ h3, &+ h4, &+ h5,
@@ -147,7 +147,11 @@ td {
 
   &:has(+ h2),
   &:has(p .style-h2) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  @media only screen and (min-width: $sm-min) {
+    font-size: 14px;
   }
 }
 
