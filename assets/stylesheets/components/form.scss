@@ -309,7 +309,7 @@ img::selection {
 					@include btn;
 					min-width: auto;
 					background: var(--color-cta);
-					color: var(--color-text-light);
+					color: var(--color-text-dark);
 					outline: none;
 
 					&:hover {

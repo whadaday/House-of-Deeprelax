@@ -26,7 +26,7 @@
   --btn-font-size:              1rem;
   --btn-background-color:       var(--color-text-dark);
   --btn-background-color-hover: #60504d;
-  --btn-text-color:             var(--color-text-light);
+  --btn-text-color:             var(--color-text-dark);
   --btn-height:                 3.5rem;
   --btn-min-width:              auto;
   --btn-border-radius:          2rem;

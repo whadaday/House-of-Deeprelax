@@ -2,7 +2,7 @@
 /*!
 Theme Name: House of Deeprelax
 Theme URI: 
-Version: 0.8.8.1
+Version: 0.8.8.2
 Author: Angelo Vaudo
 Author URI: https://www.beamthe.me
 Description: House of Deeprelax Wordpress Theme 
@@ -1844,7 +1844,7 @@ button.swiper-pagination-bullet {
   --btn-font-size:              1rem;
   --btn-background-color:       var(--color-text-dark);
   --btn-background-color-hover: #60504d;
-  --btn-text-color:             var(--color-text-light);
+  --btn-text-color:             var(--color-text-dark);
   --btn-height:                 3.5rem;
   --btn-min-width:              auto;
   --btn-border-radius:          2rem;
@@ -3362,7 +3362,7 @@ img::selection {
         transition: 0.24s ease-out background-color, 0.24s ease-out color, 0.24s ease-out transform;
         min-width: auto;
         background: var(--color-cta);
-        color: var(--color-text-light);
+        color: var(--color-text-dark);
         outline: none; }
         .content .wpforms-container-full:not(:empty) .wpforms-form .wpforms-submit-container .wpforms-submit .icon-arrow .stroke,
         .content .wpforms-container-full:not(:empty) .wpforms-form .wpforms-submit-container input[type=submit] .icon-arrow .stroke,
