@@ -3,8 +3,8 @@
 	--nav-color-background-active: var(--color-text-light);
 
 	--nav-font-family: var(--font-third);
-	--color-logo: var(--color-cta);
-    --color-logo-rgb: var(--color-cta-rgb);
+	--color-logo: var(--color-cta-fourth, var(--color-cta));
+    --color-logo-rgb: var(--color-cta-fourth-rgb, var(--color-cta-rgb));
     --hamburger-holder-size: 2.625rem;
     --hamburger-size: 1rem;
 
@@ -53,6 +53,7 @@
 	pointer-events:none;
 
 	@media only screen and (max-width: $xs-max) {
+		--color-logo: var(--color-cta-fourth, var(--color-cta));
 
 	    #nav-main {
 	    	--color-text-primary: var(--color-text-dark);
@@ -134,7 +135,8 @@
 		&:not(&[data-behind-header="1"]) {
 			position: sticky;
 			top: 0;
-			
+			--color-logo: var(--color-cta-fourth, var(--color-cta));
+
 			&:has(#nav-announcement) {
 				top: calc(-1 * var(--announcement-height));
 			}
@@ -174,6 +176,7 @@
 		}
 		&[data-behind-header="1"] {
 			position: absolute;
+			--color-logo: var(--color-cta);
 
 			// Set nav "active" style
 			&.menu-hide,
@@ -199,7 +202,7 @@
 				transform:translateY(calc( -1 * var(--nav-height) ));
 				transition: none;
 
-				.list-nav li:not(.list-btn) a {
+				.list-nav li:not(.list-btn):not(.list-btn-secondary):not(.list-btn-third):not(.list-btn-fourth) a {
 					transition:none;
 				}
 
@@ -222,6 +225,7 @@
 			&.dropdown-active,
 			.no-header & {
 				--nav-color-background: var(--nav-color-background-active);
+				--color-logo: var(--color-cta-fourth, var(--color-cta));
 
 				#nav-main {
 					&[data-color-text="light"] {
@@ -571,15 +575,22 @@
 		transition:0.24s ease-out opacity;
 		height: 100%;
 		
-		&.list-btn {
+		&.list-btn,
+		&.list-btn-secondary,
+		&.list-btn-third,
+		&.list-btn-fourth {
 			a {
 				@extend .btn;
-				background-color: var(--color-cta);
+				background-color: var(--btn-background-color);
+				color: var(--btn-text-color);
 				border-radius: 2rem;
 				font-weight: 400;
-				box-shadow: 0 2px 2px rgba(0,0,0,0.16);
+				box-shadow: none;
+				height: 3rem;
+				padding: 0 1.25rem;
 				&:hover {
-					background-color: var(--color-cta-darker);
+					background-color: var(--btn-background-color-hover);
+					color: var(--btn-text-color);
 				}
 			}
 		}
@@ -602,13 +613,13 @@
 			}
 		}
 
-		&:not(.list-btn) {
+		&:not(.list-btn):not(.list-btn-secondary):not(.list-btn-third):not(.list-btn-fourth) {
 			a {
 				height: 100%;
 				transition: 0.16s ease color;
 			}
 		}
-		&:not(.menu-item-has-children):not(.list-btn) {
+		&:not(.menu-item-has-children):not(.list-btn):not(.list-btn-secondary):not(.list-btn-third):not(.list-btn-fourth) {
 			&:hover,
 			&.active {
 				&:after {
@@ -618,7 +629,7 @@
 					right:0;
 					bottom: 0;
 					height: 1.5px;
-					background: var(--color-cta);
+					background: var(--color-cta-fourth, var(--color-cta));
 					z-index: 2;
 				}
 			}

@@ -59,7 +59,7 @@
       <div class="column column-accordion">
         <div class="content">
           <div class="accordion">
-            <?php showFAQ($faqs, 'color'); ?>
+            <?php showFAQ($faqs); ?>
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ function getFaqArticles($category = null, $amount = -1) {
     return $query;
 }
 
-function showFAQ($faqs, $buttonColor) {
+function showFAQ($faqs, $buttonColor = null) {
 		foreach($faqs as $faq):
 			$question = $faq['question'];
 			$answer   = $faq['answer'];
@@ -70,12 +70,11 @@ function showFAQ($faqs, $buttonColor) {
                     <?php if($loom): 
                         $icon = get_template_directory_uri().'/assets/images/beam/icons/play-circle.svg';
                     ?>
-                        <div class="content-action" data-align="left">
-                            <a 
+                        <div class="content-action">
+                            <a
                                 data-fancybox="video-gallery"
                                 data-type="iframe"
-                                class="btn"
-                                data-btn-color="<?php echo $buttonColor; ?>"
+                                class="btn" data-btn-color="transparent"
                                 href="<?php echo convertLoomShareToEmbed($loom); ?>">
                                 <span class="icon-play"><?php echo file_get_contents($icon); ?></span>Bekijk de uitlegvideo
                             </a>
@@ -85,10 +84,9 @@ function showFAQ($faqs, $buttonColor) {
 					    $link_title  = $link['title'];
 					    $link_target = $link['target'] ? $link['target'] : '_self';
 			  		?>
-    			  		<div class="content-action" data-align="left">
-    			  			<a 
-    							class="btn"
-    							data-btn-color="<?php echo $buttonColor; ?>"
+    			  		<div class="content-action">
+    			  			<a
+    							class="btn" data-btn-color="transparent"
     							href="<?php echo esc_url( $link_url ); ?>"
     							target="<?php echo esc_attr( $link_target ); ?>">
     							<?php echo esc_html( $link_title ); ?>

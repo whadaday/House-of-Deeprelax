@@ -31834,22 +31834,41 @@ jQuery(function ($) {
         var headerHeight = $header.outerHeight();
         var $navShowAfterHeader = $("#nav-bottombanner[data-show-after-header='1'");
 
-        if ($navShowAfterHeader.length && $header.length) {
-            new ScrollMagic.Scene({
-                triggerElement: $header,
-                triggerHook: 0,
-                offset: headerHeight,
-                duration: 0
-            })
-            .on("start", function (event) {
-                if(event.scrollDirection === 'FORWARD') {
-                   $bottomBanner.addClass('show');
-                } else {
-                    $bottomBanner.removeClass('show');
-                }
-            })
-            // .addIndicators()
-            .addTo(controller);
+        if ($navShowAfterHeader.length) {
+            if ($header.length) {
+                new ScrollMagic.Scene({
+                    triggerElement: $header,
+                    triggerHook: 0,
+                    offset: headerHeight,
+                    duration: 0
+                })
+                .on("start", function (event) {
+                    if(event.scrollDirection === 'FORWARD') {
+                       $bottomBanner.addClass('show');
+                    } else {
+                        $bottomBanner.removeClass('show');
+                    }
+                })
+                // .addIndicators()
+                .addTo(controller);
+            } else {
+                // No header: show after 100vh scroll
+                new ScrollMagic.Scene({
+                    triggerElement: document.body,
+                    triggerHook: 0,
+                    offset: window.innerHeight,
+                    duration: 0
+                })
+                .on("start", function (event) {
+                    if(event.scrollDirection === 'FORWARD') {
+                       $bottomBanner.addClass('show');
+                    } else {
+                        $bottomBanner.removeClass('show');
+                    }
+                })
+                // .addIndicators()
+                .addTo(controller);
+            }
         }
 
         new ScrollMagic.Scene({

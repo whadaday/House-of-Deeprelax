@@ -5,8 +5,6 @@
 	$text 	 	 = $content['text'];
 	$faqs 	 	 = $content['faqs'];
 	$columns 	 = (isset($options['columns'])) ? $options['columns'] : 1;
-	$buttonColor = $options['color-btn'];
-
 	foreach ($faqs as $index => $faq):
 
 			$type = $faq['question-type'];
@@ -48,14 +46,14 @@
 		<div class="column column-accordion">
 			<div class="content">
 				<div class="accordion">
-					<?php showFAQ($faqs1, $buttonColor); ?>
+					<?php showFAQ($faqs1); ?>
 				</div>
 			</div>
 		</div>
 		<div class="column column-accordion">
 			<div class="content">
 				<div class="accordion">
-					<?php showFAQ($faqs2, $buttonColor); ?>
+					<?php showFAQ($faqs2); ?>
 				</div>
 			</div>
 		</div>
@@ -79,7 +77,7 @@
 			<div class="column column-accordion">
 				<div class="content">
 					<div class="accordion">
-						<?php showFAQ($faqs, $buttonColor); ?>
+						<?php showFAQ($faqs); ?>
 					</div>
 				</div>
 			</div>

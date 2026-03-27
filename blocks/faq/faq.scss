@@ -45,6 +45,10 @@
 		}
 		.column-accordion {
 			margin:0;
+
+			& + .column-accordion {
+				margin-top: 1rem;
+			}
 		}
 	}
 
@@ -200,7 +204,15 @@
 
 			--p-font-size: 1rem;
 			--li-font-size: 1rem;
-			
+
+			.btn[data-btn-color="transparent"] {
+				--btn-text-color: var(--color-cta-fourth, var(--color-text-primary));
+				border-bottom: 1px solid currentColor;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
 		}
 		 
 		.icon-chevron {

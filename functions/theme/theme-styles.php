@@ -55,7 +55,7 @@ function add_style_variables() {
                     /* Set standard color variables */
                     foreach($themeVariablesStyles as $name => $variable):
                         echo $name.': var('.$variable.');';
-                        if($name == '--color-cta'):
+                        if($name == '--color-cta' || $name == '--color-cta-fourth'):
                             echo $name.'-darker: var('.$variable.'-darker);';
                             echo $name.'-rgb: var('.$variable.'-rgb);';
                         endif;

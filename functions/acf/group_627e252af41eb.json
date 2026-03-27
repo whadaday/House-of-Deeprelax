@@ -139,6 +139,28 @@
             "custom_choice_button_text": "Add new choice"
         },
         {
+            "key": "field_67db1a0f1c001",
+            "label": "WPForms button kleur",
+            "name": "contact-form-btn-class",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "choose-bg",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0,
+            "allow_null": 0
+        },
+        {
             "key": "field_6553538235a1f",
             "label": "Naam",
             "name": "block-title",

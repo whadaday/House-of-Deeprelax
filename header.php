@@ -58,6 +58,21 @@
 
   if(isset($headerOptions) && $headerOptions && !is_singular('post') && !is_singular('kennisbank')):
     $headerDisabled = $headerOptions['disabled'];
+
+    // If header is not disabled, check if it actually has content
+    if(!$headerDisabled):
+      $headerType = get_field('header-type', $post_id);
+      $headerText = get_field('text', $post_id);
+      $headerCta  = get_field('cta', $post_id);
+      $headerImage = ($headerType == 'image') ? get_field('image', $post_id) : null;
+      $headerVideo = ($headerType == 'video') ? get_field('video', $post_id) : null;
+
+      $hasHeaderContent = $headerText || $headerImage || $headerVideo || ($headerCta && ($headerCta['button'] || $headerCta['button2']));
+
+      if(!$hasHeaderContent):
+        $headerDisabled = true;
+      endif;
+    endif;
   endif;
 
   if($headerDisabled):
@@ -78,7 +93,7 @@
       if(!$hideNav): include( locate_template( 'partials/navigation/navigation.php', false, false ) ); endif; 
       include( locate_template( 'partials/navigation/bottombanner.php', false, false ) );
 
-      if( is_page() || is_tax('faq-category') || is_singular('book') || is_singular('landingpage') ): 
+      if( !$headerDisabled && ( is_page() || is_tax('faq-category') || is_singular('book') || is_singular('landingpage') ) ):
         include( locate_template( 'partials/general/page-header.php', false, false ) );
       elseif(is_singular('post') || is_singular('kennisbank')):
         include( locate_template( 'partials/blog/blog-header.php', false, false ) );    

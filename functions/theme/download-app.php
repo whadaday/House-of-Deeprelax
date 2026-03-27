@@ -16,7 +16,7 @@ add_action('template_redirect', function () {
     );
 
     if (! $isMobile) {
-        wp_redirect('https://houseofdeeprelax.com/app', 302);
+        wp_redirect(home_url('/app'), 302);
         exit;
     }
 
@@ -50,7 +50,7 @@ add_action('template_redirect', function () {
     );
 
     if (! $isMobile) {
-        wp_redirect('https://houseofdeeprelax.com/app', 302);
+        wp_redirect(home_url('/app'), 302);
         exit;
     }
 

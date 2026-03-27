@@ -177,7 +177,7 @@ body {
 
   &:first-child {
     .no-header & {
-      padding-top: calc( var(--whitespace-top) + var(--noheader-padding) );
+      padding-top: var(--section-padding);
     }
   }
 

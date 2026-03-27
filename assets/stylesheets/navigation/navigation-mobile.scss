@@ -341,11 +341,12 @@ html.scroll-disabled body {
 			}
 		}
 
-		&.list-btn {
+		&.list-btn,
+		&.list-btn-secondary,
+		&.list-btn-third,
+		&.list-btn-fourth {
 			a {
 				@extend .btn;
-    			--btn-background-color: var(--color-cta);
-    			--btn-background-color-hover: var(--color-cta-darker);
 			}
 		}
 	}

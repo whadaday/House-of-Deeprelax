@@ -11,14 +11,16 @@
 	global $blockIndex; 
 	$lang = getLang();
 
-	$text = get_field('contact-text', $lang);
-	$form  = get_field('contact-form', $lang);
+	$text     = get_field('contact-text', $lang);
+	$form     = get_field('contact-form', $lang);
+	$btnClass = get_field('contact-form-btn-class', $lang);
 
 	if($text || $form):
 ?>
 <section
 	id="section-<?php echo $blockIndex; ?>"
 	class="section section-contact"
+	<?php if($btnClass): ?>data-form-btn="<?php echo esc_attr($btnClass); ?>"<?php endif; ?>
 >
 	<div class="container content-animate">
 		<div class="columns">

@@ -25,20 +25,22 @@ input:-webkit-autofill {
  -webkit-text-fill-color: var(--color-text-dark) !important;
 }
 
-input[type=checkbox] {
+input[type=checkbox],
+input[type=radio] {
   width: 1rem !important;
   outline: none;
+  accent-color: var(--color-cta-fourth, var(--color-cta));
 }
 
 // SELECTION ------------------------------------------------------------------------------------
 
 ::selection {
-  background-color: var(--color-cta);
+  background-color: var(--color-cta-fourth, var(--color-cta));
   color: var(--color-text-light);
 }
 
 img::selection {
-  background-color: rgba(var(--color-cta-rgb), 0.4);
+  background-color: rgba(var(--color-cta-fourth-rgb, var(--color-cta-rgb)), 0.4);
   color: var(--color-text-light);
 }
 
@@ -80,6 +82,7 @@ img::selection {
 		--btn-min-width: 11.5rem;
 
 		--wpforms-button-background-color: var(--color-cta);
+		--wpforms-button-background-color-hover: var(--color-cta-darker);
 
 		@media only screen and (min-width: $sm-min) {
 			--field-spacer: 1rem;
@@ -265,6 +268,26 @@ img::selection {
 
 			}
 
+			// Checkbox & Radio checked/focus state
+			input[type=checkbox]:checked:before,
+			input[type=radio]:checked:before,
+			input[type=checkbox]:focus:before,
+			input[type=radio]:focus:before {
+				border-color: var(--color-cta-fourth, var(--color-cta));
+				box-shadow: 0 0 0 1px var(--color-cta-fourth, var(--color-cta)), 0px 1px 2px rgba(0, 0, 0, 0.15);
+			}
+
+			// Checkbox checkmark
+			input[type=checkbox]:checked:after {
+				border-left-color: var(--color-cta-fourth, var(--color-cta));
+				border-bottom-color: var(--color-cta-fourth, var(--color-cta));
+			}
+
+			// Radio dot
+			input[type=radio]:checked:after {
+				background-color: var(--color-cta-fourth, var(--color-cta));
+			}
+
 			// Consent
 			.consent {
 				.wpforms-field-label {
@@ -304,17 +327,17 @@ img::selection {
 				}
 				.wpforms-submit,
 				input[type=submit],
-				button[type=submit], 
+				button[type=submit],
 				.wpforms-page-button {
 					@include btn;
 					min-width: auto;
-					background: var(--color-cta);
-					color: var(--color-text-dark);
+					background: var(--wpforms-button-background-color);
+					color: var(--btn-text-color);
 					outline: none;
 
 					&:hover {
-						background: var(--color-cta-darker);
-						color: var(--color-text-light);
+						background: var(--wpforms-button-background-color-hover, var(--btn-background-color-hover));
+						color: var(--btn-text-color);
 					}
 
 					[data-color="sunshine"] & {

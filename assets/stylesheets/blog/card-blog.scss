@@ -138,9 +138,9 @@
 		flex-direction: column;
 		align-items: flex-start;
 		position: absolute;
-		left:2rem;
-		right:2rem;
-		top:2.625rem;
+		left:1.625rem;
+		right:1.625rem;
+		top:2.25rem;
 		bottom: 2.125rem;
 		transform: translate3d(0,0,0);
 	}
@@ -221,7 +221,7 @@
 	}
 	@media only screen and (min-width: $sm-min) {
 		.card-title {
-			font-size: 2rem;
+			font-size: 1.75rem;
 		}
 		.card-category {
 			font-size: 0.875rem;
@@ -229,7 +229,7 @@
 	}
 	@media only screen and (min-width: $md-min) {
 		.card-title {
-			font-size: 2rem;
+			font-size: 1.75rem;
 		}
 	}
 	@media only screen and (min-width: $xl-min) {

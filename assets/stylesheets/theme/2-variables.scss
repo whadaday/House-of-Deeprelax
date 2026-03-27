@@ -1,7 +1,7 @@
 :root {
 
     --body-font-weight-bold: 600;
-    --color-text-link: var(--color-cta);
+    --color-text-link: var(--color-cta-fourth, var(--color-cta));
 
     --ratio-landscape: 70%;
     --ratio-square: 100%;

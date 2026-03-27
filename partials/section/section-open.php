@@ -34,6 +34,7 @@
 
 	$ctaOptions  = isset($options['cta-options']) ? $options['cta-options'] : null;
 	$buttonColor = isset($ctaOptions['color-btn']) ? $ctaOptions['color-btn'] : null;
+	$formBtnColor = isset($options['contact-form-btn-class']) ? $options['contact-form-btn-class'] : null;
 ?>
 <section
 	id="<?php echo $blockName; ?>"
@@ -59,6 +60,8 @@
 	<?php if($textColor): ?> data-color-text="<?php echo $textColor; ?>" <?php endif; ?>
 
 	<?php if($buttonColor): ?> data-btn-color="<?php echo $buttonColor; ?>" <?php endif; ?>
+
+	<?php if($formBtnColor): ?> data-form-btn="<?php echo esc_attr($formBtnColor); ?>" <?php endif; ?>
 
 	<?php if(isset($container)): ?> data-container="<?php echo $container; ?>" <?php endif; ?>
 

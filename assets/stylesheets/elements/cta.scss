@@ -27,6 +27,16 @@
     }
   }
 
+  &:has(.btn[data-btn-color="transparent"]:only-child) {
+    margin-left: 0;
+    margin-right: 0;
+
+    .btn[data-btn-color="transparent"] {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
   .content-text & {
     &:first-child {
       margin-top: 0;
@@ -49,6 +59,10 @@
 
   &:hover {
     opacity: 0.6;
+  }
+
+  &:active {
+    transform: none;
   }
 }
 

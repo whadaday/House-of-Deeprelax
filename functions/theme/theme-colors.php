@@ -189,9 +189,62 @@
                 .btn-color {
                     --btn-background-color: var(--color-<?php echo $colorCta; ?>);
                     --btn-background-color-hover: var(--color-<?php echo $colorCta; ?>-darker);
-                    --btn-text-color: var(--color-text-light);
+                    --btn-text-color: var(--color-text-dark);
                 }
-                
+
+                <?php
+                // Button class variants: list-btn, list-btn-secondary, list-btn-third, list-btn-fourth
+                $btnVariants = array(
+                    ''           => $themeStyles['color-cta'],
+                    '-secondary' => $themeStyles['color-cta-secondary'],
+                    '-third'     => $themeStyles['color-cta-third'],
+                    '-fourth'    => $themeStyles['color-cta-fourth'],
+                );
+
+                foreach ($btnVariants as $suffix => $colorName):
+                    if (empty($colorName) || !isset($colors[$colorName])) continue;
+
+                    $btnHex = $colors[$colorName];
+                    $btnRgb = hexToRgb($btnHex);
+                    $btnTextColor = (colorDistance($btnRgb, $colorTextLightRgb) >= colorDistance($btnRgb, $colorTextDarkRgb))
+                        ? '--color-text-light'
+                        : '--color-text-dark';
+                ?>
+                .list-btn<?php echo $suffix; ?> a,
+                .list-btn<?php echo $suffix; ?> {
+                    --btn-background-color: var(--color-<?php echo $colorName; ?>);
+                    --btn-background-color-hover: var(--color-<?php echo $colorName; ?>-darker);
+                    --btn-text-color: var(<?php echo $btnTextColor; ?>);
+                }
+                <?php endforeach; ?>
+
+                <?php
+                // Form button variants: data-form-btn="dark|light|btn-secondary|btn-third|btn-fourth"
+                $formBtnVariants = array(
+                    'dark'          => $colorTextDark,
+                    'light'         => $colorTextLight,
+                    'btn-secondary' => $themeStyles['color-cta-secondary'],
+                    'btn-third'     => $themeStyles['color-cta-third'],
+                    'btn-fourth'    => $themeStyles['color-cta-fourth'],
+                );
+
+                foreach ($formBtnVariants as $className => $colorName):
+                    if (empty($colorName) || !isset($colors[$colorName])) continue;
+
+                    $fBtnHex = $colors[$colorName];
+                    $fBtnRgb = hexToRgb($fBtnHex);
+                    $fBtnTextColor = (colorDistance($fBtnRgb, $colorTextLightRgb) >= colorDistance($fBtnRgb, $colorTextDarkRgb))
+                        ? '--color-text-light'
+                        : '--color-text-dark';
+                ?>
+                [data-form-btn="<?php echo $className; ?>"] .wpforms-submit-container,
+                .wpforms-submit.<?php echo $className; ?> {
+                    --wpforms-button-background-color: var(--color-<?php echo $colorName; ?>);
+                    --wpforms-button-background-color-hover: var(--color-<?php echo $colorName; ?>-darker);
+                    --btn-text-color: var(<?php echo $fBtnTextColor; ?>);
+                }
+                <?php endforeach; ?>
+
             </style>
         <?php
     }
@@ -343,6 +396,7 @@ add_filter('acf/prepare_field/name=color-cta-fifth',            'acf_load_bg_col
 
 add_filter('acf/prepare_field/name=body-background-color',      'acf_load_bg_color_field_choices');
 add_filter('acf/prepare_field/name=footer-background-color',    'acf_load_bg_color_field_choices');
+add_filter('acf/prepare_field/name=star-color',                 'acf_load_bg_color_field_choices');
 
 /* Set std text color ------------------------------------------------------------------------------------- */
 function acf_set_text_color( $field ) {
@@ -376,7 +430,7 @@ add_filter('acf/prepare_field/name=color-text', 'acf_set_text_color');
 
 /* Button colors ------------------------------------------------------------------------------------------ */
 function acf_load_btn_color_field_choices( $field ) {
-    
+
     $themeStyles        = get_field('styles', 'theme');
     $colorDark          = $themeStyles['color-text-dark'];
     $colorLight         = $themeStyles['color-text-light'];
@@ -386,39 +440,114 @@ function acf_load_btn_color_field_choices( $field ) {
     $colorCtaFourth     = $themeStyles['color-cta-fourth'];
     $colorCtaFifth      = $themeStyles['color-cta-fifth'];
 
-    $btnColors = array($colorLight, $colorDark, $colorCta, $colorCtaSecondary, $colorCtaThird, $colorCtaFourth, $colorCtaFifth);
     $field['choices'] = array();
-
     $field['choices']['transparent'] = '<span class="color-indicator color-transparent"></span>';
 
-    // load colors
     $colors = getThemeColors();
-    
-    foreach($colors as $name => $hex):
-        if (in_array($name, $btnColors)):
-            if($name == $colorDark): $name = 'dark'; endif;
-            if($name == $colorLight): $name = 'light'; endif;
+    $seen   = array();
 
-            $extraClass = (isColorTooCloseToWhite($hex)) ? ' border' : '';
+    $btnEntries = array(
+        'dark'             => $colorDark,
+        'light'            => $colorLight,
+        $colorCta          => $colorCta,
+        $colorCtaSecondary => $colorCtaSecondary,
+        $colorCtaThird     => $colorCtaThird,
+        $colorCtaFourth    => $colorCtaFourth,
+        $colorCtaFifth     => $colorCtaFifth,
+    );
 
-            $field['choices'][ $name ] = '<span class="color-indicator'.$extraClass.'" style="color:'.$hex.'; background:'.$hex.';"></span>';
-        endif;
+    foreach ($btnEntries as $key => $colorName):
+        if (empty($colorName) || !isset($colors[$colorName])) continue;
+        $hex = $colors[$colorName];
+        $hexLower = strtolower($hex);
+        if (in_array($hexLower, $seen)) continue;
+        $seen[] = $hexLower;
+
+        $extraClass = (isColorTooCloseToWhite($hex)) ? ' border' : '';
+        $field['choices'][$key] = '<span class="color-indicator'.$extraClass.'" style="color:'.$hex.'; background:'.$hex.';"></span>';
     endforeach;
 
-    
-
-    $themeStyles  = get_field('styles', 'theme');
     $default = $themeStyles['color-cta'];
     if($default):
         $field['default_value'] = $default;
     endif;
 
-    // echo '<pre>'; print_r($field); echo '</pre>';
-
-    // return the field
     return $field;
-    
+
 }
 
 add_filter('acf/prepare_field/name=color-btn', 'acf_load_btn_color_field_choices');
 add_filter('acf/prepare_field/name=color-btn2', 'acf_load_btn_color_field_choices');
+
+
+/* Helper: build button color choices with duplicate hex filtering ------------------------------------------- */
+function _build_btn_color_choices( $entries ) {
+    $colors  = getThemeColors();
+    $choices = array();
+    $seen    = array(); // track hex values to skip duplicates
+
+    foreach ($entries as $key => $colorName):
+        if (empty($colorName)) continue;
+
+        // Resolve hex
+        if ($key === 'dark' || $key === 'light' || $key === 'color'):
+            // These map to theme style color names
+            $hex = isset($colors[$colorName]) ? $colors[$colorName] : null;
+        else:
+            $hex = isset($colors[$colorName]) ? $colors[$colorName] : null;
+        endif;
+
+        if (!$hex) continue;
+
+        // Skip duplicate hex values
+        $hexLower = strtolower($hex);
+        if (in_array($hexLower, $seen)) continue;
+        $seen[] = $hexLower;
+
+        $extraClass = (isColorTooCloseToWhite($hex)) ? ' border' : '';
+        $choices[$key] = '<span class="color-indicator'.$extraClass.'" style="color:'.$hex.'; background:'.$hex.';"></span>';
+    endforeach;
+
+    return $choices;
+}
+
+/* Form button color choices (with dark/light + 4 CTA brand colors) ----------------------------------------- */
+function acf_load_form_btn_color_field_choices( $field ) {
+
+    $themeStyles = get_field('styles', 'theme');
+    $field['choices'] = _build_btn_color_choices(array(
+        'dark'          => $themeStyles['color-text-dark'],
+        'light'         => $themeStyles['color-text-light'],
+        ''              => $themeStyles['color-cta'],
+        'btn-secondary' => $themeStyles['color-cta-secondary'],
+        'btn-third'     => $themeStyles['color-cta-third'],
+        'btn-fourth'    => $themeStyles['color-cta-fourth'],
+    ));
+    $field['default_value'] = '';
+
+    return $field;
+}
+
+add_filter('acf/prepare_field/name=contact-form-btn-class', 'acf_load_form_btn_color_field_choices');
+
+
+/* Popup button color choices (dark/light/color + 4 CTA brand colors as actual color names) ------------------ */
+function acf_load_popup_btn_color_field_choices( $field ) {
+
+    $field['label'] = 'WPForms button kleur';
+
+    $themeStyles = get_field('styles', 'theme');
+    $field['choices'] = _build_btn_color_choices(array(
+        'dark'                                  => $themeStyles['color-text-dark'],
+        'light'                                 => $themeStyles['color-text-light'],
+        'color'                                 => $themeStyles['color-cta'],
+        $themeStyles['color-cta-secondary']      => $themeStyles['color-cta-secondary'],
+        $themeStyles['color-cta-third']          => $themeStyles['color-cta-third'],
+        $themeStyles['color-cta-fourth']         => $themeStyles['color-cta-fourth'],
+    ));
+    $field['default_value'] = 'color';
+
+    return $field;
+}
+
+add_filter('acf/prepare_field/name=popup-btn-color', 'acf_load_popup_btn_color_field_choices');
