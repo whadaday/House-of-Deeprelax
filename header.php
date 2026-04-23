@@ -11,15 +11,12 @@
   $headerClasses  = array();
   $headerDisabled = false;
 
-  $hideNav = get_field('hide-nav-footer');
+  $hideNav    = get_field('hide-navigation');
+  $hideFooter = get_field('hide-nav-footer');
 
-  $hideNav = false;
-  // if(is_tax('faq-category')):
-  //   $hideNav = true;
-  // endif;
-
-
-  if($hideNav): array_push($headerClasses, 'no-navigation', 'no-footer', 'page-sales'); endif;
+  if($hideNav):    array_push($headerClasses, 'no-navigation'); endif;
+  if($hideFooter): array_push($headerClasses, 'no-footer'); endif;
+  if($hideNav && $hideFooter): array_push($headerClasses, 'page-sales'); endif;
 
   if(is_404() || is_search() || is_author() || is_archive() || is_category() || is_singular('kennisbank') || is_home()):
     $showContact = true;

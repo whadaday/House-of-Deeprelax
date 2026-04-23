@@ -46,12 +46,32 @@
             "ui": 1
         },
         {
+            "key": "field_680a1f0e7b8d5",
+            "label": "Verberg navigatie",
+            "name": "hide-navigation",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Selecteer om de navigatie te verbergen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_641193d79a405",
-            "label": "Sales pagina",
+            "label": "Verberg footer",
             "name": "hide-nav-footer",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "Selecteer om de navigatie en de footer te verbergen.",
+            "instructions": "Selecteer om de footer te verbergen.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
