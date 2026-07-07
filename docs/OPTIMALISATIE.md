@@ -44,8 +44,8 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 | HOD-07 | 9.16 | **Geen options-cache: 85 losse `get_field(...,'theme'/$lang)`-reads/pageload** over ~37 bestanden, geen memo/transient/invalidatie | 37 bestanden; zwaartepunten `theme-colors.php` (9), `page-footer.php` (7), `theme-shortcodes.php` (7), `theme-navigation.php`, `header.php` | `hod_option()`-helper: prime top-level velden via `get_fields()` (**afwijkend van PB** — HoD heeft diep-geneste ACF-groups; per-rij-enumeratie gaf 349 subveld-rijen in de transient), transient + static memo per post_id, invalidatie op `acf/save_post`, miss-fallback naar `get_field()` voor stale/absente velden | 🔴 | **done** |
 | HOD-08 | 9.16 | **`getLang()` doet ongecachte `get_field('site-lang','theme')` bij 30 call-sites** — en draait N+1 in de nav-walker (`start_lvl`/`end_lvl`/`start_el`, dus per menu-item) | `theme-languages.php:3-12`; walker `theme-navigation.php:21-49` | Static memo in `getLang()`; nav-options één keer buiten de walker ophalen | 🔴 | **done** |
 | HOD-09 | 1 | CodeKit-build; `package.json` is CodeKit-starter zonder scripts | `config.codekit3`, `package.json` | Migreren naar npm/esbuild + sass (kopie van premiumbusiness `build/*.mjs`) — randvoorwaarde voor HOD-10/11/12 | 🔴 | **done** |
-| HOD-10 | 4 | **Dubbele jQuery** (bundel + WP-core, geverifieerd: `jQuery.fn.jquery`=3.7.1 WP-core wint) + GSAP/ScrollMagic in bundel. (slick-carousel bleek **ongebruikt** — als dode dep verwijderd bij HOD-09; alleen Swiper is in gebruik) | `main.js`; `theme-scripts.php:8`; `package.json` | jQuery uit bundel (`dep array('jquery')`); consolideer naar één carousel-lib conditioneel; GSAP/ScrollMagic → IntersectionObserver | 🔴 | open |
-| HOD-11 | 4 | main.js zonder `defer`; render-blocking | `theme-scripts.php:8` | `wp_script_add_data('main','strategy','defer')` | 🟡 | open |
+| HOD-10 | 4 | **Dubbele jQuery** (bundel + WP-core, geverifieerd: `jQuery.fn.jquery`=3.7.1 WP-core wint) + GSAP/ScrollMagic in bundel. (slick-carousel bleek **ongebruikt** — als dode dep verwijderd bij HOD-09; alleen Swiper is in gebruik) | `main.js`; `theme-scripts.php:8`; `package.json` | jQuery uit bundel (`dep array('jquery')`); consolideer naar één carousel-lib conditioneel; GSAP/ScrollMagic → IntersectionObserver | 🔴 | **deels done** (jQuery-dedupe + slick weg; GSAP/ScrollMagic-removal open) |
+| HOD-11 | 4 | main.js zonder `defer`; render-blocking | `theme-scripts.php:8` | `wp_script_add_data(strategy defer)` — maar main.js laadt al in de footer (niet render-blocking); defer gaf geen extra winst en de globale-`$`-afhankelijkheid maakt het fragiel tot de JS gemodulariseerd is. Uitgesteld tot na GSAP/ScrollMagic-refactor | 🟡 | open |
 | HOD-12 | 5.15/5.2 | Fonts via remote `@import` in `wp_head` (render-blocking) + `font-display: block` (FOIT) + geen preload/preconnect | `theme-fonts.php:17,35` | Lokaal hosten of preload+async; `swap`; preconnect + woff2-preload | 🔴 | open |
 | HOD-13 | 5.7 | `style.css` 644 KB als één bundel incl. Swiper/slick CSS | `theme-scripts.php:7` | Library-CSS uit style.css splitsen; kritieke CSS overwegen | 🟡 | open |
 | HOD-14 | 2 | Images: geen `cf_img()`/`cf_srcset()`, geen `sizes`-attribuut, JS-lazy (`data-src`) i.p.v. native, blur-placeholder als aparte HTTP-request i.p.v. base64-LQIP; `cover` 2500px-varianten | `image.php:37-107`; `theme-images.php:3-8` | CF Image Transformations + native lazy + base64 `_blur_data_url` + context-`sizes`; breakpoints cappen | 🔴 | open |
@@ -153,3 +153,26 @@ aanpak. Volgens afspraak: alle wijzigingen eerst lokaal testen, niets pushen.
   **49/49** call-site-velden identiek (`get_field` vs `hod_option`, incl. via
   miss-fallback), transient 23 (theme) + 25 (nl) velden, homepage + pagina's
   renderen 0 PHP-fouten, nav/footer/socials/logo (options-driven) intact.
+
+## HOD-09/10 implementatienotities
+
+- **Build**: CodeKit → npm/esbuild + dart-sass (kopie van premiumbusiness
+  `build/*.mjs`). 4 SCSS-entrypoints; glob-expansie incl. recursieve
+  `blocks/**/*` (gefilterd op `.scss`/`.css`). main.js 1,1M → 505K → **417K**
+  (na jQuery-dedupe), geminified.
+- **jQuery-dedupe (HOD-10)**: jQuery uit de bundel, enqueue met `array('jquery')`
+  → één jQuery (WP-core 3.7.1) i.p.v. twee. **Valkuil**: de oude gebundelde
+  jQuery zette een globale `$`; WP-core draait in noConflict (geen globale `$`),
+  en theme-code (navigation.js/headroom) leunt op de bare `$` buiten een
+  `jQuery(fn($){})`-wrapper. Symptoom: headroom-nav kreeg geen classes (Swiper,
+  wél in een wrapper, werkte). Fix: `window.$ = window.$ || window.jQuery;` als
+  eerste regel van de bundel (in `build/js-build.mjs`) — herstelt het gedrag van
+  vóór de dedupe. Browser-geverifieerd: nav `headroom headroom--top`, 1 jQuery.
+- **slick-carousel** bleek ongebruikt → als dode dep verwijderd (alleen Swiper).
+- **Gevonden bugs bij de build-strictheid**: ontbrekende `)` in een `calc()`
+  (`blocks/faq/faq.scss`) die CodeKit's sass stil tolereerde; case-fout
+  `debug.addindicators.js` → `addIndicators` (Linux-CI).
+- **HOD-11 (defer)**: teruggedraaid — main.js laadt al in de footer (dus niet
+  render-blocking), en defer gaf geen meetbare winst terwijl het door de
+  globale-`$`-afhankelijkheid fragiel is. Heropenen na de GSAP/ScrollMagic →
+  IntersectionObserver-refactor (dan is de bundel niet meer jQuery-globaal).

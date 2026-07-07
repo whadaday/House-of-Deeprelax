@@ -3,11 +3,12 @@ import { transformSync } from 'esbuild';
 
 // Same bundle as the old CodeKit @codekit-prepend list, in the same order.
 // GSAP/ScrollMagic removal + jQuery-dedupe are separate backlog items
-// (HOD-10) — this build only replaces CodeKit, it does not change output.
+// jQuery is NIET meer gebundeld (HOD-10): main.js hangt via de enqueue
+// af van WP-core jQuery (array('jquery')). GSAP/ScrollMagic-removal blijft
+// een apart item. debug.addIndicators.js: hoofdletter I (Linux-CI case-fix).
 // Note: debug.addIndicators.js has a capital I — the CodeKit source used
 // lowercase, which works on macOS (case-insensitive) but breaks Linux CI.
 const vendors = [
-  'node_modules/jquery/dist/jquery.js',
   'node_modules/gsap/dist/gsap.js',
   'node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js',
   'node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js',
@@ -38,8 +39,13 @@ try {
     }
   }
 
+  // De oude gebundelde jQuery zette een globale `$`; WP-core jQuery draait in
+  // noConflict (geen globale `$`). Theme-code (navigation.js/headroom) leunt op
+  // de bare `$` buiten een `jQuery(fn($){})`-wrapper — herstel de alias zodat
+  // het gedrag identiek blijft aan vóór de jQuery-dedupe (HOD-10).
+  const jqAliasShim = 'window.$ = window.$ || window.jQuery;\n';
   const vendorCode = vendors.map((f) => readFileSync(f, 'utf8')).join('\n;\n');
-  const combined = vendorCode + '\n;\n' + appCode();
+  const combined = jqAliasShim + vendorCode + '\n;\n' + appCode();
 
   if (isProd) {
     const result = transformSync(combined, { minify: true, loader: 'js', legalComments: 'none' });
