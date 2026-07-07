@@ -1,6 +1,6 @@
 <?php
 	$lang = getLang();
-	$globalBlockId = get_field('404', $lang);
+	$globalBlockId = hod_option('404', $lang);
 	if(!$globalBlockId): 
 		wp_redirect('/');
 		exit;

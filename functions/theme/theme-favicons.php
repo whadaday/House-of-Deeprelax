@@ -2,8 +2,8 @@
 
 function add_icons() {
 	
-	$appicon = get_field('site-appicon', 'theme');
-	$favicon = get_field('site-favicon', 'theme');
+	$appicon = hod_option('site-appicon');
+	$favicon = hod_option('site-favicon');
 
 	if($favicon): ?> <link rel="shortcut icon" type="image/png" href="<?php echo $favicon; ?>"><?php endif;
   	if($appicon): ?><link rel="apple-touch-icon" href="<?php echo $appicon; ?>" /><?php endif;

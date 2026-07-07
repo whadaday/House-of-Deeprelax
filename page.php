@@ -33,12 +33,12 @@
   get_header();
   $lang = getLang();
 
-  $globalBlockId = get_field('page-start', $lang);
+  $globalBlockId = hod_option('page-start', $lang);
   if($globalBlockId): showGlobalBlock($globalBlockId); endif;
     
   include( locate_template( 'partials/general/page-content.php', false, false ) );
 
-  $globalBlockId = get_field('page-end', $lang);
+  $globalBlockId = hod_option('page-end', $lang);
   if($globalBlockId): showGlobalBlock($globalBlockId); endif;
 
   get_footer();

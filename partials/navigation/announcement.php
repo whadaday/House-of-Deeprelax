@@ -1,7 +1,7 @@
 <?php 
 	$post_id		   = get_the_ID();
 	$lang 		       = getLang();
-	$navigation 	   = get_field('navigation', $lang);
+	$navigation 	   = hod_option('navigation', $lang);
 	$hide_announcement = get_field('hide-announcement', $post_id);
 
 	if(!$hide_announcement):

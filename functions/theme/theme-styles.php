@@ -1,7 +1,7 @@
 <?php
 function add_style_variables() {
     if( class_exists('ACF') ) :
-        $themeStyles          = get_field('styles', 'theme');
+        $themeStyles          = hod_option('styles');
         $themeVariablesStyles = array();
 
         $themeStylesObject = get_field_object('styles', 'theme');

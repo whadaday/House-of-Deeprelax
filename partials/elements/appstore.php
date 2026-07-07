@@ -1,6 +1,6 @@
 <?php
 	$lang = getLang();
-  $appstores = get_field('appstore', $lang);
+  $appstores = hod_option('appstore', $lang);
   $qr_src = get_template_directory_uri().'/assets/images/qr-download-app.jpg';
   if($appstores):
 ?>

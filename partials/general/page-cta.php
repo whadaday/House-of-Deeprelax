@@ -10,6 +10,6 @@
 		global $blockIndex; 
 		$lang = getLang();
 
-		$globalBlockId = get_field('cta', $lang);
+		$globalBlockId = hod_option('cta', $lang);
 	  	if($globalBlockId): showGlobalBlock($globalBlockId); endif;
 	endif;

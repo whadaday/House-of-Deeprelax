@@ -21,7 +21,7 @@ add_action('template_redirect', function () {
     }
 
     $lang = getLang();
-    $appstores = get_field('appstore', $lang);
+    $appstores = hod_option('appstore', $lang);
 
     // iOS (iPhone, iPad, iPod)
     if (preg_match('/iPhone|iPad|iPod/i', $userAgent)) {
@@ -55,7 +55,7 @@ add_action('template_redirect', function () {
     }
 
     $lang = getLang();
-    $appstores = get_field('appstore', $lang);
+    $appstores = hod_option('appstore', $lang);
 
     // iOS (iPhone, iPad, iPod)
     if (preg_match('/iPhone|iPad|iPod/i', $userAgent)) {

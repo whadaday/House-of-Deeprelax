@@ -38,7 +38,7 @@
   endif;
   $headerOptions  = get_field('options', $post_id);
 
-  $themeStyles = get_field('styles', 'theme');
+  $themeStyles = hod_option('styles');
   if($themeStyles):
     $colorText   = $themeStyles['body-text-color'];
   else:

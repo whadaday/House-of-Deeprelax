@@ -45,7 +45,7 @@
                 <aside>
 
                     <?php
-                      $mostRead = get_field('blog-widget-mostread', $lang);
+                      $mostRead = hod_option('blog-widget-mostread', $lang);
                       if($mostRead):
                         ?>
                         <div class="widget widget-articles">
@@ -62,7 +62,7 @@
 
 
                       <?php
-                        $banner  = (get_field('banner-promo')) ? get_field('banner-promo') :  get_field('blog-widget-banner', $lang);
+                        $banner  = (get_field('banner-promo')) ? get_field('banner-promo') :  hod_option('blog-widget-banner', $lang);
                         if($banner):
                           ?>
                           <div class="widget widget-banner">

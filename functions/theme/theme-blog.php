@@ -3,7 +3,7 @@
 // Replace Posts label as Articles in Admin Panel 
 
 function change_post_menu_label() {
-	$blogActive = get_field('blog-active', 'theme');
+	$blogActive = hod_option('blog-active');
 	if($blogActive):
 	    global $menu;
 	    global $submenu;
@@ -15,7 +15,7 @@ function change_post_menu_label() {
 add_action( 'admin_menu', 'change_post_menu_label' );
 
 function change_post_object_label() {
-	$blogActive = get_field('blog-active', 'theme');
+	$blogActive = hod_option('blog-active');
 	if($blogActive):
         global $wp_post_types;
         $labels = &$wp_post_types['post']->labels;
@@ -36,7 +36,7 @@ add_action( 'admin_init', 'change_post_object_label' );
 
 
 function add_blog_posts_page() {
-	$blogActive = get_field('blog-active', 'theme');
+	$blogActive = hod_option('blog-active');
 	$pageForPosts = get_option('page_for_posts');
 	$blogPageLabel = 'Blog';
 
@@ -91,9 +91,9 @@ function blog_unregister_taxonomy(){
 	// echo '<pre>'; print_r($wp_taxonomies); echo '</pre>';
 	// die();
 
-	$blogActive 	  = get_field('blog-active', 'theme');
-	$categoriesActive = get_field('blog-categories-active', 'theme');
-	$tagsActive 	  = get_field('blog-tags-active', 'theme');
+	$blogActive 	  = hod_option('blog-active');
+	$categoriesActive = hod_option('blog-categories-active');
+	$tagsActive 	  = hod_option('blog-tags-active');
 
 	if(!$blogActive || !$categoriesActive):
 		unregister_taxonomy_for_object_type( 'category', 'post' );

@@ -1,7 +1,7 @@
 <?php
 
     function getThemeColors() {
-        $themeColors         = get_field('colors', 'theme');
+        $themeColors         = hod_option('colors');
         $colors              = array();
         // Change array format 
         if(!empty($themeColors)):
@@ -49,7 +49,7 @@
     // Add colors to WYSIWYG editor
     function my_mce4_options($init) {
 
-        $themeColors = get_field('colors', 'theme');
+        $themeColors = hod_option('colors');
         $iColor = 0;
         $wysiwyg_colors = '';
 
@@ -113,7 +113,7 @@
                 }
 
                 <?php
-                $themeStyles = get_field('styles', 'theme');
+                $themeStyles = hod_option('styles');
                 $colors      = getThemeColors();
                 $colorCta    = $themeStyles['color-cta'];
 
@@ -258,7 +258,7 @@ function acf_load_text_color_field_choices( $field ) {
 
     // load colors
     $colors = getThemeColors();
-    $themeStyles  = get_field('styles', 'theme');
+    $themeStyles  = hod_option('styles');
     // echo '<pre>'; print_r($colors); echo '</pre>';
     // die();
 
@@ -341,7 +341,7 @@ function acf_load_bg_color_field_choices( $field ) {
     
     endforeach;
 
-    $themeStyles  = get_field('styles', 'theme');
+    $themeStyles  = hod_option('styles');
     if($themeStyles):
         $default = $themeStyles['body-background-color'];
 
@@ -404,7 +404,7 @@ function acf_set_text_color( $field ) {
     // echo '<pre>'; print_r($field); echo '</pre>';
     // die();
 
-    $themeStyles  = get_field('styles', 'theme');
+    $themeStyles  = hod_option('styles');
     if($themeStyles):
         $default = $themeStyles['body-text-color'];
 
@@ -431,7 +431,7 @@ add_filter('acf/prepare_field/name=color-text', 'acf_set_text_color');
 /* Button colors ------------------------------------------------------------------------------------------ */
 function acf_load_btn_color_field_choices( $field ) {
 
-    $themeStyles        = get_field('styles', 'theme');
+    $themeStyles        = hod_option('styles');
     $colorDark          = $themeStyles['color-text-dark'];
     $colorLight         = $themeStyles['color-text-light'];
     $colorCta           = $themeStyles['color-cta'];
@@ -514,7 +514,7 @@ function _build_btn_color_choices( $entries ) {
 /* Form button color choices (with dark/light + 4 CTA brand colors) ----------------------------------------- */
 function acf_load_form_btn_color_field_choices( $field ) {
 
-    $themeStyles = get_field('styles', 'theme');
+    $themeStyles = hod_option('styles');
     $field['choices'] = _build_btn_color_choices(array(
         'dark'          => $themeStyles['color-text-dark'],
         'light'         => $themeStyles['color-text-light'],
@@ -536,7 +536,7 @@ function acf_load_popup_btn_color_field_choices( $field ) {
 
     $field['label'] = 'WPForms button kleur';
 
-    $themeStyles = get_field('styles', 'theme');
+    $themeStyles = hod_option('styles');
     $field['choices'] = _build_btn_color_choices(array(
         'dark'                                  => $themeStyles['color-text-dark'],
         'light'                                 => $themeStyles['color-text-light'],

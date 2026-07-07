@@ -1,7 +1,7 @@
 <?php
 	if(is_front_page()):
 		$lang = getLang();
-		$instagramFeed  = get_field('instagram-feed', $lang);
+		$instagramFeed  = hod_option('instagram-feed', $lang);
 
 		if($instagramFeed):
 	?>

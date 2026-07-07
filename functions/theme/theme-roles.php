@@ -126,7 +126,7 @@ function change_page_capabilities( $required_caps, $cap, $user_id, $args ) {
 
         $lang = getLang();
 
-        $terms_page_id 		= get_field('terms-page', $lang);
+        $terms_page_id 		= hod_option('terms-page', $lang);
         $policy_page_id 	= get_option( 'wp_page_for_privacy_policy' );
         $page_for_posts_id 	= get_option( 'page_for_posts' );
         array_push($page_restricted, $terms_page_id, $policy_page_id, $page_for_posts_id);

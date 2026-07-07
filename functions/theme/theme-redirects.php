@@ -5,7 +5,7 @@ function custom_redirects() {
 	/* Privacy policy page */
 	$lang 			= getLang();
 	$policy_page_id = get_option( 'wp_page_for_privacy_policy' );
-	$policy_pdf 	= get_field('privacy-policy', $lang);
+	$policy_pdf 	= hod_option('privacy-policy', $lang);
 
 	if ( $policy_page_id != '' && is_page($policy_page_id) ):
 		if($policy_pdf):
@@ -23,8 +23,8 @@ function custom_redirects() {
 	endif;
 
 	/* Terms policy page */
-	$terms_page_id = get_field('terms-page', $lang);
-	$terms_pdf 	   = get_field('terms', $lang);
+	$terms_page_id = hod_option('terms-page', $lang);
+	$terms_pdf 	   = hod_option('terms', $lang);
 
 	if ( $terms_page_id != '' && is_page($terms_page_id) ):
 		if($terms_pdf):

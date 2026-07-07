@@ -35,7 +35,7 @@
 
                     <?php
                       $lang = getLang();
-                      $mostRead = get_field('kennisbank-widget-mostread', $lang);
+                      $mostRead = hod_option('kennisbank-widget-mostread', $lang);
                       if($mostRead):
                         ?>
                         <div class="widget widget-articles">
@@ -52,7 +52,7 @@
 
 
                       <?php
-                        $banner = (get_field('banner-promo')) ? get_field('banner-promo') : get_field('kennisbank-widget-banner', $lang);
+                        $banner = (get_field('banner-promo')) ? get_field('banner-promo') : hod_option('kennisbank-widget-banner', $lang);
                         if($banner):
                           ?>
                           <div class="widget widget-banner">

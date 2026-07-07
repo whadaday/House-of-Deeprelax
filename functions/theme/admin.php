@@ -243,7 +243,7 @@ function set_default_page() {
         $privacyPageID = 3;
         $privacyPage = get_post($privacyPageID);
 
-        $termsPageId = get_field('terms', $lang);       
+        $termsPageId = hod_option('terms', $lang);       
 
         if($defaultPage):
 

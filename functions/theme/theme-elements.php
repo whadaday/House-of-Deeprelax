@@ -1,7 +1,7 @@
 <?php
 function add_elements_variables() {
     if( class_exists('ACF') ) :
-        $themeElements = get_field('elements', 'theme');
+        $themeElements = hod_option('elements');
         if($themeElements):
             $themeElements['p'] = $themeElements['body'];
 
@@ -110,7 +110,7 @@ add_action('wp_head', 'add_elements_variables');
 
 // Get fonts in font selector
 function get_fonts_dynamically( $field ) {
-    $fonts = get_field('fonts', 'theme');
+    $fonts = hod_option('fonts');
 
     if($fonts):
 

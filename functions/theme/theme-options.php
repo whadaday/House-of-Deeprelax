@@ -21,7 +21,7 @@
       ));
 
       /* Languages */
-      $defaultLang = get_field('site-lang', 'theme');
+      $defaultLang = hod_option('site-lang');
       if(function_exists( 'pll_the_languages' )):
         $languages = pll_languages_list();
       else:
@@ -33,7 +33,7 @@
           'page_title'  => strtoupper($lang).' options',
           'menu_title'  => strtoupper($lang).' options',
           'parent_slug' => $parent['menu_slug'],
-          'menu_slug'   => "options-${lang}",
+          'menu_slug'   => "options-{$lang}",
           'post_id'     => $lang
         );
         $child = acf_add_options_sub_page($args);

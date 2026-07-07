@@ -23,8 +23,6 @@ add_action('login_footer', 'wpb_remove_loginshake');
 
 function wpum_disable_remember_me( $fields ) {
 
-    echo '<pre>'; print_r($fields); echo '</pre>';
-
         if ( isset( $fields['login']['remember'] ) ) {
             unset( $fields['login']['remember'] );
         }
@@ -49,7 +47,7 @@ add_action( 'login_footer', function () {
 // Custom Login Logo
 function customize_login_logo() {
   
-  $logo = get_field('site-logo', 'theme');
+  $logo = hod_option('site-logo');
   
   if($logo):
     echo '<style type="text/css">

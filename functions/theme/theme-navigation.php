@@ -18,7 +18,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
 
     function start_lvl( &$output, $depth = 0, $args = null ) {
         $lang        = getLang();
-        $navigation  = get_field('navigation', $lang);
+        $navigation  = hod_option('navigation', $lang);
         $navOptions  = $navigation['nav-options'];
         $navDropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
 
@@ -30,7 +30,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
     }
     function end_lvl( &$output, $depth = 0, $args = null ) {
         $lang        = getLang();
-        $navigation  = get_field('navigation', $lang);
+        $navigation  = hod_option('navigation', $lang);
         $navOptions  = $navigation['nav-options'];
         $navDropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
 
@@ -44,7 +44,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth=0, $args=[], $id=0) {
 
         $lang        = getLang();
-        $navigation  = get_field('navigation', $lang);
+        $navigation  = hod_option('navigation', $lang);
         $navOptions  = $navigation['nav-options'];
         $navDropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
 
@@ -73,7 +73,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
             // echo '<pre>'; print_r($dropdown);
 
             $removeKey = array_search('menu-item-has-children', $item->classes);
-            if($removeKey): unset($item->classes[$removeKey]); endif;
+            if($removeKey !== false): unset($item->classes[$removeKey]); endif;
 
             if(!empty($dropdown) && !in_array('read-more', $item->classes)):
                 array_push($item->classes, 'menu-item-has-dropdown');
@@ -109,7 +109,7 @@ class dropdown_menu_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth=0, $args=[], $id=0) {
         $page_id       = $item->object_id;
         $lang          = getLang();
-        $navigation    = get_field('navigation', $lang);
+        $navigation    = hod_option('navigation', $lang);
         $navOptions    = $navigation['nav-options'];
         $show_dropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
         $dropdown      = get_field('nav-dropdown', $page_id);
@@ -178,7 +178,7 @@ add_filter( 'acf/prepare_field/name=nav-dropdown', 'show_dropdown_menu' );
 function show_dropdown_menu( $field ) {
 
     $lang        = getLang();
-    $navigation  = get_field('navigation', $lang);
+    $navigation  = hod_option('navigation', $lang);
     $navOptions  = $navigation['nav-options'];
     $navDropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
     
@@ -193,7 +193,7 @@ add_filter( 'acf/prepare_field/name=dropdown-message', 'show_dropdown_message' )
 function show_dropdown_message( $field ) {
 
     $lang        = getLang();
-    $navigation  = get_field('navigation', $lang);
+    $navigation  = hod_option('navigation', $lang);
     $navOptions  = $navigation['nav-options'];
     $navDropdown = isset($navOptions['show-nav-dropdown']) ? $navOptions['show-nav-dropdown'] : null;
 

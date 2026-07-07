@@ -3,11 +3,11 @@
 
 	// Logo
 	$siteName 	 	  = get_bloginfo('name');
-	$logo 	  	 	  = get_field('site-logo', 'theme');
+	$logo 	  	 	  = hod_option('site-logo');
 	$logoUrl  	 	  = getLogoUrl();
 
 	// Nav
-	$navigation  	  = get_field('navigation', $lang);
+	$navigation  	  = hod_option('navigation', $lang);
 	$navColor 	 	  = get_field('navigation-color', $post_id) ? get_field('navigation-color', $post_id) : 'dark';
 
 	// Nav side

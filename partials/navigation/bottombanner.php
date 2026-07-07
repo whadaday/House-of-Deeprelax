@@ -1,7 +1,7 @@
 <?php 
 	$post_id		   = get_the_ID();
 	$lang 		       = getLang();
-	$navigation 	   = get_field('navigation', $lang);
+	$navigation 	   = hod_option('navigation', $lang);
 	$hide_bottombanner = get_field('hide-bottombanner', $post_id);
 
 	if(!$hide_bottombanner):

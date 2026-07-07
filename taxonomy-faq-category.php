@@ -70,7 +70,7 @@
 <?php 
   
   $lang = getLang();
-  $globalBlockId = get_field('faq-end', $lang);
+  $globalBlockId = hod_option('faq-end', $lang);
   if($globalBlockId): showGlobalBlock($globalBlockId); endif;
 
   get_footer(); 

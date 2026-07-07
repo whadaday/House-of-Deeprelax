@@ -2,12 +2,12 @@
 	$hideNav 	 = get_field('hide-nav-footer');
 	$lang 		 = getLang();
 	$logoUrl  	 = getLogoUrl();
-	$icon 	 	 = get_field('site-icon', 'theme');
-	$siteName 	 = get_field('site-name', $lang) ?: get_bloginfo('name');
+	$icon 	 	 = hod_option('site-icon');
+	$siteName 	 = hod_option('site-name', $lang) ?: get_bloginfo('name');
 	$chevDown	 = get_template_directory().'/assets/images/beam/icons/chevron-down.svg';
-	$navLegal 	 = get_field('nav-legal', $lang);
+	$navLegal 	 = hod_option('nav-legal', $lang);
 
-	$themeStyles = get_field('styles', 'theme');
+	$themeStyles = hod_option('styles');
 	if($themeStyles):
 		$colorText   = $themeStyles['footer-text-color'];
 	else:
@@ -24,9 +24,9 @@
 	
 	<?php if(!$hideNav): 
 		$menus 	     = array('footer-1', 'footer-2', 'footer-3', 'footer-4');
-		$labelApp 	 = get_field('appstore-title', $lang);
-		$labelSocial = get_field('social-title', $lang);
-		$thankyou    = get_field('appstore-description', $lang);
+		$labelApp 	 = hod_option('appstore-title', $lang);
+		$labelSocial = hod_option('social-title', $lang);
+		$thankyou    = hod_option('appstore-description', $lang);
 	?>
 		<div class="footer-top">
 			<?php if($icon): ?>

@@ -352,43 +352,6 @@ function add_pagebuilder_fields() {
 
 
 
-// add_filter('acf/fields/flexible_content/layout_title', 'pagebuilder_layout_custom_title', 10, 4);
-function pagebuilder_layout_custom_title( $title, $field, $layout, $i ) {
-
-    $index = $i;
-    // echo '<pre>'; print_r($field); echo '</pre>';
-
-    $blockLayout = $field['value'][$index]['acf_fc_layout'];
-    // if($blockLayout != 'block'):
-
-    //     echo 'in layout';
-
-    //     $block = get_sub_field($blockLayout);
-    //     $options = $block['options'];
-    //     $blockTitle = ucfirst($options['block-title']);
-        
-    //     if($blockTitle != ''):
-    //         // $title .= ': '.$blockTitle;
-    //         $ret = sprintf($title . ': ' . '<strong>' . $blockTitle . '</strong>');
-    //     endif;
-
-    //     // Display thumbnail image.
-    //     // if( $image = get_sub_field('image') ) {
-    //     //     $title .= '<div class="thumbnail"><img src="' . esc_url($image['sizes']['thumbnail']) . '" height="36px" /></div>';     
-    //     // }
-
-    // endif;
-
-    $ret = $title;
-    if ($custom_title = 'je moeder') {
-    $ret = sprintf($title . ': ' . '<strong>' . $custom_title . ' layout: '.$index.' - '.count($field['value'][$index] ).'</strong>');
-    // $ret .= ' - test '.count( $field['value'] );
-    }
-
-    return $ret;
-}
-
-
 function getBlocks() {
     
     /* Basic WP query with pagination */

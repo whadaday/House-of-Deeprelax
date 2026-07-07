@@ -96,7 +96,7 @@ function getRelatedKennisbankArticles($category, $amount, $currentPost) {
         $args = array(
             'posts_per_page' => $amount,
             'post_type' => 'kennisbank',
-            'orderby' => 'DESC',
+            'order' => 'DESC',
             'post__not_in' => array($currentPost),
         );
         $query = new WP_Query($args);

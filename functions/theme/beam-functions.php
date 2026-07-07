@@ -332,8 +332,8 @@ function get_next_post_id() {
 		$post_id = $next_post->ID;
 	else:
 		$post_type = get_post_type();
-		$query = get_posts( 'post_type="'.$post_type.'"&numberposts=1&order=ASC' );
-    	$post_id = $query[0]->ID; 
+		$query = get_posts( array( 'post_type' => $post_type, 'numberposts' => 1, 'order' => 'ASC', 'fields' => 'ids' ) );
+    	$post_id = ! empty( $query ) ? $query[0] : 0; 
 	endif;
 
     return $post_id;
@@ -347,8 +347,8 @@ function get_previous_post_id() {
 		$post_id = $previous_post->ID;
 	else:
 		$post_type = get_post_type();
-		$query = get_posts( 'post_type="'.$post_type.'"&numberposts=1&order=DESC' );
-    	$post_id = $query[0]->ID; 
+		$query = get_posts( array( 'post_type' => $post_type, 'numberposts' => 1, 'order' => 'DESC', 'fields' => 'ids' ) );
+    	$post_id = ! empty( $query ) ? $query[0] : 0; 
 	endif;
 
     return $post_id;

@@ -2,10 +2,10 @@
 
 function add_fonts() {
 	
-	$fonts  		 = get_field('fonts', 'theme');
-	$fontsImport 	 = get_field('fonts-import', 	'theme');
-	$fontsLocal  	 = get_field('fonts-local', 	'theme');
-	$fontsVariables  = get_field('variables-fonts', 'theme');
+	$fonts  		 = hod_option('fonts');
+	$fontsImport 	 = hod_option('fonts-import');
+	$fontsLocal  	 = hod_option('fonts-local');
+	$fontsVariables  = hod_option('variables-fonts');
 
 	?>
 	<style>

@@ -14,7 +14,7 @@ function after_dev_mode_update( $field ) {
 add_filter('acf/update_value/name=dev-mode', 'after_dev_mode_update', 10, 1);
 
 function show_grid_view() {
-    $devMode = get_field('dev-mode', 'theme');
+    $devMode = hod_option('dev-mode');
     if($devMode):
         include( locate_template( 'partials/dev/grid-view.php', false, false ) );
     endif;

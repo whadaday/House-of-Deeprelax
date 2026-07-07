@@ -23,7 +23,7 @@ function menu_404_shortcode() {
 
   $lang = getLang();
 
-  $menu = get_field('nav-404', $lang);
+  $menu = hod_option('nav-404', $lang);
 
 
 
@@ -62,10 +62,10 @@ function logo_shortcode($atts) {
 
   $type = $atts['type'];
 
-  $logoPrimary   = get_field('site-logo', 'theme');
-  $logoSecondary = get_field('logo-secondary', 'theme');
-  $tagline       = get_field('logo-tagline', 'theme');
-  $icon          = get_field('site-icon', 'theme');
+  $logoPrimary   = hod_option('site-logo');
+  $logoSecondary = hod_option('logo-secondary');
+  $tagline       = hod_option('logo-tagline');
+  $icon          = hod_option('site-icon');
 
   if(!$logoPrimary && !$logoSecondary && !$icon):
     return;
@@ -123,7 +123,7 @@ add_shortcode( 'audio-player', 'audio_shortcode' );
 function socials_shortcode() {
 
   $lang    = getLang();
-  $socials = get_field('socials', $lang);
+  $socials = hod_option('socials', $lang);
   if(!empty($socials)):
       $socials = array_filter($socials);
 
@@ -181,7 +181,7 @@ add_shortcode( 'signature', 'signature_shortcode' );
 function contact_info_shortcode() {
 
   $lang        = getLang();
-  $contactInfo = get_field('contact-info', $lang);
+  $contactInfo = hod_option('contact-info', $lang);
   
   ob_start();
 

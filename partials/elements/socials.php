@@ -1,6 +1,6 @@
 <?php
   $lang = getLang();
-  $socials = get_field('socials', $lang);
+  $socials = hod_option('socials', $lang);
 
   if($socials):
 ?>

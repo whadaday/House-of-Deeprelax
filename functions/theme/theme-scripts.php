@@ -9,7 +9,7 @@ function theme_styles()
 
     if( ! class_exists('ACF') ) : return; endif;
 
-    $devMode = get_field('dev-mode', 'theme');
+    $devMode = hod_option('dev-mode');
     if($devMode):
         $jsFile = locate_template( 'assets/javascript/scripts/dev-mode.js', false, false );
         if (file_exists($jsFile)):

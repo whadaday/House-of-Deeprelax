@@ -3,7 +3,7 @@
 // Register Reviews Post Type
 function add_reviews_posttype() {
 
-	$reviewsActive = get_field('reviews-active', 'theme');
+	$reviewsActive = hod_option('reviews-active');
 	if($reviewsActive):
     
 	    $labels = array(

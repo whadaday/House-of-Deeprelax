@@ -1,5 +1,5 @@
 <?php
-	$navigation  = get_field('navigation', $lang);
+	$navigation  = hod_option('navigation', $lang);
 	$navOptions  = $navigation['nav-options'];
 	$navDropdown = isset($navOptions['show-nav-side']) ? $navOptions['show-nav-side'] : null;
 

@@ -11,9 +11,9 @@
 	global $blockIndex; 
 	$lang = getLang();
 
-	$text     = get_field('contact-text', $lang);
-	$form     = get_field('contact-form', $lang);
-	$btnClass = get_field('contact-form-btn-class', $lang);
+	$text     = hod_option('contact-text', $lang);
+	$form     = hod_option('contact-form', $lang);
+	$btnClass = hod_option('contact-form-btn-class', $lang);
 
 	if($text || $form):
 ?>

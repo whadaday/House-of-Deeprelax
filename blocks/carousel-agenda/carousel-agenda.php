@@ -3,7 +3,7 @@
 	/* Order: 30 */
 
 	$agenda = $content['agenda'];
-	$styles = get_field('styles', 'theme');
+	$styles = hod_option('styles');
 	$colorCta = $styles['color-cta'];
 	// echo '<pre>'; print_r($styles); echo '</pre>';
 	$showNav = $options['show-nav'];
