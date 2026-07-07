@@ -1,21 +1,45 @@
 {
-  "scripts": {},
-  "repository": {},
-  "description": "CodeKit created this starter package.json file. You should customize it appropriately.",
+  "name": "houseofdeeprelax",
+  "description": "WordPress theme for House of Deeprelax",
   "version": "1.0.0",
+  "author": "Angelo Vaudo",
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "@fancyapps/ui": "^5.0.33",
-    "@tinymce/tinymce-jquery": "^2.1.0",
     "eric-meyer-reset": "^2.0.0",
     "feather-icons": "^4.29.1",
     "gsap": "^3.11.3",
     "headroom.js": "^0.12.0",
     "jquery": "^3.6.1",
     "scrollmagic": "^2.0.8",
-    "slick-carousel": "^1.8.1",
     "swiper": "^11.0.6"
   },
-  "name": "codekit-project",
-  "license": "UNLICENSED",
-  "author": ""
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "chokidar-cli": "^3.0.0",
+    "esbuild": "^0.21.0",
+    "glob": "^13.0.0",
+    "npm-run-all2": "^6.0.0",
+    "postcss": "^8.4.0",
+    "sass": "^1.77.0"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "scripts": {
+    "copy:vendor": "node build/copy-vendor.mjs",
+    "build:css": "node build/sass-build.mjs",
+    "build:css:prod": "node build/sass-build.mjs --production",
+    "build:js": "node build/js-build.mjs",
+    "build:js:prod": "node build/js-build.mjs --production",
+    "build": "npm-run-all copy:vendor --parallel build:css build:js",
+    "prod": "npm-run-all copy:vendor --parallel build:css:prod build:js:prod",
+    "watch:css": "chokidar \"assets/stylesheets/**/*.scss\" \"blocks/**/*.scss\" -c \"npm run build:css\"",
+    "watch:js": "chokidar \"assets/javascript/main.js\" \"assets/javascript/navigation.js\" -c \"npm run build:js\"",
+    "watch": "npm-run-all --parallel watch:css watch:js",
+    "postinstall": "npm run copy:vendor"
+  }
 }

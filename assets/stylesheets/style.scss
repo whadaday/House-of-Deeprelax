@@ -1,7 +1,7 @@
 /*!
 Theme Name: House of Deeprelax
 Theme URI: 
-Version: 0.8.8.2
+Version: 0.8.8.4
 Author: Angelo Vaudo
 Author URI: https://www.beamthe.me
 Description: House of Deeprelax Wordpress Theme 
@@ -16,7 +16,7 @@ Tags:
 @import '../../node_modules/swiper/swiper-bundle';
 
 @import 'theme/*.scss';
-@import '../../../../plugins/beam-popup/beam-popup.scss';  
+@import '../vendor/beam-popup.scss';  
       
 @import 'components/*.scss'; 
 @import 'elements/*.scss';

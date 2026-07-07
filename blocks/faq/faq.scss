@@ -39,7 +39,7 @@
 		&[data-columns="2"] .column-accordion:first-child {
 			.accordion__row {
 				&:first-child {
-					margin-top: calc(-1 * var(--accordion-sizer);
+					margin-top: calc(-1 * var(--accordion-sizer));
 				}
 			}
 		}
