@@ -1,0 +1,150 @@
+name: Deploy to Cloudways
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # WSM beheert vars.DEPLOY_TARGETS: een JSON-lijst van sites die deze repo deelt.
+  # De prepare-job leest 'm (leeg/ontbrekend → []) zodat de deploy-matrix nooit op
+  # een lege/ongeldige variable crasht.
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      targets: ${{ steps.load.outputs.targets }}
+    steps:
+      - name: Load deploy targets
+        id: load
+        env:
+          TARGETS: ${{ vars.DEPLOY_TARGETS }}
+        run: |
+          echo "targets=${TARGETS:-[]}" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: prepare
+    if: needs.prepare.outputs.targets != '[]' && needs.prepare.outputs.targets != ''
+    runs-on: ubuntu-latest
+    name: ${{ matrix.target.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJson(needs.prepare.outputs.targets) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Detect build configuration
+        id: detect
+        run: |
+          if [ -f "package.json" ]; then
+            echo "has_node=true" >> "$GITHUB_OUTPUT"
+            if grep -q '"prod"' package.json; then
+              echo "build_script=prod" >> "$GITHUB_OUTPUT"
+            elif grep -q '"build"' package.json; then
+              echo "build_script=build" >> "$GITHUB_OUTPUT"
+            else
+              echo "build_script=" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "has_node=false" >> "$GITHUB_OUTPUT"
+            echo "build_script=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node.js
+        if: steps.detect.outputs.has_node == 'true' && steps.detect.outputs.build_script != ''
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_node == 'true' && steps.detect.outputs.build_script != ''
+        run: npm ci
+
+      - name: Build for production
+        if: steps.detect.outputs.has_node == 'true' && steps.detect.outputs.build_script != ''
+        run: npm run ${{ steps.detect.outputs.build_script }}
+
+      - name: Veiligheidscheck — geen lege/incomplete theme-deploy
+        run: |
+          # De rsync hieronder gebruikt --delete: een lege of incomplete repo
+          # zou het live-thema wissen (style.css weg → "Stylesheet is missing" →
+          # wit scherm). Breek af vóór de destructieve stap als de theme-root
+          # geen geldige style.css heeft. Draait NA de build, zodat een
+          # gegenereerde style.css meetelt.
+          if [ ! -f style.css ] || ! grep -q "Theme Name" style.css; then
+            echo "::error::style.css met een geldige 'Theme Name'-header ontbreekt in de repo-root."
+            echo "::error::Deploy afgebroken — een rsync --delete zou het live-thema wissen."
+            echo "::error::Push eerst de complete theme-bron (incl. style.css + functions.php)."
+            exit 1
+          fi
+          echo "style.css gevonden — theme-bron compleet, deploy mag door."
+
+      - name: Write deploy info
+        run: |
+          cat > .deploy-info.json << DEPLOYEOF
+          {
+            "repo": "${{ github.repository }}",
+            "commit": "${{ github.sha }}",
+            "deployed_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          DEPLOYEOF
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
+          path: ./
+          remote_path: ${{ matrix.target.path }}
+          remote_host: ${{ matrix.target.host }}
+          remote_port: ${{ matrix.target.port }}
+          remote_user: ${{ matrix.target.user }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Fix file permissions
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ matrix.target.host }}
+          port: ${{ matrix.target.port }}
+          username: ${{ matrix.target.user }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # group-write op alles wat de SSH-user (via rsync) bezit, zodat de Cloudways
+            # app-user (zelfde www-data-groep) WP-updates kan doen — anders falen updates
+            # met "Kon de oude versie niet verplaatsen naar upgrade-temp-backup". (g+rwX
+            # voegt alleen toe; NIET 755/644 dat group-write juist strip't.)
+            WP_CONTENT=$(echo "${{ matrix.target.path }}" | sed 's|/wp-content/.*|/wp-content|')
+            find "$WP_CONTENT" -user "$(whoami)" -exec chmod g+rwX {} + || true
+            mkdir -p "$WP_CONTENT/breeze-config" "$WP_CONTENT/cache" 2>/dev/null || true
+            chmod 775 "$WP_CONTENT/breeze-config" "$WP_CONTENT/cache" 2>/dev/null || true
+            find "$WP_CONTENT/upgrade" "$WP_CONTENT/upgrade-temp-backup" -mindepth 1 -delete 2>/dev/null || true
+            echo "Permissions fixed (group-writable for www-data)"
+
+      - name: Purge caches (Varnish + Breeze)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ matrix.target.host }}
+          port: ${{ matrix.target.port }}
+          username: ${{ matrix.target.user }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            curl -s -o /dev/null http://localhost:8080/purge-all || true
+            CACHE_DIR=$(echo "${{ matrix.target.path }}" | sed 's|/wp-content/themes/.*|/wp-content/cache/breeze-minification/|')
+            find "$CACHE_DIR" -type f ! -name 'index.html' -delete 2>/dev/null || true
+            echo "Caches purged"
+
+      - name: Notify deploy
+        if: always()
+        run: |
+          STATUS="${{ job.status }}"
+          SUBJECT="${STATUS^} — ${{ github.repository }} → ${{ matrix.target.name }}"
+          curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"from\": \"WP Deploy <woof@builtwithbeam.com>\",
+              \"to\": [\"notifications@angelovaudo.com\"],
+              \"subject\": \"$SUBJECT\",
+              \"text\": \"Site: ${{ matrix.target.name }}\\nRepository: ${{ github.repository }}\\nBranch: ${{ github.ref_name }}\\nCommit: ${{ github.sha }}\\nStatus: $STATUS\\nDoor: ${{ github.actor }}\\n\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+            }"
