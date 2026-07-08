@@ -190,3 +190,34 @@ aanpak. Volgens afspraak: alle wijzigingen eerst lokaal testen, niets pushen.
   jagen. De jQuery-dedupe (HOD-10-deel) is wél gedaan.
 - **HOD-14 cf_img/breakpoint-cap**: cf_img N.V.T. (geen Cloudflare); cover-cap
   vereist thumbnail-regeneratie + design-review.
+
+## Audit-rondes (3×) — 2026-07-07
+
+Na de implementatie zijn 3 adversariële audit-rondes gedraaid (elk 3-4
+parallelle lenzen: PHP-correctheid, security, a11y/render, build/JS). Elke
+ronde-bevinding is geverifieerd en gefixt (commits `fix(audit-r1..r3)`).
+
+**Ronde 1** — ving een KRITIEKE functionele regressie: de security-pass
+(HOD-26) had `wp_redirect`→`wp_safe_redirect` gezet, maar `wp_safe_redirect`
+weigert externe hosts → app-store/PDF-redirects stuurden bezoekers naar
+`/wp-admin`. Fix: `allowed_redirect_hosts`-whitelist. Plus 12 correctheids/
+a11y-fixes (AUTOSAVE dode code, ACF-cache-invalidatie, SVG-kses uitbreiding,
+LQIP scheme-normalisatie, getLang-sentinel, focus-kleur, admin.js-dep) +
+`.github/workflows/deploy.yml` toegevoegd (HOD-00).
+
+**Ronde 2** — de focus-ring (HOD-30) bleek nog overal onderdrukt door
+achtergebleven `outline:none`/`outline:0` in de btn/link-mixins + form-velden;
+opgelost met één autoritatieve `!important`-regel. Plus: nopriv-AJAX-endpoint
+(`load_templates`) dichtgezet (IDOR), systemische `esc_url`-pass (33 rauwe
+ACF-URL-echo's over 26 bestanden), xlink:href-protocolfilter, nav-mobile
+`<div>`→`<nav>`.
+
+**Ronde 3** — finale validatie. Ving één CI-blocker (`package-lock.json`
+out-of-sync na de deps-opschoning → `npm ci` faalt) + escaping-restanten
+(CSS-vars/aria-labels/login-logo) + de nopriv-regel die in r2 niet matchte.
+Alle r1/r2-fixes adversarieel bevestigd correct; build/perf/a11y volledig.
+
+**Bewust niet gedaan** (met reden): `wp_kses_post` op het hoofd-WYSIWYG
+(`text.php` — zou legit editor-embeds strippen), de brede systemische
+`data-*`-esc_attr-pass (vaste ACF-keuzelijsten, laag risico), HOD-13 CSS-split,
+GSAP/ScrollMagic-rewrite, HOD-14 cf_img (geen Cloudflare).
