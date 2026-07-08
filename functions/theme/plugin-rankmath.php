@@ -9,8 +9,23 @@ add_filter('rank_math/researches/tests', function ($tests, $type) {
 }, 10, 2 );
 
 add_filter( 'rank_math/opengraph/url', function( $url ) {
-    $url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-    return $url;
+    // Bouw de og:url uit de request, maar valideer de host tegen de bekende
+    // site-domeinen (anti host-header-injectie / cache-poisoning) en escape.
+    // Onvertrouwde host → RankMath's eigen (veilige) canonical.
+    $host = isset( $_SERVER['HTTP_HOST'] ) ? strtolower( (string) $_SERVER['HTTP_HOST'] ) : '';
+    $allowed = array();
+    foreach ( array( home_url(), site_url() ) as $known ) {
+        $h = strtolower( (string) wp_parse_url( $known, PHP_URL_HOST ) );
+        if ( $h ) {
+            $allowed[] = $h;
+            $allowed[] = ( strpos( $h, 'www.' ) === 0 ) ? substr( $h, 4 ) : 'www.' . $h;
+        }
+    }
+    if ( ! in_array( $host, array_unique( $allowed ), true ) ) {
+        return $url;
+    }
+    $path = isset( $_SERVER['REQUEST_URI'] ) ? '/' . ltrim( (string) $_SERVER['REQUEST_URI'], '/' ) : '';
+    return esc_url_raw( 'https://' . $host . $path );
 });
 
 add_action(

@@ -16,7 +16,7 @@ add_action('template_redirect', function () {
     );
 
     if (! $isMobile) {
-        wp_redirect(home_url('/app'), 302);
+        wp_safe_redirect(home_url('/app'), 302);
         exit;
     }
 
@@ -25,12 +25,12 @@ add_action('template_redirect', function () {
 
     // iOS (iPhone, iPad, iPod)
     if (preg_match('/iPhone|iPad|iPod/i', $userAgent)) {
-        wp_redirect($appstores['apple'], 302);
+        wp_safe_redirect( esc_url_raw($appstores['apple']), 302 );
         exit;
 
     // Android
     } else {
-         wp_redirect($appstores['android'], 302);
+         wp_safe_redirect( esc_url_raw($appstores['android']), 302 );
         exit;
     }
 });
@@ -50,7 +50,7 @@ add_action('template_redirect', function () {
     );
 
     if (! $isMobile) {
-        wp_redirect(home_url('/app'), 302);
+        wp_safe_redirect(home_url('/app'), 302);
         exit;
     }
 
@@ -59,12 +59,12 @@ add_action('template_redirect', function () {
 
     // iOS (iPhone, iPad, iPod)
     if (preg_match('/iPhone|iPad|iPod/i', $userAgent)) {
-        wp_redirect($appstores['apple'], 302);
+        wp_safe_redirect( esc_url_raw($appstores['apple']), 302 );
         exit;
 
     // Android
     } else {
-         wp_redirect($appstores['android'], 302);
+         wp_safe_redirect( esc_url_raw($appstores['android']), 302 );
         exit;
     }
 });

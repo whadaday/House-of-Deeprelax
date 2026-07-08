@@ -9,7 +9,7 @@ function custom_redirects() {
 
 	if ( $policy_page_id != '' && is_page($policy_page_id) ):
 		if($policy_pdf):
-			wp_redirect( $policy_pdf );
+			wp_safe_redirect( esc_url_raw($policy_pdf) );
 			exit();
 		// else:
 		// 	global $wp_query;
@@ -28,7 +28,7 @@ function custom_redirects() {
 
 	if ( $terms_page_id != '' && is_page($terms_page_id) ):
 		if($terms_pdf):
-			wp_redirect( $terms_pdf );
+			wp_safe_redirect( esc_url_raw($terms_pdf) );
 			exit();
 		// else:
 		// 	global $wp_query;

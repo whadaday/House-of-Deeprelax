@@ -36,7 +36,7 @@
 				<?php 
 					if($image): 
 						if($image['subtype'] == 'svg+xml'):
-							echo '<span class="icon-benefit">'.file_get_contents($image['url']).'</span>';
+							echo '<span class="icon-benefit">'.hod_kses_svg( file_get_contents($image['url']) ).'</span>';
 						else:
 							$content['image'] = $image;
 							$imageSize = 'xs';

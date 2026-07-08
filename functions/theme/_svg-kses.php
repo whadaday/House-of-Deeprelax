@@ -1,0 +1,66 @@
+<?php
+/**
+ * SVG-sanitizer voor klant-geüploade SVG's die inline geëcho'd worden.
+ *
+ * ACF-image-velden (logo's, icoon-uploads) kunnen SVG's zijn; die worden in dit
+ * thema met file_get_contents() rauw in de DOM gezet. Een SVG kan <script>,
+ * event-handlers (onload=…) of foreignObject bevatten → stored-XSS. Deze helper
+ * haalt de SVG door een wp_kses-allowlist die alléén tekenende elementen +
+ * presentatie-attributen toestaat, en strip zo scripts/handlers/externe refs.
+ *
+ * Bundel-SVG's uit get_template_directory() zijn theme-eigen (niet klant-
+ * beheerd) en hoeven hier NIET doorheen — zie de call-sites. Prefix "_" zodat
+ * dit vóór de andere functions-bestanden laadt.
+ */
+
+if (!defined('ABSPATH')) { exit; }
+
+/**
+ * Sanitize een inline SVG-string tegen XSS. Retourneert '' bij lege input.
+ *
+ * @param string $svg Rauwe SVG-markup.
+ * @return string     Ge-sanitizede SVG.
+ */
+function hod_kses_svg($svg) {
+    if (!is_string($svg) || $svg === '') {
+        return '';
+    }
+
+    // Presentatie-/geometrie-attributen die op vrijwel elk SVG-element mogen.
+    $common = array(
+        'class' => true, 'id' => true, 'style' => true, 'fill' => true,
+        'fill-rule' => true, 'fill-opacity' => true, 'stroke' => true,
+        'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true,
+        'stroke-miterlimit' => true, 'stroke-dasharray' => true, 'stroke-opacity' => true,
+        'opacity' => true, 'transform' => true, 'clip-path' => true, 'clip-rule' => true,
+        'x' => true, 'y' => true, 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true,
+        'cx' => true, 'cy' => true, 'r' => true, 'rx' => true, 'ry' => true,
+        'd' => true, 'points' => true, 'width' => true, 'height' => true,
+        'viewbox' => true, 'preserveaspectratio' => true, 'xmlns' => true,
+        'xmlns:xlink' => true, 'gradientunits' => true, 'gradienttransform' => true,
+        'offset' => true, 'stop-color' => true, 'stop-opacity' => true,
+        'aria-hidden' => true, 'aria-label' => true, 'role' => true, 'focusable' => true,
+    );
+
+    $allowed = array(
+        'svg'            => $common,
+        'g'              => $common,
+        'path'           => $common,
+        'circle'         => $common,
+        'ellipse'        => $common,
+        'rect'           => $common,
+        'line'           => $common,
+        'polyline'       => $common,
+        'polygon'        => $common,
+        'defs'           => $common,
+        'clippath'       => $common,
+        'lineargradient' => $common,
+        'radialgradient' => $common,
+        'stop'           => $common,
+        'title'          => $common,
+        'desc'           => $common,
+        'use'            => $common + array('xlink:href' => true, 'href' => true),
+    );
+
+    return wp_kses($svg, $allowed);
+}

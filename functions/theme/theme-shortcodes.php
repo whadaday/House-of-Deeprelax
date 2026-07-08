@@ -91,7 +91,7 @@ function logo_shortcode($atts) {
 
   endif;
 
-  echo '<figure class="'.$class.'">'.file_get_contents($logo).'</figure>';
+  echo '<figure class="'.esc_attr($class).'">'.hod_kses_svg( file_get_contents($logo) ).'</figure>';
 
   return ob_get_clean();
 }
@@ -136,7 +136,7 @@ function socials_shortcode() {
       foreach($socials as $name => $value):
         $icon = get_template_directory().'/assets/images/social/icon-'.$name.'.svg';
         if($icon && $value):
-          echo '<li class="social-'.$name.'"><a href="'.$value.'" target="_blank">'.file_get_contents($icon).'</a></li>';
+          echo '<li class="social-'.esc_attr($name).'"><a href="'.esc_url($value).'" target="_blank" rel="noopener noreferrer">'.file_get_contents($icon).'</a></li>';
         endif;
       endforeach;
 
@@ -196,10 +196,10 @@ function contact_info_shortcode() {
     elseif($label == 'phone'):
       $label = ($lang == 'nl' ) ? 'Telefoon' : 'Phone';
     elseif($label == 'times'):
-      $label = ($lang == 'nl') ? 'Openings<br />tijden' : 'Opening</br />hours';
+      $label = ($lang == 'nl') ? 'Openings<br />tijden' : 'Opening<br />hours';
     endif;
 
-    echo '<li><h6>'.$label.'</h6>'.$info.'</li>';
+    echo '<li><h6>'.wp_kses_post($label).'</h6>'.wp_kses_post($info).'</li>';
 
   endforeach;
 

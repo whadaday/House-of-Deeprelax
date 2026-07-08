@@ -79,7 +79,7 @@
 <body
   id="body"
   <?php body_class($headerClasses); ?>
-  data-color-text="<?php echo $colorText; ?>"
+  data-color-text="<?php echo esc_attr($colorText); ?>"
   <?php echo apply_filters('body_custom_attributes', ''); ?>
 >
   <?php wp_body_open(); ?>

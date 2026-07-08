@@ -35,8 +35,8 @@
             </a>
         <?php endif; ?>
         <div class="author-content">
-            <p class="author-name"><a href="<?php echo $authorLink; ?>"><?php echo $authorName; ?></a><?php if($authorRole): ?>, <span class="author-role"><?php echo lcfirst($authorRole); ?></span><?php endif; ?></p>
-            <?php if($author_bio): ?><p class="author-description"><?php echo $author_bio; ?> <?php /*<a href="<?php echo $authorLink; ?>">Lees verder</a>*/ ?></p><?php endif; ?>
+            <p class="author-name"><a href="<?php echo esc_url($authorLink); ?>"><?php echo esc_html($authorName); ?></a><?php if($authorRole): ?>, <span class="author-role"><?php echo esc_html(lcfirst($authorRole)); ?></span><?php endif; ?></p>
+            <?php if($author_bio): ?><p class="author-description"><?php echo wp_kses_post($author_bio); ?> <?php /*<a href="<?php echo $authorLink; ?>">Lees verder</a>*/ ?></p><?php endif; ?>
 
             <?php if($socials): ?>
                 <ul class="list-author-socials">
@@ -46,7 +46,7 @@
                             $icon = get_template_directory().'/assets/images/social/icon-'.$social.'.svg';
                     ?>
                         <li>
-                            <a class="link-social link-<?php echo $social; ?>" href="<?php echo $url; ?>" target="_blank">
+                            <a class="link-social link-<?php echo esc_attr($social); ?>" href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer">
                                 <?php echo file_get_contents($icon); ?>
                             </a>
                         </li>

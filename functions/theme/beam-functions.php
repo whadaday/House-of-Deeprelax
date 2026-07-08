@@ -17,7 +17,7 @@ function showLogo($logo_url, $class = null) {
 	if($class): $logo .= '<figure class="'.$class.'" data-size="normal">'; endif;
 
 	if($logoType == 'svg'):
-		$svg = file_get_contents($logo_url);
+		$svg = hod_kses_svg( file_get_contents($logo_url) );
 		$svg = addSvgAlign($svg);
 		$logo .= $svg;
 	else:
