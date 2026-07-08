@@ -140,21 +140,77 @@ function get_string_between($string, $start, $end){
     return substr($string, $ini, $len);
 }
 
-add_action('acf/init', 'add_pagebuilder_fields');
-function add_pagebuilder_fields() {
+/**
+ * Enumerate the blocks/* directory into the sorted layout list used by the
+ * pagebuilder flexible-content field: per block its ACF field-group key (from
+ * the block's *.json) plus its display name + order (parsed from the PHP header
+ * comment). This is pure disk I/O — one glob over blocks/* plus two file reads
+ * per block — whose result only changes on a code deploy or a block-field-group
+ * save. It ran ongecachet on acf/init (i.e. EVERY request, frontend included),
+ * ~140 filesystem ops per page. Cache it in a transient keyed on THEME_VERSION
+ * so a deploy refreshes it automatically, mirroring the acf_load_json paths
+ * cache (HOD-21). (HOD perf-audit — hook-gebruik)
+ *
+ * @return array<int,array{order:int,name:string,slug:string,key:string}>
+ */
+function hod_pagebuilder_blocks() {
+    $cache_key = 'hod_pagebuilder_blocks_' . (defined('THEME_VERSION') ? THEME_VERSION : '1');
+    $cached    = get_transient($cache_key);
+    if (is_array($cached)) {
+        return $cached;
+    }
 
     $base_dir = trailingslashit(get_template_directory());
     $dir      = 'blocks';
-    $folders  = glob($base_dir.$dir.'/*');
 
-    // Get names of blocks
-    $blockNames = array();
+    $contentblocks = array();
 
-    foreach ($folders as $folder):
-        $folder = explode('/', $folder);
-        $folder = end($folder);
-        array_push($blockNames, $folder);
-    endforeach;
+    foreach ((array) glob($base_dir . $dir . '/*') as $folder) {
+        $block = basename($folder);
+
+        $jsonFile = glob($base_dir . $dir . '/' . $block . '/*.json');
+        if (empty($jsonFile) || !file_exists($jsonFile[0])) { continue; }
+
+        $json = (array) json_decode(file_get_contents($jsonFile[0]));
+        $key  = isset($json['key']) ? $json['key'] : '';
+
+        $blockFile = glob($base_dir . $dir . '/' . $block . '/*.php');
+        if (empty($blockFile)) { continue; }
+
+        $source     = file_get_contents($blockFile[0]);
+        $blockName  = get_string_between($source, '/* Block Name: ', ' */');
+        if ($blockName === '') { $blockName = $block; }
+        $blockOrder = intval(get_string_between($source, '/* Order: ', ' */'));
+        if (!$blockOrder) { $blockOrder = 1000; }
+
+        $contentblocks[] = array(
+            'order' => $blockOrder,
+            'name'  => $blockName,
+            'slug'  => $block,
+            'key'   => $key,
+        );
+    }
+
+    usort($contentblocks, fn($a, $b) => $a['order'] <=> $b['order']);
+
+    set_transient($cache_key, $contentblocks, 12 * HOUR_IN_SECONDS);
+
+    return $contentblocks;
+}
+
+// Vernieuw de block-cache wanneer een veldgroep verandert (nieuw block gaat
+// gepaard met een field-group-save) of bij theme-switch — zelfde triggers als
+// hod_flush_acf_json_paths, zodat een nieuw block direct in de pagebuilder
+// verschijnt i.p.v. tot 12u onzichtbaar te blijven.
+function hod_flush_pagebuilder_blocks() {
+    delete_transient('hod_pagebuilder_blocks_' . (defined('THEME_VERSION') ? THEME_VERSION : '1'));
+}
+add_action('acf/update_field_group', 'hod_flush_pagebuilder_blocks');
+add_action('acf/trash_field_group', 'hod_flush_pagebuilder_blocks');
+add_action('after_switch_theme', 'hod_flush_pagebuilder_blocks');
+
+add_action('acf/init', 'add_pagebuilder_fields');
+function add_pagebuilder_fields() {
 
     // Create layouts
     $layouts = array();
@@ -195,39 +251,9 @@ function add_pagebuilder_fields() {
         'max' => '',
     );
 
-    $contentBlocks = array();
-
-    foreach ($blockNames as $block):
-        $jsonFile = glob($base_dir.$dir.'/'.$block.'/*.json');
-        if(!empty($jsonFile)):
-            $jsonFile = $jsonFile[0];
-            if (file_exists($jsonFile)):
-                $json = file_get_contents($jsonFile);
-                $json = (array) json_decode($json);
-                $key = $json['key'];
-                $blockSlug = $block;
-                $blockFile = glob($base_dir.$dir.'/'.$block.'/*.php');
-                if(empty($blockFile)): continue; endif;
-                $blockFile = $blockFile[0];
-                $source = file_get_contents($blockFile);
-                $blockName = get_string_between($source, '/* Block Name: ', ' */');
-                if($blockName == ''): $blockName = $blockSlug; endif;
-                $blockOrder = intval(get_string_between($source, '/* Order: ', ' */'));
-                if(!$blockOrder): $blockOrder = 1000; endif;
-
-                $contentblocks[] = array(
-                    'order' => $blockOrder,
-                    'name'  => $blockName,
-                    'slug'  => $block,
-                    'key'   => $key
-                );
-            endif;
-        endif;
-    endforeach;
-
-    // Sort layouts based on label
-    usort($contentblocks, fn($a, $b) => $a['order'] <=> $b['order']);
-    $blockNames = $contentblocks;
+    // Block-lijst uit de cache — de glob + file reads draaien alléén bij een
+    // cache-miss (na deploy / field-group-save), niet meer op elke acf/init.
+    $blockNames = hod_pagebuilder_blocks();
 
     $i = 2;
     foreach ($blockNames as $block):
