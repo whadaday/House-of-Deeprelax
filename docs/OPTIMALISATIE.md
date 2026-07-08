@@ -85,11 +85,11 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 
 | ID | § Std | Bevinding | Locatie | Fix | Prio | Status |
 |----|-------|-----------|---------|-----|------|--------|
-| HOD-30 | 10.3 | **`*:focus-visible { outline: none }` op de universele selector** — alle focus-indicatie site-breed weg | `components/elements.scss:10-11` | Regel weg of vervangen door zichtbare focus (`outline: 2px solid`/box-shadow) | 🔴 | open |
-| HOD-31 | 10.1 | Geen skip-to-content link | `header.php` (na `wp_body_open`) | `<a class="skip-link" href="#main">` | 🟡 | open |
+| HOD-30 | 10.3 | **`*:focus-visible { outline: none }` op de universele selector** — alle focus-indicatie site-breed weg | `components/elements.scss:10-11` | Regel weg of vervangen door zichtbare focus (`outline: 2px solid`/box-shadow) | 🔴 | **done** |
+| HOD-31 | 10.1 | Geen skip-to-content link | `header.php` (na `wp_body_open`) | `<a class="skip-link" href="#main">` | 🟡 | **done** |
 | HOD-32 | 10.9 | Geen `prefers-reduced-motion` (GSAP/ScrollMagic onvoorwaardelijk) | `main.js`; SCSS | `matchMedia`-guard + CSS-fallback | 🟡 | open |
 | HOD-33 | 10.4/10.6 | Menu-toggle is `<a href="#">` zonder `aria-expanded`/`aria-controls`; mobiele overlay zonder dialog-semantiek; icon-only links (socials, nav-back, scroll-indicator) zonder toegankelijke naam | `navigation.php:95-97`, `navigation-mobile.php:10`, `socials.php:16` | `<button aria-expanded>` + `role="dialog"` + `aria-label`s | 🟡 | open |
-| HOD-34 | 10.6 | **Verwisselde app-store aria-labels**: Apple-knop zegt "Google play", Play-knop zegt "App Store"; QR-`<img>` zonder alt | `appstore.php:14,22,10` | Labels omwisselen; `alt` toevoegen | 🟡 | open |
+| HOD-34 | 10.6 | **Verwisselde app-store aria-labels**: Apple-knop zegt "Google play", Play-knop zegt "App Store"; QR-`<img>` zonder alt | `appstore.php:14,22,10` | Labels omwisselen; `alt` toevoegen | 🟡 | **done** |
 | HOD-35 | 6.6 | FAQ-schema niet JSON-veilig (rauwe echo — quote/newline breekt JSON-LD) + `http://schema.org`; FAQ-taxonomiepagina mist FAQPage-schema volledig | `blocks/faq/faq.php:91,99,102`, `taxonomy-faq-category.php:62` | `wp_json_encode()`, https, schema op de taxonomie-template | 🟡 | open |
 | HOD-36 | 6.5 | Gemiste schema-kansen: geen `Book`-schema op single-book CPT, geen `Review`/`AggregateRating` bij reviews | `single-book.php`, `functions-reviews.php` | `Book`- + `Review`-JSON-LD (SERP-verrijking) | 🟡 | open |
 | HOD-37 | — | Legacy favicons (alleen shortcut-icon PNG + apple-touch); geen 32/16/SVG/webmanifest/theme-color | `theme-favicons.php:8-9` | Moderne icon-set | ⚪ | open |

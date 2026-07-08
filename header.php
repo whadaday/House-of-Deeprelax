@@ -84,6 +84,8 @@
 >
   <?php wp_body_open(); ?>
 
+  <a class="skip-link screen-reader-text" href="#main"><?php echo (getLang() === 'nl') ? 'Naar inhoud' : 'Skip to content'; ?></a>
+
   <div id="wrapper">
   
     <?php 

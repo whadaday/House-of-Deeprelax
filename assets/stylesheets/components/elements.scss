@@ -7,8 +7,11 @@
   &:last-child {
     margin-bottom: 0;
   }
+  // HOD-30: zichtbare focus-ring (was outline:none op de universele selector,
+  // waardoor toetsenbord-focus site-breed onzichtbaar was — WCAG 2.4.7).
   &:focus-visible {
-    outline: none;
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   -webkit-tap-highlight-color: transparent;

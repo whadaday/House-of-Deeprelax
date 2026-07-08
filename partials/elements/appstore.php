@@ -7,11 +7,11 @@
 
 	<ul class="list-apps">
 		<li class="dynamic-qr">
-			<img src="<?php echo $qr_src; ?>" />
+			<img src="<?php echo esc_url($qr_src); ?>" alt="" />
 			<p>Scan de QR-code met je telefoon en krijg direct toegang tot de Deeprelax-app.</p>
 		</li>
 		<li>
-			<a class="link-appstore" href="<?php echo $appstores['apple']; ?>" target="_blank" aria-label="Ontdek het op Google play">
+			<a class="link-appstore" href="<?php echo esc_url($appstores['apple']); ?>" target="_blank" rel="noopener noreferrer" aria-label="Download in de App Store">
 				<?php 
 					$logo = get_template_directory().'/assets/images/badge-appstore.svg'; 
 					if($logo): echo file_get_contents($logo); endif;
@@ -19,7 +19,7 @@
 			</a>
 		</li>
 		<li>
-			<a class="link-playstore" href="<?php echo $appstores['android']; ?>" target="_blank" aria-label="Download in de App Store">
+			<a class="link-playstore" href="<?php echo esc_url($appstores['android']); ?>" target="_blank" rel="noopener noreferrer" aria-label="Ontdek het op Google Play">
 				<?php 
 					$logo = get_template_directory().'/assets/images/badge-playstore.svg'; 
 					if($logo): echo file_get_contents($logo); endif;
