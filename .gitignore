@@ -20,3 +20,13 @@ Thumbs.db
 
 # Log files
 *.log
+
+# --- WSM theme hygiene (managed) ---
+# macOS Finder metadata
+.DS_Store
+# Misconfigured GitHub Actions step writing a literal $GITHUB_OUTPUT file
+$GITHUB_OUTPUT
+*GITHUB_OUTPUT
+# A root/server .htaccess does not belong in a theme directory
+.htaccess
+# --- end WSM theme hygiene ---
