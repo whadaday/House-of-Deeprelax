@@ -80,6 +80,7 @@ function getGuides() {
     $paged  = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $args   = array(
             'posts_per_page'      => -1,
+            'no_found_rows'       => true, // geen paginatie bij -1 (HOD-20)
             'post_type'           => 'guide',
             'post_status'         => 'publish',
             'ignore_sticky_posts' => true,

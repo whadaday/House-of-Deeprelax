@@ -101,41 +101,32 @@ add_filter( 'acf/json/save_paths', 'acf_save_json', 10, 2 );
 add_filter('acf/settings/load_json', 'acf_load_json');
 
 function acf_load_json( $paths ) {
-    
+
     unset($paths[0]);
 
-    // Load ACF fields
-    $paths[] = get_stylesheet_directory() . '/functions/acf';
+    // De JSON-load-paths veranderen alléén bij een code-deploy; cache ze zodat
+    // niet elke acf/settings/load_json-call (élke get_field) 3x glob() over de
+    // filesystem draait. Key op THEME_VERSION → een deploy ververst vanzelf.
+    // (HOD-21, §13.4)
+    $cache_key = 'hod_acf_json_paths_' . (defined('THEME_VERSION') ? THEME_VERSION : '1');
+    $cached    = get_transient($cache_key);
+    if (is_array($cached)) {
+        return array_merge($paths, $cached);
+    }
 
-    // Load ACF block fields
+    $found    = array();
+    $found[]  = get_stylesheet_directory() . '/functions/acf';
     $base_dir = trailingslashit(get_template_directory());
-    $dir      = 'blocks/*';
-    $folders  = glob($base_dir.$dir);
 
-    foreach ($folders as $folder):
-        $paths[] = $folder;
-    endforeach;
+    foreach (array('blocks/*', 'modules/*/acf', 'modules/*/blocks/*') as $dir) {
+        foreach ((array) glob($base_dir . $dir) as $folder) {
+            $found[] = $folder;
+        }
+    }
 
-    // Load ACF modules acf fields
-    $dir      = 'modules/*/acf';
-    $folders  = glob($base_dir.$dir);
+    set_transient($cache_key, $found, 12 * HOUR_IN_SECONDS);
 
-    foreach ($folders as $folder):
-        $paths[] = $folder;
-    endforeach;
-
-    // Load ACF modules block fields
-    $dir      = 'modules/*/blocks/*';
-    $folders  = glob($base_dir.$dir);
-
-    foreach ($folders as $folder):
-        $paths[] = $folder;
-    endforeach;
-
-    // echo '<pre>'; print_r($paths); echo '</pre>'; die();
-
-    return $paths;
-    
+    return array_merge($paths, $found);
 }
 
 
