@@ -71,6 +71,10 @@ function configure_admin_menu() {
 
     remove_menu_page('copy-delete-posts');
 
+    // RankMath top-level settings-menu weg (§12.2.4). De per-post SEO-metabox
+    // (hernoemd naar "SEO") blijft; alleen de globale settings verdwijnen.
+    remove_menu_page('rank_math');
+
     // Remove setting pages
     // remove_menu_page('options-general.php');
 
@@ -408,3 +412,23 @@ function cmfy_excerpt_character_counter() {
 <?php }
 add_action( 'admin_head-post.php', 'cmfy_excerpt_character_counter' );
 add_action( 'admin_head-post-new.php', 'cmfy_excerpt_character_counter' );
+
+
+/* Site-icon control uit de Customizer (§12.1.6) — de favicon staat vast via
+ * theme-favicons.php, dus geen klant-toggle nodig. */
+add_action('customize_register', function ($wp_customize) {
+    $wp_customize->remove_control('site_icon');
+}, 20);
+
+/* Plugin-admin-scripts die overal laden dequeuen (§12.6.1-12.6.3): upgrade-
+ * prompts + bulk-edit-assets die op onze schermen niets toevoegen. */
+add_action('admin_enqueue_scripts', function () {
+    foreach (array(
+        'acf-escaped-html-notice',      // ACF Pro escaping-waarschuwing
+        'wpforms-edit-post-education',  // WPForms upgrade-prompt
+        'rank-math-post-bulk-edit',     // RankMath bulk-edit
+        'rank-math-pro-post-list',      // RankMath Pro post-list
+    ) as $handle) {
+        wp_dequeue_script($handle);
+    }
+}, 100);

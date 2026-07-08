@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Veilige CSS font-family-token (§5.14/§7.17): strip alles behalve letters,
+ * cijfers, spatie, koppelteken en underscore. esc_html/esc_attr laten `;{}"'`
+ * staan, en die worden in CSS-context (binnen <style>) NIET als entity
+ * gedecodeerd → een klant-fontnaam kon zo uit de declaratie/`<style>` breken.
+ */
+function hod_css_font_name($name) {
+	return preg_replace('/[^A-Za-z0-9 _-]/', '', (string) $name);
+}
+
 function add_fonts() {
 
 	$fonts  		 = hod_option('fonts');
@@ -48,7 +58,7 @@ function add_fonts() {
 				$woff2 	= isset($font['file-woff2']) ? $font['file-woff2'] : '';
 				?>
 				@font-face {
-				    font-family:"<?php echo esc_attr($name); ?>";
+				    font-family:"<?php echo hod_css_font_name($name); ?>";
 				    src: url("<?php echo esc_url_raw($woff2); ?>") format("woff2");
 				    font-style: <?php echo esc_attr($style); ?>;
 				    font-weight: <?php echo esc_attr($weight); ?>;
@@ -65,9 +75,9 @@ function add_fonts() {
 			?>
 
 			:root {
-			    <?php if($primary): ?>--font-primary: <?php echo esc_html($primary); ?>, sans-serif; <?php endif; ?>
-			    <?php if($secondary): ?>--font-secondary: <?php echo esc_html($secondary); ?>, sans-serif; <?php endif; ?>
-			    <?php if($third): ?>--font-third: <?php echo esc_html($third); ?>, sans-serif; <?php endif; ?>
+			    <?php if($primary): ?>--font-primary: <?php echo hod_css_font_name($primary); ?>, sans-serif; <?php endif; ?>
+			    <?php if($secondary): ?>--font-secondary: <?php echo hod_css_font_name($secondary); ?>, sans-serif; <?php endif; ?>
+			    <?php if($third): ?>--font-third: <?php echo hod_css_font_name($third); ?>, sans-serif; <?php endif; ?>
 			}
 
 			<?php

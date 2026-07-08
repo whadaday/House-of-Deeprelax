@@ -46,8 +46,8 @@
 					<div class="column column-logo">
 						<div class="content">
 							<?php if($logo): ?>
-								<a class="site-logo logo-primary" href="<?php echo esc_url($logoUrl); ?>" title="<?php echo $siteName; ?>">
-									<?php echo file_get_contents($logo); ?>
+								<a class="site-logo logo-primary" href="<?php echo esc_url($logoUrl); ?>" title="<?php echo esc_attr($siteName); ?>">
+									<?php echo hod_kses_svg(file_get_contents($logo)); // klant-upload → sanitize (§7.2) ?>
 								</a>
 							<?php endif; ?>
 
