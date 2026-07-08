@@ -129,10 +129,15 @@ jobs:
           username: ${{ matrix.target.user }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            WP_ROOT=$(echo "${{ matrix.target.path }}" | sed 's|/wp-content/themes/.*||')
+            # Breeze PAGE-cache purge — dit miste: alleen de minification-dir +
+            # Varnish werden gepurged, niet de volledige-HTML-page-cache, dus na
+            # een deploy werd stale HTML geserveerd tot die vanzelf verliep.
+            cd "$WP_ROOT" && /usr/local/bin/wp breeze purge --cache=all 2>/dev/null || true
+            # Fallback (file-cache, beide dirs) + Varnish edge-cache.
+            find "$WP_ROOT/wp-content/cache/breeze" "$WP_ROOT/wp-content/cache/breeze-minification" -type f ! -name 'index.html' -delete 2>/dev/null || true
             curl -s -o /dev/null http://localhost:8080/purge-all || true
-            CACHE_DIR=$(echo "${{ matrix.target.path }}" | sed 's|/wp-content/themes/.*|/wp-content/cache/breeze-minification/|')
-            find "$CACHE_DIR" -type f ! -name 'index.html' -delete 2>/dev/null || true
-            echo "Caches purged"
+            echo "Caches purged (Breeze page + minification + Varnish)"
 
       - name: Notify deploy
         if: always()
