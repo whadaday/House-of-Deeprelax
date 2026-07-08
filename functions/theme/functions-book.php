@@ -35,7 +35,7 @@ function add_book_posttype() {
     $args = array(
         'label'                 => __( 'Book', 'text_domain' ),
         'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'custom-fields' ),
+        'supports'              => array( 'title', 'editor', 'custom-fields', 'revisions' ),
         'taxonomies'            => array( ),
         'menu_icon'             => 'dashicons-book',
         'hierarchical'          => true,

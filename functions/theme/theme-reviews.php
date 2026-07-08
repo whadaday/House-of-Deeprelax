@@ -52,7 +52,7 @@ function add_reviews_posttype() {
 	        'hierarchical'          => false,
 	        'has_archive'           => false,
 	        'query_var'             => true,
-	        'supports'              => array( 'title', 'custom-fields' ),
+	        'supports'              => array( 'title', 'custom-fields', 'revisions' ),
 	        'taxonomies' => array( 'category', 'post_tag' ),
 	    );
 	    register_post_type( 'review', $args );

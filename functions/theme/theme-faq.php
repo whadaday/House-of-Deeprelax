@@ -157,7 +157,7 @@ function add_faq_posttype() {
     $args = array(
         'label'                 => __( 'Question', 'text_domain' ),
         'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'custom-fields' ),
+        'supports'              => array( 'title', 'editor', 'custom-fields', 'revisions' ),
         'taxonomies'            => array( 'faq-category' ),
         'menu_icon'             => 'dashicons-format-status',
         'hierarchical'          => false,

@@ -49,7 +49,7 @@ function add_guide_posttype() {
         'hierarchical'          => false,
         'has_archive'           => false,
         'query_var'             => true,
-        'supports'              => array( 'title', 'custom-fields', 'thumbnail', 'excerpt' ),
+        'supports'              => array( 'title', 'custom-fields', 'thumbnail', 'excerpt', 'revisions' ),
         'taxonomies' => array( 'category', 'guide_type' ),
     );
     register_post_type( 'guide', $args );

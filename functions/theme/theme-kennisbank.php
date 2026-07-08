@@ -27,7 +27,7 @@ function add_kennisbank_posttype() {
         // 'rewrite' => array( 'slug'=>'kennisbank' ),
         'has_archive' => 'kennisbank',
         'query_var' => true,
-        'supports' => array( 'title', 'custom-fields', 'excerpt', 'thumbnail', 'author' ),
+        'supports' => array( 'title', 'custom-fields', 'excerpt', 'thumbnail', 'author', 'revisions' ),
         'taxonomies' => array( 'category', 'post_tag' ),
     );
 

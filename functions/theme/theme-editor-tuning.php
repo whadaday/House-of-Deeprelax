@@ -25,55 +25,17 @@ add_action('after_setup_theme', function () {
     remove_theme_support('block-template-parts');
 }, 20);
 
-// ── HOD-18/24: revisions optimaliseren (recipe-revisions-optimizer, §14) ──
-// Model = identiek aan de referentie steffy.nl ("werkt goed"):
-//   • Globale cap WP_POST_REVISIONS = 3 in wp-config → geen enkele post loopt
-//     ooit vol (was 117/pagina, ~1800 meta-rijen/save).
-//   • De drie lean-filters hieronder draaien ALLÉÉN op 'page' — het zwaarste
-//     flex-type dat we bewust zonder revisie-geschiedenis houden. Alle andere
-//     content-types (landingpage/book/guide/…) vallen terug op normale WP-
-//     revisies MÉT inhoud (gecapt op 3), zodat de klant dáár wél kan
-//     terugrollen. Zónder deze scoping zag je overal 0 revisies.
-// De filters: 1) cap 'page' op 1; 2) skip revisie als alléén ACF-meta wijzigde;
-// 3) houd postmeta uit 'page'-revisions (de bloat-bottleneck).
-// Zie docs/plan/recipe-revisions-optimizer.md.
-
-// Alléén 'page' krijgt de lean-behandeling (net als steffy.nl). Andere types
-// houden normale, gecapte revisies mét inhoud.
-function hod_revisioned_flex_types() {
-    return array('page');
-}
-
-// 1. Cap 'page' op 1 revisie (preview blijft werken); goedkoop want geen meta.
-add_filter('wp_revisions_to_keep', function ($num, $post) {
-    if (!$post) { return $num; }
-    return in_array($post->post_type, hod_revisioned_flex_types(), true) ? 1 : $num;
-}, 10, 2);
-
-// 2. Skip de revision-creatie als alleen ACF-meta wijzigde, niet de
-//    content-kolommen. Bespaart de dure meta-kopie bij elke autosave/update.
-add_filter('wp_save_post_revision_post_has_changed', function ($changed, $last_revision, $post) {
-    if (!in_array($post->post_type, hod_revisioned_flex_types(), true)) {
-        return $changed;
-    }
-    foreach (array('post_title', 'post_content', 'post_excerpt') as $f) {
-        if ($last_revision->$f !== $post->$f) {
-            return true; // echte content-wijziging → revision toestaan (preview werkt)
-        }
-    }
-    return false; // alléén meta veranderde → geen nieuwe revision
-}, 10, 3);
-
-// 3. Kopieer geen postmeta naar revisions. Dit is de bottleneck-fix. Gevolg:
-//    de ACF-"Revisions"-UI is leeg voor deze types — bewust; de content zit in
-//    post_content/JSON, niet per-revision in meta.
-add_filter('wp_post_revision_meta_keys', function ($keys) {
-    global $post;
-    if ($post && in_array($post->post_type, hod_revisioned_flex_types(), true)) {
-        return array();
-    }
-    return $keys;
-}, 100);
+// ── HOD-18/24: revisions ────────────────────────
+// Revisies staan AAN voor ÁLLE content-types, mét inhoud (de ACF-velden gaan
+// mee), en zijn globaal begrensd via `define('WP_POST_REVISIONS', 3)` in
+// wp-config. Zo kan de klant overal terugrollen, maar loopt geen post ooit vol
+// (was 117/pagina, ~1800 meta-rijen/save). Bewuste keuze van de klant:
+// revisie-geschiedenis boven een maximaal-lichte DB.
+//
+// Er staan hier GEEN per-type lean-filters meer (die strippten de ACF-meta uit
+// revisions → geschiedenis onbruikbaar). De eenmalige cleanup van de oude
+// opgeblazen historie is al gedraaid; de cap houdt 'm voortaan begrensd.
+// Zie docs/plan/recipe-revisions-optimizer.md + §14.
 
 // ── HOD-22: heartbeat rustiger ──────────────────────────────────────────
 // Beperkt de admin-ajax-heartbeat (WPForms/ACF-zware edit-screens).
