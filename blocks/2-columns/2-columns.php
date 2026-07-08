@@ -76,13 +76,13 @@
 					    <img
 					    	data-src="<?php echo $imageOverlay['sizes']['large']; ?>"
 					    	class="lazy"
-					    	alt="<?php echo $imageOverlay['alt']; ?>"
+					    	alt="<?php echo esc_attr($imageOverlay['alt']); ?>"
 					    	width="<?php echo $imageOverlay['sizes']['large-width']; ?>"
 					    	height="<?php echo $imageOverlay['sizes']['large-height']; ?>"
 					    />
 					</picture>
 					<?php if($imageOverlay['subtype'] != 'svg+xml'): ?>
-						<div class="lazy-placeholder"><img src="<?php echo $imageOverlay['sizes']['placeholder']; ?>" alt="<?php echo $imageOverlay['alt']; ?>" /></div>
+						<div class="lazy-placeholder"><img src="<?php echo hod_lqip($imageOverlay['sizes']['placeholder']); ?>" alt="<?php echo esc_attr($imageOverlay['alt']); ?>" /></div>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>

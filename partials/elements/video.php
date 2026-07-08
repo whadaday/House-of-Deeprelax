@@ -27,7 +27,7 @@
 
     <?php if($lazy): ?>
       </div>
-      <?php if($image): ?><div class="lazy-placeholder"><img src="<?php echo $image['sizes']['placeholder']; ?>" alt="<?php echo $image['alt']; ?>" /></div><?php endif; ?>
+      <?php if($image): ?><div class="lazy-placeholder"><img src="<?php echo hod_lqip($image['sizes']['placeholder']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" /></div><?php endif; ?>
     <?php endif; ?>
   </div>
 </div>

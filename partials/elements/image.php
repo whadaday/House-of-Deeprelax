@@ -38,7 +38,7 @@
 			    <img
 			    	data-src="<?php echo $imageMobile['sizes']['1536x1536']; ?>"
 			    	class="lazy"
-			    	alt="<?php echo $imageMobile['alt']; ?>"
+			    	alt="<?php echo esc_attr($imageMobile['alt']); ?>"
 			    	width="<?php echo $imageMobile['sizes']['1536x1536-width']; ?>"
 			    	height="<?php echo $imageMobile['sizes']['1536x1536-height']; ?>"
 			    	fetchpriority="<?php echo $priority; ?>"
@@ -48,10 +48,10 @@
 			<?php if($imageMobile['subtype'] != 'svg+xml'): ?>
 				<div class="lazy-placeholder">
 					<img
-						src="<?php echo $imageMobile['sizes']['placeholder']; ?>"
+						src="<?php echo hod_lqip($imageMobile['sizes']['placeholder']); ?>"
 						fetchpriority="<?php echo $priority; ?>"
 						loading="lazy"
-						alt="<?php echo $imageMobile['alt']; ?>"
+						alt="<?php echo esc_attr($imageMobile['alt']); ?>"
 					/>
 				</div>
 			<?php endif; ?>
@@ -94,7 +94,7 @@
 		    <img
 		    	data-src="<?php echo $image['sizes']['cover']; ?>"
 		    	class="lazy"
-		    	alt="<?php echo $image['alt']; ?>"
+		    	alt="<?php echo esc_attr($image['alt']); ?>"
 		    	width="<?php echo $image['sizes']['cover-width']; ?>"
 		    	height="<?php echo $image['sizes']['cover-height']; ?>"
 		    	fetchpriority="<?php echo $priority; ?>"
@@ -104,9 +104,9 @@
 		<?php if($image['subtype'] != 'svg+xml'): ?>
 			<div class="lazy-placeholder">
 				<img
-					src="<?php echo $image['sizes']['placeholder']; ?>"
+					src="<?php echo hod_lqip($image['sizes']['placeholder']); ?>"
 					fetchpriority="<?php echo $priority; ?>"
-					alt="<?php echo $image['alt']; ?>"
+					alt="<?php echo esc_attr($image['alt']); ?>"
 				/>
 			</div>
 		<?php endif; ?>
