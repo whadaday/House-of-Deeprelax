@@ -7,7 +7,7 @@
 	$navMobile   = $navigation['nav-mobile'];
 	$navContent  = isset($navMobile['content-nav']) ? $navMobile['content-nav'] : null;
 ?>
-<div id="nav-mobile">
+<div id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu">
 	<div class="nav-mobile-container">
 		<div class="nav-mobile-column">
 			<div class="nav-mobile-inner">

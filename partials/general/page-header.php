@@ -147,7 +147,7 @@
 	<?php endif; ?>
 
 	<?php if($headerHeight == 'fullscreen' && $showScrollIndicator): ?>
-		<a href="#section-1" class="scroll-indicator">
+		<a href="#section-1" class="scroll-indicator" aria-label="Scroll naar beneden">
 			<?php /*<span class="scroll-indicator-text">Scroll to play</span>*/ ?>
 			<span class="scroll-indicator-mouse"></span>
 		</a>

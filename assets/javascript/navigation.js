@@ -297,6 +297,9 @@ jQuery(function ($) {
                 $body.css('top', -scrollY); body.style.top = `-${scrollY}`;
             }
         }
+
+        // A11y: reflecteer de open/dicht-staat op de toggle (HOD-33).
+        $('.toggle-menu').attr('aria-expanded', $body.hasClass('menu-open') ? 'true' : 'false');
       });
 
 

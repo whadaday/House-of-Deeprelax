@@ -10,7 +10,8 @@
 		<?php
 			if(is_page(6332)):
 				?>
-					<script id="sleakbot" src="https://cdn.sleak.chat/fetchsleakbot.js" chatbot-id="afca85ce-8c32-4ee2-8081-ec1f85135444" ></script>
+					<link rel="preconnect" href="https://cdn.sleak.chat" crossorigin>
+					<script id="sleakbot" src="https://cdn.sleak.chat/fetchsleakbot.js" chatbot-id="afca85ce-8c32-4ee2-8081-ec1f85135444" defer></script>
 				<?php
 			endif;
 		?>

@@ -52,7 +52,7 @@
 							<?php endif; ?>
 
 							<?php if($navMobile && $navDropdown): ?>
-								<a class="nav-back" href="#">
+								<a class="nav-back" aria-label="Terug" href="#">
 									<?php $icon = get_template_directory().'/assets/images/beam/icons/chevron-left.svg'; ?>
 	                				<span class="chev-left"><?php echo file_get_contents($icon); ?></span>
 								</a>
@@ -92,7 +92,7 @@
 					<?php endif; ?>
 
 					<div class="column column-hamburger<?php if($navSide): ?> show-nav-side<?php endif; ?>">
-						<a href="#" class="toggle-menu" aria-label="Open menu">
+						<a href="#" class="toggle-menu" role="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
 							<span class="hamburger-holder"><span class="hamburger"></span></span>
 						</a>
 					</div>
