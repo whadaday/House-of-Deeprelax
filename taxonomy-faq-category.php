@@ -59,7 +59,7 @@
       <div class="column column-accordion">
         <div class="content">
           <div class="accordion">
-            <?php showFAQ($faqs); ?>
+            <?php hod_faq_schema($faqs); showFAQ($faqs); ?>
           </div>
         </div>
       </div>

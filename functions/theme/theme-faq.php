@@ -1,4 +1,26 @@
 <?php
+/**
+ * Emit FAQPage JSON-LD voor een set FAQ's (['question'],['answer']). JSON-veilig
+ * via wp_json_encode; herbruikt door het faq-block én de faq-taxonomiepagina
+ * (HOD-35). No-op bij lege set.
+ */
+function hod_faq_schema($faqs) {
+    if (empty($faqs) || !is_array($faqs)) { return; }
+    $schema = array('@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => array());
+    foreach ($faqs as $faq) {
+        $q = isset($faq['question']) ? wp_strip_all_tags($faq['question']) : '';
+        $a = isset($faq['answer']) ? wp_strip_all_tags($faq['answer']) : '';
+        if ($q === '') { continue; }
+        $schema['mainEntity'][] = array(
+            '@type' => 'Question', 'name' => $q,
+            'acceptedAnswer' => array('@type' => 'Answer', 'text' => $a),
+        );
+    }
+    if (!empty($schema['mainEntity'])) {
+        echo '<script type="application/ld+json">' . wp_json_encode($schema) . '</script>';
+    }
+}
+
 
 function getFaqArticles($category = null, $amount = -1) {
     

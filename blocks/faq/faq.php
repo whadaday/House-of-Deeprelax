@@ -86,23 +86,4 @@
 
 	<?php endif; ?>
 
-	<script type='application/ld+json'>
-	{
-		"@context": "http://schema.org",
-		"@type": "FAQPage",
-		"mainEntity": [
-		<?php $iFaq = 0; foreach($faqs as $faq): 
-
-		?>
-			<?php if($iFaq != 0): echo ','; endif; ?>{
-			"@type": "Question",
-			"name": "<?php echo $faq['question']; ?>",
-			"acceptedAnswer": {
-				"@type": "Answer",
-				"text": "<?php echo strip_tags($faq['answer']); ?>"
-			}
-			}
-		<?php $iFaq++; endforeach; ?>
-		]
-	}
-	</script>
+	<?php hod_faq_schema($faqs); ?>
