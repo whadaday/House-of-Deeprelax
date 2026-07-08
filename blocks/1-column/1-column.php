@@ -72,6 +72,7 @@
 					<?php if($link == 'video'): ?>data-fancybox="video-gallery"<?php endif; ?>
 					class="image-link-overlay image-link-overlay-play"
 					target="_blank"
+					rel="noopener noreferrer"
 					href="<?php echo esc_url( $url ); ?>">
 
 					<?php if($link == 'video'): ?>

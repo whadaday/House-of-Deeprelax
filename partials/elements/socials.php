@@ -13,8 +13,8 @@
   ?>
 
     <li>
-      <a href="<?php echo esc_url($url); ?>" target="_blank">
-        <?php echo file_get_contents($icon); ?>
+      <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(ucfirst($name)); ?>">
+        <?php echo hod_inline_svg($icon); ?>
       </a>
     </li>
 
