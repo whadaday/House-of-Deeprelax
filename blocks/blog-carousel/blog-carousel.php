@@ -1,11 +1,6 @@
 <?php 
   /* Block Name: Article feed */
   /* Order: 100 */
-
-  // echo '<pre>'; 
-  // print_r($content); 
-  // print_r($options); 
-  // echo '</pre>';
   
   $title  = $content['title'];
   $link   = $content['link'];

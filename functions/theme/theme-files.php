@@ -10,8 +10,6 @@ function custom_mime_types( $mimes ) {
     // Optional. Remove a mime type.
     // unset( $mimes['exe'] );
 
-    // echo '<pre>'; print_r($mimes); echo '</pre>'; die();
-
     return $mimes;
 }
  

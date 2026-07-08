@@ -5,7 +5,6 @@
 	$agenda = $content['agenda'];
 	$styles = hod_option('styles');
 	$colorCta = $styles['color-cta'];
-	// echo '<pre>'; print_r($styles); echo '</pre>';
 	$showNav = $options['show-nav'];
 	$colorSlider = $options['slider-color'];
 	$activeSlide = isset($options['active-slide']) ? $options['active-slide'] : 2;

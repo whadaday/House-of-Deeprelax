@@ -125,10 +125,6 @@ function getKennisbankArticles($categories = null, $articles = null, $author = n
     /* Do we need to filter on categories? */
     if($categories):
 
-        // echo '<pre>';
-        // print_r($categories);
-        // echo '</pre>';
-
         if(!is_array($categories)):
             $categories = array($categories);
         endif;
@@ -180,11 +176,6 @@ function getKennisbankArticles($categories = null, $articles = null, $author = n
         $args['post__not_in'] = array($featured);
 
     endif;
-
-    // echo '<pre>';
-    // print_r($args);
-    // echo '</pre>';
-    // die();
 
     $query = new WP_Query($args);
 

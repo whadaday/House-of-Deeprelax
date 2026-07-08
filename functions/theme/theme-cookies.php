@@ -1,8 +1,6 @@
 <?php
 function custom_cookie_text( $cookie_text ) {
 
-    // echo '<pre>'; print_r($cookie_text); echo '</pre>'; die();
-
     $cookie_text['position'] = '';
     $cookie_text['css_class'] = '';
     $cookie_text['button_class'] = 'btn';

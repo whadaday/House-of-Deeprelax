@@ -15,12 +15,8 @@ function getTocTitles($blocks) {
         // $h5 = preg_grep('/(?s)(?<=<h3>).*?(?=<\/h5>)/', explode("\n", $text));
         // $h6 = preg_grep('/(?s)(?<=<h3>).*?(?=<\/h6>)/', explode("\n", $text));
 
-        // echo '<pre>'; print_r($h2); print_r($h3); echo '</pre>';
-
         $titles = $h2;
         ksort($titles);
-
-        // echo '<pre>'; print_r($titles); echo '</pre>';
 
         foreach($titles as $title):
           

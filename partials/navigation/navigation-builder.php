@@ -2,8 +2,6 @@
 
 foreach ($navContent as $content):
 
-// echo '<pre>'; print_r($content);
-
 $layout = $content['acf_fc_layout'];
 
 if($layout == 'nav'):
@@ -56,7 +54,6 @@ elseif($layout == 'text'):
 	<?php
 
 elseif($layout == 'cta'):
-	// echo '<pre>'; print_r($content);
 
 	$title = $content['nav-title'];
 
@@ -76,7 +73,6 @@ elseif($layout == 'cta'):
 	</div>
 <?php
 elseif($layout == 'cards'):
-	// echo '<pre>'; print_r($content);
 
 	$title = $content['nav-title'];
 	$cards = $content['cards'];
@@ -89,7 +85,6 @@ elseif($layout == 'cards'):
 	</div>
 <?php
 elseif($layout == 'appstore'):
-	// echo '<pre>'; print_r($content);
 
 	$title = $content['nav-title'];
 ?>

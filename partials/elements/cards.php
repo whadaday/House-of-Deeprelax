@@ -2,7 +2,6 @@
 	<div class="swiper-wrapper">
 		<?php
 			foreach($cards as $card):
-				// echo '<pre>'; print_r($card); echo '</pre>';
 			$card_title = $card['title'];
 			$link 		= $card['url'];
 			$background = $card['background-type'];

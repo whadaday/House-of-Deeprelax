@@ -11,7 +11,6 @@
 		$ratio 		= getImageDimensionPercentage($image);
 		$crop  		= getImageCrop($image);
 	else:
-		// echo '<pre>'; print_r($image); echo '</pre>';
 		unset($ratio);
 		$crop = false;
 	endif;

@@ -2,8 +2,6 @@
 	/* Block Name: Banner */
 	/* Order: 60 */
 
-	// echo '<pre>'; print_r($content); echo '</pre>';
-
 	$align 	      	= $options['align'];
 	$textColor 	  	= $options['text-color'];
 	$bannerGradient = $options['banner-gradient'];

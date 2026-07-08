@@ -118,7 +118,6 @@ add_filter( 'mce_buttons', 'tinymce_buttons' );
 
 
 function wp_editor_settings( $settings ) {
-    // echo '<pre>'; print_r($settings); echo '</pre>';
 
     $new_settings = [
         'textarea_rows'         => 8,
@@ -139,8 +138,6 @@ function wp_editor_settings( $settings ) {
 }
 
 function tinymce_buttons( $buttons ) {
-
-    // echo '<pre>'; print_r($buttons); echo '</pre>';
 
     $buttons = [
         'formatselect',

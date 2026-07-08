@@ -23,7 +23,6 @@ function custom_columns_data( $column, $post_id ) {
                 $currentLayout = $block['acf_fc_layout'];
 
                 foreach($contentBlocksInfo as $layout):
-                    // echo '<pre>'; print_r($layout); echo '</pre>';
                     if($currentLayout == $layout['name']):
                         if($i > 0): echo ', '; endif;
                         echo $layout['label'];

@@ -387,8 +387,6 @@ function acf_load_block_templates( $field ) {
     $field['choices'][ 0 ] = 'Selecteer een template';
 
     $blocks = getBlocks();
-    // echo '<pre>'; print_r($blocks); echo '</pre>';
-    // die();
 
     // add array
     $blockTemplates = array();
@@ -396,9 +394,6 @@ function acf_load_block_templates( $field ) {
     foreach($blocks as $block):
         $field['choices'][ $block ] = get_the_title($block);
     endforeach;
-
-    // echo '<pre>'; print_r($field); echo '</pre>';
-    // die();
 
     // return the field
     return $field;

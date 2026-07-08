@@ -53,8 +53,6 @@ class main_menu_Walker extends Walker_Nav_Menu {
             $output .= '<li class="' .  implode(" ", $item->classes) .'">';
             $output .= '<a href="' . $item->url . '">'.$item->title;
 
-            // echo '<pre>'; print_r($item->classes); echo '</pre>';
-
             if (in_array('menu-item-has-children', $item->classes)):
                 $icon = get_template_directory().'/assets/images/beam/icons/chevron-down.svg';
                 $output .= '<span class="chev-down">'.hod_inline_svg($icon).'</span>';
@@ -69,8 +67,6 @@ class main_menu_Walker extends Walker_Nav_Menu {
             $page_id       = $item->object_id;
             $dropdown      = get_field('nav-dropdown', $page_id);
             $dropdown      = isset($dropdown['content-nav']) ? $dropdown['content-nav'] : null;
-
-            // echo '<pre>'; print_r($dropdown);
 
             $removeKey = array_search('menu-item-has-children', $item->classes);
             if($removeKey !== false): unset($item->classes[$removeKey]); endif;

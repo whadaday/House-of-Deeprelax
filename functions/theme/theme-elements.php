@@ -10,8 +10,6 @@ function add_elements_variables() {
 
             if($themeElements):
 
-                // echo '<pre>'; print_r($themeElements); echo '</pre>';
-
             ?>
             <style>
                 :root {
@@ -91,8 +89,6 @@ function add_elements_variables() {
                             echo '--'.$key.'-'.$name.': '.$value.';';
 
                         endforeach;
-                       
-    //                     echo '<pre>'; print_r($element); echo '</pre>';
                     endforeach;
             ?>
                 }
@@ -100,7 +96,6 @@ function add_elements_variables() {
             <?php
             endif;
         endif;
-        // echo '<pre>'; print_r($themeStylesFields); echo '</pre>';
         
     endif;
 }

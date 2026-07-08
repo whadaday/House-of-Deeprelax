@@ -21,8 +21,6 @@
     	// 'meta_key'      => 'order'
 	));
 
-	// echo '<pre>'; print_r($terms); echo '</pre>';
-
 	if(!empty($terms)):
 ?>
 		<div class="columns columns-guides-buttons">

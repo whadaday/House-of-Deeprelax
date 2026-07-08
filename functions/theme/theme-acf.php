@@ -77,8 +77,6 @@ function acf_save_json( $paths, $post ) {
             $name = '';
         endif;
 
-        // echo '<pre>'; print_r($paths); die();
-
         //check if directory exists
         //if not, create directory
 

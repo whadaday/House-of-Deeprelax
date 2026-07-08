@@ -1,7 +1,6 @@
 <?php
 
 function after_dev_mode_update( $field ) {
-    // echo '<pre>'; print_r($field); echo '</pre>'; die();
     if($field == 1):
         update_option('blog_public', '0');
     else:

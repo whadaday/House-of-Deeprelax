@@ -4,8 +4,6 @@
 	global $blockIndex;
 	$blockName = isset($options['block-title']) && $options['block-title'] != '' ? slugify($options['block-title']) : 'section-'.$blockIndex;
 
-	// echo '<pre>'; print_r($options); echo '</pre>';
-
 	if(isset($options['whitespace'])):
 		$whitespace   = $options['whitespace'];
 		$whitespaceT  = ($whitespace['top'] != 'none') ? $whitespace['top'] : 0;

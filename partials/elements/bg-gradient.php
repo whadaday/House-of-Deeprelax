@@ -11,8 +11,6 @@
 
 		$contentBlocks     = get_field('content');
 
-		// echo '<pre>'; print_r($contentBlocks); echo '</pre><br /><br />';
-
 		$currentBlockIndex = $contentBlockIndex;
 		if(isset($headerGradient)): $currentBlockIndex = -1; endif;
 

@@ -59,12 +59,6 @@ function getReviews($reviews = null, $amount = -1, $categories = null, $tags = n
     
     endif;
 
-    // echo '<pre>';
-    // print_r($args);
-    // echo '</pre>';
-
-    // die();
-
 
     return new WP_Query( $args );
 }

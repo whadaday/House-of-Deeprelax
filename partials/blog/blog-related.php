@@ -27,8 +27,6 @@
   $whitespaceT     = 'normal';
   $whitespaceB     = 'normal'; 
 
-  // echo '<pre>'; print_r($articles); echo '</pre>';
-
   if($articles):
 ?>
 

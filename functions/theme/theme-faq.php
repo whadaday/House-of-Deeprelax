@@ -65,11 +65,6 @@ function getFaqArticles($category = null, $amount = -1) {
 
     endif;
 
-    // echo '<pre>';
-    // print_r($args);
-    // echo '</pre>';
-    // die();
-
     $query = new WP_Query($args);
 
     return $query;

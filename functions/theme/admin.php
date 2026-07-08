@@ -50,8 +50,6 @@ function configure_admin_menu() {
     if(isset($menu[4][4]) && $menu[4][4] == 'wp-menu-separator'): unset($menu[4]); endif;
     if(isset($menu[99][4]) && $menu[99][4] == 'wp-menu-separator'): unset($menu[99]); endif;
 
-    // echo '<pre>'; print_r($menu); echo '</pre>';
-
     
     // Remove dashboard
     remove_submenu_page( 'index.php', 'update-core.php' );
@@ -91,8 +89,6 @@ function configure_admin_menu() {
     add_filter( 'update_footer',     '__return_empty_string', 11 );
 
     global $submenu;
-
-    // echo '<pre>'; print_r($submenu); echo '</pre>';
 
     
 
@@ -334,8 +330,6 @@ function set_default_page() {
         endif;
 
     endif;
-    // var_dump( $defaultPage ); /* outputs false */
-    // die();
     
 }
 

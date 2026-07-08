@@ -259,8 +259,6 @@ function acf_load_text_color_field_choices( $field ) {
     // load colors
     $colors = getThemeColors();
     $themeStyles  = hod_option('styles');
-    // echo '<pre>'; print_r($colors); echo '</pre>';
-    // die();
 
     $colorDark  = $themeStyles['color-text-dark'];
     $colorLight = $themeStyles['color-text-light'];
@@ -309,14 +307,9 @@ function acf_load_guide_color_field_choices( $field ) {
     );
     // global $colors;
 
-    // echo '<pre>'; print_r($colors); echo '</pre>';
-    // die();
-
     foreach($colors as $name => $hex):
         $field['choices'][ $name ] = '<span class="color-indicator" style="background:'.$hex.';"></span>';
     endforeach;
-
-    // echo '<pre>'; print_r($field); echo '</pre>';
 
     // return the field
     return $field;
@@ -349,8 +342,6 @@ function acf_load_bg_color_field_choices( $field ) {
             $field['default_value'] = $default;
         endif;
     endif;
-
-    // echo '<pre>'; print_r($field); echo '</pre>';
 
     // return the field
     return $field;
@@ -401,9 +392,6 @@ add_filter('acf/prepare_field/name=star-color',                 'acf_load_bg_col
 /* Set std text color ------------------------------------------------------------------------------------- */
 function acf_set_text_color( $field ) {
 
-    // echo '<pre>'; print_r($field); echo '</pre>';
-    // die();
-
     $themeStyles  = hod_option('styles');
     if($themeStyles):
         $default = $themeStyles['body-text-color'];
@@ -417,8 +405,6 @@ function acf_set_text_color( $field ) {
             endif;
         endif;
     endif;
-
-    // echo '<pre>'; print_r($field); echo '</pre>';
 
     // return the field
     return $field;

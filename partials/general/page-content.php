@@ -3,8 +3,6 @@
 
   $contentBlocks = get_field('content');
 
-  // echo '<pre>'; print_r($contentBlocks); die();
-
   if($contentBlocks):
 
     foreach ($contentBlocks as $contentBlock):

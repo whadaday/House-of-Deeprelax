@@ -88,9 +88,6 @@ function blog_unregister_taxonomy(){
 	//wp_template_part_area
 	//wpforms_form_tag
 
-	// echo '<pre>'; print_r($wp_taxonomies); echo '</pre>';
-	// die();
-
 	$blogActive 	  = hod_option('blog-active');
 	$categoriesActive = hod_option('blog-categories-active');
 	$tagsActive 	  = hod_option('blog-tags-active');

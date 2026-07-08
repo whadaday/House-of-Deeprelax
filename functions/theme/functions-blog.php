@@ -26,10 +26,6 @@ function getArticles(
     /* Do we need to filter on categories? */
     if($categories):
 
-        // echo '<pre>';
-        // print_r($categories);
-        // echo '</pre>';
-
         if(is_single()):
             $post_id = get_the_ID();
             $args['post__not_in'] = array($post_id);
@@ -84,11 +80,6 @@ function getArticles(
     if($currentArticle):
         $args['post__not_in'] = array($currentArticle);
     endif;
-
-    // echo '<pre>';
-    // print_r($args);
-    // echo '</pre>';
-    // die();
 
 
     return new WP_Query( $args );

@@ -6,12 +6,6 @@ function add_style_variables() {
 
         $themeStylesObject = get_field_object('styles', 'theme');
 
-        // echo '<pre>'; print_r($themeStyles); echo '</pre>';
-
-        // echo '<pre>'; print_r($themeStylesFields); echo '</pre>';
-
-        // die();
-
         /* Change array format */
         if(!empty($themeStyles)):
             $themeStylesFields = $themeStylesObject['sub_fields'];
@@ -49,8 +43,6 @@ function add_style_variables() {
             <style>
                 :root {
                     <?php
-
-                    //echo '<pre>'; print_r($themeVariablesStyles); die(); 
 
                     /* Set standard color variables */
                     foreach($themeVariablesStyles as $name => $variable):

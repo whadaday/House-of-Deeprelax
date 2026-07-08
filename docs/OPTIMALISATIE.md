@@ -98,7 +98,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 
 | ID | Bevinding | Locatie | Fix | Prio | Status |
 |----|-----------|---------|-----|------|--------|
-| HOD-38 | Grote uitgecommentarieerde blokken + `// print_r`/`// die()` verspreid; `slick-carousel`+`@tinymce/tinymce-jquery` in deps mogelijk ongebruikt | `functions-blog.php`, `theme-kennisbank.php`, `theme-acf.php`, `theme-blocks.php`; `package.json` | Opruimen bij HOD-09 (build-migratie) | ⚪ | open |
+| HOD-38 | Grote uitgecommentarieerde blokken + `// print_r`/`// die()` verspreid; `slick-carousel`+`@tinymce/tinymce-jquery` in deps mogelijk ongebruikt | `functions-blog.php`, `theme-kennisbank.php`, `theme-acf.php`, `theme-blocks.php`; `package.json` | Opruimen bij HOD-09 (build-migratie) | ⚪ | **deels done** (80 pure debug-comment-regels verwijderd; slick/tinymce-deps al weg bij HOD-09) |
 
 ## Wat al goed is (uit de audit)
 
@@ -176,3 +176,17 @@ aanpak. Volgens afspraak: alle wijzigingen eerst lokaal testen, niets pushen.
   render-blocking), en defer gaf geen meetbare winst terwijl het door de
   globale-`$`-afhankelijkheid fragiel is. Heropenen na de GSAP/ScrollMagic →
   IntersectionObserver-refactor (dan is de bundel niet meer jQuery-globaal).
+
+## Bewust uitgesteld (met reden)
+
+- **HOD-13 (CSS-split Swiper/Fancybox)**: lage ROI op deze site — Swiper staat
+  op vrijwel elke pagina (home heeft er 6), dus conditioneel laden bespaart
+  weinig, terwijl het FOUC-risico + build-complexiteit introduceert. De echte
+  CSS-omvang zit in de eigen component-/block-styles, niet de libraries.
+- **GSAP/ScrollMagic → IntersectionObserver (rest van HOD-10)**: grote,
+  risicovolle JS-rewrite (ScrollMagic ~200×, GSAP ~108× in de bundel) die alle
+  scroll-animaties/parallax/reveals raakt. Vereist een eigen sessie met
+  grondige regressietests per animatie; niet verantwoord om er even doorheen te
+  jagen. De jQuery-dedupe (HOD-10-deel) is wél gedaan.
+- **HOD-14 cf_img/breakpoint-cap**: cf_img N.V.T. (geen Cloudflare); cover-cap
+  vereist thumbnail-regeneratie + design-review.
