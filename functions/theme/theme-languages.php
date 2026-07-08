@@ -11,9 +11,11 @@
    */
   function getLang() {
     static $lang = null;
-    if ($lang !== null) {
+    static $done = false;
+    if ($done) {
       return $lang;
     }
+    $done = true;
 
     if (function_exists('pll_the_languages')) {
       $lang = pll_current_language();

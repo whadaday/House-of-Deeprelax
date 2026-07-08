@@ -1,4 +1,11 @@
 <?php
+// wp_safe_redirect() weigert externe hosts (→ /wp-admin). De download-funnel
+// stuurt bewust naar de app-stores; whitelist die hosts zodat de redirect
+// werkt én arbitraire open-redirects geblokkeerd blijven (fix audit r1).
+add_filter('allowed_redirect_hosts', function ($hosts) {
+    return array_merge($hosts, array('apps.apple.com', 'itunes.apple.com', 'play.google.com', 'www.apple.com'));
+});
+
 
 add_action('template_redirect', function () {
     // Alleen iets doen op het juiste subdomein

@@ -12,7 +12,7 @@ function privacy_shortcode($atts) {
     $href = get_the_permalink($policy_page_id);
   endif;
 
-  $output ='<a href="'.$href.'" target="_blank">'.$atts['text'].'</a>';
+  $output ='<a href="'.esc_url($href).'" target="_blank">'.$atts['text'].'</a>';
 
   return $output;
 }

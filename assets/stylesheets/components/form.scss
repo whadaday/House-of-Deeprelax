@@ -28,8 +28,14 @@ input:-webkit-autofill {
 input[type=checkbox],
 input[type=radio] {
   width: 1rem !important;
-  outline: none;
   accent-color: var(--color-cta-fourth, var(--color-cta));
+
+  // Behoud de zichtbare toetsenbord-focus (was outline:none, won van de
+  // universele focus-ring door specificiteit — fix audit r1).
+  &:focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+  }
 }
 
 // SELECTION ------------------------------------------------------------------------------------

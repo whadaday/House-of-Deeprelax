@@ -60,6 +60,11 @@ function hod_kses_svg($svg) {
         'title'          => $common,
         'desc'           => $common,
         'use'            => $common + array('xlink:href' => true, 'href' => true),
+        'text'           => $common + array('text-anchor' => true, 'font-family' => true, 'font-size' => true, 'font-weight' => true, 'letter-spacing' => true, 'dx' => true, 'dy' => true, 'dominant-baseline' => true),
+        'tspan'          => $common + array('dx' => true, 'dy' => true),
+        'mask'           => $common + array('maskunits' => true, 'maskcontentunits' => true),
+        'pattern'        => $common + array('patternunits' => true, 'patterncontentunits' => true, 'patterntransform' => true, 'href' => true, 'xlink:href' => true),
+        'symbol'         => $common,
     );
 
     return wp_kses($svg, $allowed);

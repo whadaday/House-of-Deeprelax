@@ -27,7 +27,11 @@ function hod_lqip($url) {
     if ($cached !== false) { $memo[$url] = $cached; return $cached; }
 
     $uploads = wp_get_upload_dir();
-    $path    = str_replace($uploads['baseurl'], $uploads['basedir'], $url);
+    // Normaliseer scheme (http/https-mismatch tussen $url en baseurl breekt de
+    // string-replace anders) vóór de path-afleiding.
+    $norm    = set_url_scheme($url);
+    $base    = set_url_scheme($uploads['baseurl']);
+    $path    = str_replace($base, $uploads['basedir'], $norm);
     $data    = '';
     if ($path !== $url && is_readable($path)) {
         $bin = file_get_contents($path);
@@ -37,7 +41,13 @@ function hod_lqip($url) {
             $data = 'data:' . $mime . ';base64,' . base64_encode($bin);
         }
     }
-    if ($data === '') { $data = $url; }
+    if ($data === '') {
+        // Base64'en lukte niet (CDN/extern pad): val terug op de URL en cache
+        // die maar kort — het bestand kan later alsnog lokaal beschikbaar zijn.
+        $memo[$url] = $url;
+        set_transient($tkey, $url, HOUR_IN_SECONDS);
+        return $url;
+    }
 
     set_transient($tkey, $data, 7 * DAY_IN_SECONDS);
     $memo[$url] = $data;

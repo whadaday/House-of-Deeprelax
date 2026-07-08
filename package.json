@@ -8,10 +8,8 @@
   "dependencies": {
     "@fancyapps/ui": "^5.0.33",
     "eric-meyer-reset": "^2.0.0",
-    "feather-icons": "^4.29.1",
     "gsap": "^3.11.3",
     "headroom.js": "^0.12.0",
-    "jquery": "^3.6.1",
     "scrollmagic": "^2.0.8",
     "swiper": "^11.0.6"
   },

@@ -24,7 +24,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 
 | ID | Bevinding | Fix | Prio | Status |
 |----|-----------|-----|------|--------|
-| HOD-00 | **Geen git-repo** in de theme-map → er is geen deploy-pad; niets kan via CI live. (PB draait op per-repo GitHub Actions rsync.) | `git init` + GitHub-repo + deploy-workflow (kopie van premiumbusiness `.github/workflows/deploy.yml`) + `DEPLOY_TARGETS`-variable. Randvoorwaarde vóór élke live-uitrol | 🔴 | open |
+| HOD-00 | **Geen git-repo** in de theme-map → er is geen deploy-pad; niets kan via CI live. (PB draait op per-repo GitHub Actions rsync.) | `git init` + GitHub-repo + deploy-workflow (kopie van premiumbusiness `.github/workflows/deploy.yml`) + `DEPLOY_TARGETS`-variable. Randvoorwaarde vóór élke live-uitrol | 🔴 | **done** (remote + repo bestonden al; deploy.yml toegevoegd) |
 
 ## Bugs (los van optimalisatie — eerst fixen)
 

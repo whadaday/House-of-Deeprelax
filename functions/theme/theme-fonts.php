@@ -49,7 +49,7 @@ function add_fonts() {
 				?>
 				@font-face {
 				    font-family:"<?php echo esc_attr($name); ?>";
-				    src: url("<?php echo esc_url($woff2); ?>") format("woff2");
+				    src: url("<?php echo esc_url_raw($woff2); ?>") format("woff2");
 				    font-style: <?php echo esc_attr($style); ?>;
 				    font-weight: <?php echo esc_attr($weight); ?>;
 				    font-display: swap;

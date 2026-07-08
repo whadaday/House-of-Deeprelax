@@ -29,7 +29,9 @@ const isProd = process.argv.includes('--production');
 // vendors above replace it. Everything from the first non-comment line stays.
 function appCode() {
   const raw = readFileSync(APP_SOURCE, 'utf8');
-  return raw.replace(/^(?:\s*\/\/.*\n)+/, '');
+  // Strip alléén het leidende @codekit-prepend-blok (+ evt. losse
+  // prepend-comments), niet willekeurige // comments bovenaan de app-code.
+  return raw.replace(/^(?:\s*\/\/\s*@codekit-prepend.*\n|\s*\/\/\s*['\"][^'\"]*['\"].*\n)+/, '');
 }
 
 try {

@@ -8,10 +8,11 @@
  * in-request static memo. The transient is cleared whenever the options page
  * is saved, so edits are visible immediately.
  *
- * The cache is primed per field via get_field() — NOT via get_fields() —
- * because get_fields() silently skips fields whose definition no longer
- * resolves (values saved by a since-changed field group), while get_field()
- * falls back to the raw stored value. Call sites relied on that fallback.
+ * The cache is primed via get_fields() (top-level fields only, to avoid
+ * caching hundreds of nested group/repeater sub-rows). get_fields() silently
+ * skips fields whose definition no longer resolves; those stale fields are
+ * resolved on-demand by the hod_option() miss-fallback via get_field(). Net
+ * behaviour is identical to the old per-field get_field() reads (parity-tested).
  *
  * This file is prefixed with "_" so the glob-include in functions.php loads
  * it before any other functions file uses hod_option().
@@ -55,10 +56,10 @@ function hod_options($post_id = 'theme', $flush = false) {
 }
 
 /**
- * Build the full field map for an options page. One query enumerates the
- * saved field names (a value row "{post_id}_{name}" paired with an ACF
- * reference row "_{post_id}_{name}"); each value then loads through
- * get_field() so formatting matches the old per-call behaviour exactly.
+ * Build the top-level field map for an options page via get_fields(). Nested
+ * group/repeater sub-rows are intentionally NOT cached here — they are only
+ * ever read through their top-level field, and the hod_option() miss-fallback
+ * covers any stale top-level field get_fields() skips.
  *
  * @param string $post_id Options page post_id.
  * @return array

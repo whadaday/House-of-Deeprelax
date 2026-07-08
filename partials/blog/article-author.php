@@ -26,7 +26,7 @@
         <?php if($authorImage): 
             $content['image'] = $authorImage;
         ?>
-            <a class="author-image" href="<?php echo $authorLink; ?>">
+            <a class="author-image" href="<?php echo esc_url($authorLink); ?>">
                 <?php 
                     $imageSize = 'xs';
                         include( locate_template( 'partials/elements/image.php', false, false ) );
@@ -36,7 +36,7 @@
         <?php endif; ?>
         <div class="author-content">
             <p class="author-name"><a href="<?php echo esc_url($authorLink); ?>"><?php echo esc_html($authorName); ?></a><?php if($authorRole): ?>, <span class="author-role"><?php echo esc_html(lcfirst($authorRole)); ?></span><?php endif; ?></p>
-            <?php if($author_bio): ?><p class="author-description"><?php echo wp_kses_post($author_bio); ?> <?php /*<a href="<?php echo $authorLink; ?>">Lees verder</a>*/ ?></p><?php endif; ?>
+            <?php if($author_bio): ?><p class="author-description"><?php echo wp_kses_post($author_bio); ?> <?php /*<a href="<?php echo esc_url($authorLink); ?>">Lees verder</a>*/ ?></p><?php endif; ?>
 
             <?php if($socials): ?>
                 <ul class="list-author-socials">

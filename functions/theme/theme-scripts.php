@@ -33,7 +33,7 @@ function admin_scripts($hook) {
     //     return;
     // endif;
 
-    wp_enqueue_script('main', get_template_directory_uri().'/assets/javascript/admin.js', array(), THEME_VERSION, 'all');
+    wp_enqueue_script('admin', get_template_directory_uri().'/assets/javascript/admin.js', array('jquery'), THEME_VERSION, true);
 
     $post_id = get_the_ID(); // we'll be using this later to grab the gallery field on the page
     

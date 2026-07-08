@@ -98,6 +98,16 @@ add_filter( 'acf/json/save_paths', 'acf_save_json', 10, 2 );
 
 add_filter('acf/settings/load_json', 'acf_load_json');
 
+// Invalideer de paths-cache wanneer een veldgroep verandert (nieuw block/module
+// gaat gepaard met een field-group-save) of bij theme-switch — voorkomt dat een
+// nieuwe blocks/*-folder tot 12u onzichtbaar blijft (fix audit r1).
+function hod_flush_acf_json_paths() {
+    delete_transient('hod_acf_json_paths_' . (defined('THEME_VERSION') ? THEME_VERSION : '1'));
+}
+add_action('acf/update_field_group', 'hod_flush_acf_json_paths');
+add_action('acf/trash_field_group', 'hod_flush_acf_json_paths');
+add_action('after_switch_theme', 'hod_flush_acf_json_paths');
+
 function acf_load_json( $paths ) {
 
     unset($paths[0]);
