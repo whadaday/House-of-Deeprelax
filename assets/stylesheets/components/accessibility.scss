@@ -43,3 +43,19 @@ summary,
     outline-offset: 2px !important;
   }
 }
+
+// Respecteer prefers-reduced-motion (HOD-32, WCAG 2.3.3). De scroll-reveals in
+// dit thema zijn class-toggle-gebaseerd (addClass('active') → CSS-transition)
+// en content is standaard zichtbaar, dus transitions/animaties near-0 zetten
+// verbergt niets — het maakt bewegingen alleen instantaan. Parallax-transforms
+// (ScrollMagic) blijven, maar verplaatsen alleen; geen content-verlies.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

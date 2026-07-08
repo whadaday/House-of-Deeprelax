@@ -79,7 +79,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 | HOD-26 | Open-redirects via `wp_redirect()` met klant-ACF-URL's (privacy/terms-PDF, appstore) | `theme-redirects.php:12,31`, `download-app.php:28,33,62,67` | Open redirect naar externe URL | `wp_safe_redirect(esc_url_raw($url))` | 🟡 | **done** |
 | HOD-27 | Ongeëscapete klant-content: `contact-info` rauwe HTML-echo, socials-URL rauw in `href` (+ `target="_blank"` zonder `rel`), auteurvelden, `data-color-text` | `theme-shortcodes.php:139,202`, `partials/elements/socials.php:16`, `article-author.php:38-49`, `header.php:82` | Stored-XSS / attribuut-injectie / tabnabbing | `wp_kses_post`/`esc_html`/`esc_url`/`esc_attr` + `rel="noopener noreferrer"` | 🟡 | **done** |
 | HOD-28 | Dev-mode alleen ACF-gated (niet environment): zet `blog_public=0` (de-index) + toont grid-overlay aan álle bezoekers | `functions-dev-mode.php:6-9,16-21` | Per-ongeluk-aan in productie = de-index + dev-UI | Gate op `wp_get_environment_type() !== 'production'` / `manage_options` | 🟡 | **done** |
-| HOD-29 | `nopriv` AJAX-endpoint `load_templates` met ongesanitized `$_POST['post_id']` + rauwe `echo json_encode` (nonce is wél aanwezig) | `theme-blocks.php:454,499,505` | Laag (nonce beschermt), onnodige unauth-exposure | `nopriv`-registratie weg; `absint()`; `wp_send_json()` | ⚪ | open |
+| HOD-29 | `nopriv` AJAX-endpoint `load_templates` met ongesanitized `$_POST['post_id']` + rauwe `echo json_encode` (nonce is wél aanwezig) | `theme-blocks.php:454,499,505` | Laag (nonce beschermt), onnodige unauth-exposure | `nopriv`-registratie weg; `absint()`; `wp_send_json()` | ⚪ | **done** (nopriv weg + current_user_can(edit_posts) + nonce; audit-r2/r3) |
 
 ## Accessibility & SEO
 
@@ -87,7 +87,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 |----|-------|-----------|---------|-----|------|--------|
 | HOD-30 | 10.3 | **`*:focus-visible { outline: none }` op de universele selector** — alle focus-indicatie site-breed weg | `components/elements.scss:10-11` | Regel weg of vervangen door zichtbare focus (`outline: 2px solid`/box-shadow) | 🔴 | **done** |
 | HOD-31 | 10.1 | Geen skip-to-content link | `header.php` (na `wp_body_open`) | `<a class="skip-link" href="#main">` | 🟡 | **done** |
-| HOD-32 | 10.9 | Geen `prefers-reduced-motion` (GSAP/ScrollMagic onvoorwaardelijk) | `main.js`; SCSS | `matchMedia`-guard + CSS-fallback | 🟡 | open |
+| HOD-32 | 10.9 | Geen `prefers-reduced-motion` (GSAP/ScrollMagic onvoorwaardelijk) | `main.js`; SCSS | `matchMedia`-guard + CSS-fallback | 🟡 | **done** (CSS reduced-motion media query; veilig want reveals zijn class-toggle, content standaard zichtbaar) |
 | HOD-33 | 10.4/10.6 | Menu-toggle is `<a href="#">` zonder `aria-expanded`/`aria-controls`; mobiele overlay zonder dialog-semantiek; icon-only links (socials, nav-back, scroll-indicator) zonder toegankelijke naam | `navigation.php:95-97`, `navigation-mobile.php:10`, `socials.php:16` | `<button aria-expanded>` + `role="dialog"` + `aria-label`s | 🟡 | **done** |
 | HOD-34 | 10.6 | **Verwisselde app-store aria-labels**: Apple-knop zegt "Google play", Play-knop zegt "App Store"; QR-`<img>` zonder alt | `appstore.php:14,22,10` | Labels omwisselen; `alt` toevoegen | 🟡 | **done** |
 | HOD-35 | 6.6 | FAQ-schema niet JSON-veilig (rauwe echo — quote/newline breekt JSON-LD) + `http://schema.org`; FAQ-taxonomiepagina mist FAQPage-schema volledig | `blocks/faq/faq.php:91,99,102`, `taxonomy-faq-category.php:62` | `wp_json_encode()`, https, schema op de taxonomie-template | 🟡 | **done** |
