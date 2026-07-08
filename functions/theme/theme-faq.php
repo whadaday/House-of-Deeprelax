@@ -76,7 +76,7 @@ function showFAQ($faqs, $buttonColor = null) {
                                 data-type="iframe"
                                 class="btn" data-btn-color="transparent"
                                 href="<?php echo convertLoomShareToEmbed($loom); ?>">
-                                <span class="icon-play"><?php echo file_get_contents($icon); ?></span>Bekijk de uitlegvideo
+                                <span class="icon-play"><?php echo hod_inline_svg($icon); ?></span>Bekijk de uitlegvideo
                             </a>
                         </div>
 			  		<?php elseif($link): 

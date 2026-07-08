@@ -32,3 +32,16 @@ add_action('after_setup_theme', function () {
 add_filter('wp_revisions_to_keep', function ($num, $post) {
     return 5;
 }, 10, 2);
+
+// ── HOD-22: heartbeat rustiger + autosave minder frequent ───────────────
+// Beperkt de admin-ajax-heartbeat (WPForms/ACF-zware edit-screens) en verlengt
+// het autosave-interval van 60s → 120s.
+add_filter('heartbeat_settings', function ($settings) {
+    $settings['interval'] = 60; // seconden (WP staat 15-120 toe); rustiger dan default
+    return $settings;
+});
+add_action('admin_init', function () {
+    if (!defined('AUTOSAVE_INTERVAL')) {
+        define('AUTOSAVE_INTERVAL', 120);
+    }
+});

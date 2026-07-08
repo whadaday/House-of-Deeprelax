@@ -53,7 +53,7 @@ function add_banners_posttype() {
         'can_export'            => true,
         'publicly_queryable'    => false,
         'capability_type'       => 'post',
-        'show_in_rest'          => true,
+        'show_in_rest'          => false,
     );
     register_post_type( 'banner', $args );
 

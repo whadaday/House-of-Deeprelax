@@ -64,3 +64,19 @@ function hod_kses_svg($svg) {
 
     return wp_kses($svg, $allowed);
 }
+
+/**
+ * Gememoized inline-reader voor THEME-EIGEN SVG's (iconen, chevrons, sterren).
+ * Voorkomt dat dezelfde file meermaals per render van schijf wordt gelezen
+ * (HOD-16). Geen kses nodig: het pad is thema-intern, niet klant-beheerd.
+ *
+ * @param string $path Absoluut pad naar een theme-SVG.
+ * @return string
+ */
+function hod_inline_svg($path) {
+    static $cache = array();
+    if (!array_key_exists($path, $cache)) {
+        $cache[$path] = ($path && is_readable($path)) ? file_get_contents($path) : '';
+    }
+    return $cache[$path];
+}

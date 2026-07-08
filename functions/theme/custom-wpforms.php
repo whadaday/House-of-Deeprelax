@@ -18,7 +18,7 @@ add_action( 'wpforms_wp_footer_end', 'wpf_dev_disable_scroll_to_error', 10, 1 );
 add_filter('wpforms_field_submit', function ($submit_text, $form_data){
     
     $icon        = get_template_directory().'/assets/images/icon-arrow-right.svg';
-    $submit_text = file_get_contents($icon);
+    $submit_text = hod_inline_svg($icon);
 
     return $submit_text;
 

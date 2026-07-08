@@ -47,8 +47,8 @@ function disable_page_widgets() {
 function configure_admin_menu() {
   // Configure the admin menu here.
     global $menu;
-    if($menu[4][4] == 'wp-menu-separator'): unset($menu[4]); endif;
-    if($menu[99][4] == 'wp-menu-separator'): unset($menu[99]); endif;
+    if(isset($menu[4][4]) && $menu[4][4] == 'wp-menu-separator'): unset($menu[4]); endif;
+    if(isset($menu[99][4]) && $menu[99][4] == 'wp-menu-separator'): unset($menu[99]); endif;
 
     // echo '<pre>'; print_r($menu); echo '</pre>';
 

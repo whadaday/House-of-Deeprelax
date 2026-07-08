@@ -136,7 +136,7 @@ function socials_shortcode() {
       foreach($socials as $name => $value):
         $icon = get_template_directory().'/assets/images/social/icon-'.$name.'.svg';
         if($icon && $value):
-          echo '<li class="social-'.esc_attr($name).'"><a href="'.esc_url($value).'" target="_blank" rel="noopener noreferrer">'.file_get_contents($icon).'</a></li>';
+          echo '<li class="social-'.esc_attr($name).'"><a href="'.esc_url($value).'" target="_blank" rel="noopener noreferrer">'.hod_inline_svg($icon).'</a></li>';
         endif;
       endforeach;
 
@@ -218,11 +218,11 @@ function rating_shortcode() {
 
   ?>
   <ul class="list-rating">
-    <li><?php echo file_get_contents($star); ?></li>
-    <li><?php echo file_get_contents($star); ?></li>
-    <li><?php echo file_get_contents($star); ?></li>
-    <li><?php echo file_get_contents($star); ?></li>
-    <li><?php echo file_get_contents($star); ?></li>
+    <li><?php echo hod_inline_svg($star); ?></li>
+    <li><?php echo hod_inline_svg($star); ?></li>
+    <li><?php echo hod_inline_svg($star); ?></li>
+    <li><?php echo hod_inline_svg($star); ?></li>
+    <li><?php echo hod_inline_svg($star); ?></li>
   </ul>
   <?php
 

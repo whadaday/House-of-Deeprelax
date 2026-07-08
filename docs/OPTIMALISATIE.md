@@ -50,7 +50,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 | HOD-13 | 5.7 | `style.css` 644 KB als één bundel incl. Swiper/slick CSS | `theme-scripts.php:7` | Library-CSS uit style.css splitsen; kritieke CSS overwegen | 🟡 | open |
 | HOD-14 | 2 | Images: geen `cf_img()`/`cf_srcset()`, geen `sizes`-attribuut, JS-lazy (`data-src`) i.p.v. native, blur-placeholder als aparte HTTP-request i.p.v. base64-LQIP; `cover` 2500px-varianten | `image.php:37-107`; `theme-images.php:3-8` | CF Image Transformations + native lazy + base64 `_blur_data_url` + context-`sizes`; breakpoints cappen | 🔴 | open |
 | HOD-15 | 9.8/9.9 | Geen preconnect/dns-prefetch; externe sync-scripts (sleak.chat chatbot, Instagram-feed globaal op home) | `header.php`, `footer.php:12`, `page-instagram.php` | Preconnect naar font/CDN-origins; chatbot `defer`; Instagram-feed conditioneel + lazy | 🟡 | open |
-| HOD-16 | 9.18 | `file_get_contents()` op dezelfde SVG's meermaals per render zonder memo | `theme-shortcodes.php:221-225`, `theme-navigation.php`, `page-footer.php`, `socials.php` | `static $cache[$path] ??= file_get_contents()` of SVG-sprite | ⚪ | open |
+| HOD-16 | 9.18 | `file_get_contents()` op dezelfde SVG's meermaals per render zonder memo | `theme-shortcodes.php:221-225`, `theme-navigation.php`, `page-footer.php`, `socials.php` | `static $cache[$path] ??= file_get_contents()` of SVG-sprite | ⚪ | **done** |
 | HOD-17 | 3 | ACF-embed/YouTube/Vimeo iframes eager geladen | `partials/elements/embed.php:4`, `blocks/embed/embed.php:22` | `loading="lazy"` + poster-facade | 🟡 | open |
 
 ## Admin & queries
@@ -61,8 +61,8 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 | HOD-19 | 12.3 | **Gutenberg niet uit voor posts/pages** (`use_block_editor_for_post` ontbreekt; geen `remove_theme_support` core-block-patterns/templates) → ~50 MB zwaarder edit-screen | `custom-widgets.php:3-5` (alleen widgets) | Classic editor forceren + theme-supports strippen | 🔴 | **done** |
 | HOD-20 | 9.19/9.1 | Query-hygiëne: `posts_per_page=-1` (guides, blocks, landingpage-rewrite, reviews/blog/kennisbank), geen `no_found_rows`/cache-flags, geen transient-caching op CPT-queries; N+1 in `card-blog` (per item `get_the_category`+`get_term_by`+`acf_get_attachment`) | `theme-guide.php:82`, `theme-blocks.php:397`, `functions-landingpages.php:71`, `card-blog.php:14-19` e.a. | Caps + `no_found_rows` + `_prime_post_caches()` vóór loops; 1h-transient taal-gescoped | 🟡 | open |
 | HOD-21 | 13 | ACF-pipeline: geen picker-query-tuning (`post_object` in pagebuilder → N+1 AJAX), ACF JSON load-paths niet gecached (`glob()` per request), `getBlocks()` (`-1`) op elk edit-screen via `acf/prepare_field` | `theme-acf.php:103-139`, `theme-blocks.php:392-444` | §13-recipes: query-tuning-filters, JSON-paths in 12h-transient, static-select cache | 🟡 | open |
-| HOD-22 | 12 | `set_default_page()` draait op élke `admin_head` (meerdere `get_option`/`update_field`); geen heartbeat-tuning; `$menu[4][4]` zonder `isset()` | `admin.php:229-342`, `admin.php:50-51` | Verplaats naar `after_switch_theme`/one-time flag; `heartbeat_settings`; isset-guard | 🟡 | open |
-| HOD-23 | 13.6 | CPT's exposen onnodig REST-schema: `landingpage`/`faq`/`book`/`banner` `show_in_rest=true` | `functions-landingpages.php:54`, `theme-faq.php`, `functions-book.php:53`, `theme-banners.php:56` | `show_in_rest=false` waar geen REST nodig | ⚪ | open |
+| HOD-22 | 12 | `set_default_page()` draait op élke `admin_head` (meerdere `get_option`/`update_field`); geen heartbeat-tuning; `$menu[4][4]` zonder `isset()` | `admin.php:229-342`, `admin.php:50-51` | Verplaats naar `after_switch_theme`/one-time flag; `heartbeat_settings`; isset-guard | 🟡 | **done** |
+| HOD-23 | 13.6 | CPT's exposen onnodig REST-schema: `landingpage`/`faq`/`book`/`banner` `show_in_rest=true` | `functions-landingpages.php:54`, `theme-faq.php`, `functions-book.php:53`, `theme-banners.php:56` | `show_in_rest=false` waar geen REST nodig | ⚪ | **done** |
 
 ## Security (concretisering §7)
 
@@ -92,7 +92,7 @@ gemeten op bestandsgrootte, niet op gerenderde pagina.
 | HOD-34 | 10.6 | **Verwisselde app-store aria-labels**: Apple-knop zegt "Google play", Play-knop zegt "App Store"; QR-`<img>` zonder alt | `appstore.php:14,22,10` | Labels omwisselen; `alt` toevoegen | 🟡 | **done** |
 | HOD-35 | 6.6 | FAQ-schema niet JSON-veilig (rauwe echo — quote/newline breekt JSON-LD) + `http://schema.org`; FAQ-taxonomiepagina mist FAQPage-schema volledig | `blocks/faq/faq.php:91,99,102`, `taxonomy-faq-category.php:62` | `wp_json_encode()`, https, schema op de taxonomie-template | 🟡 | open |
 | HOD-36 | 6.5 | Gemiste schema-kansen: geen `Book`-schema op single-book CPT, geen `Review`/`AggregateRating` bij reviews | `single-book.php`, `functions-reviews.php` | `Book`- + `Review`-JSON-LD (SERP-verrijking) | 🟡 | open |
-| HOD-37 | — | Legacy favicons (alleen shortcut-icon PNG + apple-touch); geen 32/16/SVG/webmanifest/theme-color | `theme-favicons.php:8-9` | Moderne icon-set | ⚪ | open |
+| HOD-37 | — | Legacy favicons (alleen shortcut-icon PNG + apple-touch); geen 32/16/SVG/webmanifest/theme-color | `theme-favicons.php:8-9` | Moderne icon-set | ⚪ | **done** |
 
 ## Opschonen
 

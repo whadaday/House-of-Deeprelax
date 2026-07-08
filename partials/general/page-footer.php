@@ -31,7 +31,7 @@
 		<div class="footer-top">
 			<?php if($icon): ?>
 				<a class="site-icon" href="<?php echo $logoUrl; ?>" title="<?php echo $siteName; ?>">
-					<?php echo file_get_contents($icon); ?>
+					<?php echo hod_inline_svg($icon); ?>
 				</a>
 			<?php endif; ?>
 			
@@ -49,7 +49,7 @@
 							<div class="content content-menu">
 								<h4 class="nav-title nav-dropdown">
 									<?php echo $menu->name; ?>
-									<span class="chev-down"><?php echo file_get_contents($chevDown); ?></span>
+									<span class="chev-down"><?php echo hod_inline_svg($chevDown); ?></span>
 								</h4>
 								<?php
 								  	wp_nav_menu(array(
@@ -70,7 +70,7 @@
 								<div class="content content-menu">
 									<h4 class="nav-title nav-dropdown">
 										<?php echo $menu->name; ?>
-										<span class="chev-down"><?php echo file_get_contents($chevDown); ?></span>
+										<span class="chev-down"><?php echo hod_inline_svg($chevDown); ?></span>
 									</h4>
 									<?php
 									  	wp_nav_menu(array(
@@ -96,7 +96,7 @@
 							<div class="content content-menu">
 								<h4 class="nav-title nav-dropdown">
 									<?php echo $menu->name; ?>
-									<span class="chev-down"><?php echo file_get_contents($chevDown); ?></span>
+									<span class="chev-down"><?php echo hod_inline_svg($chevDown); ?></span>
 								</h4>
 								<?php
 								  	wp_nav_menu(array(
@@ -117,7 +117,7 @@
 								<div class="content content-menu">
 									<h4 class="nav-title nav-dropdown">
 										<?php echo $menu->name; ?>
-										<span class="chev-down"><?php echo file_get_contents($chevDown); ?></span>
+										<span class="chev-down"><?php echo hod_inline_svg($chevDown); ?></span>
 									</h4>
 									<?php
 									  	wp_nav_menu(array(
@@ -143,7 +143,7 @@
 							<div class="content content-menu">
 								<h4 class="nav-title nav-dropdown">
 									<?php echo $menu->name; ?>
-									<span class="chev-down"><?php echo file_get_contents($chevDown); ?></span>
+									<span class="chev-down"><?php echo hod_inline_svg($chevDown); ?></span>
 								</h4>
 								<?php
 								  	wp_nav_menu(array(

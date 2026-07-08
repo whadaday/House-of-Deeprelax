@@ -57,7 +57,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
 
             if (in_array('menu-item-has-children', $item->classes)):
                 $icon = get_template_directory().'/assets/images/beam/icons/chevron-down.svg';
-                $output .= '<span class="chev-down">'.file_get_contents($icon).'</span>';
+                $output .= '<span class="chev-down">'.hod_inline_svg($icon).'</span>';
             endif;
 
             $output .= '</a>';
@@ -86,7 +86,7 @@ class main_menu_Walker extends Walker_Nav_Menu {
 
             if (in_array('menu-item-has-dropdown', $item->classes)):
                 $icon = get_template_directory_uri().'/assets/images/beam/icons/chevron-right.svg';
-                $output .= '<span class="chev-right">'.file_get_contents($icon).'</span>';
+                $output .= '<span class="chev-right">'.hod_inline_svg($icon).'</span>';
             endif;
 
             $output .= '</a>';
@@ -133,7 +133,7 @@ class mobile_Menu_Walker extends Walker_Nav_Menu {
 
         if (in_array('menu-item-has-children', $item->classes)):
             $icon = get_template_directory_uri().'/assets/images/beam/icons/chevron-down.svg';
-            $output .= '<span class="chev-down">'.file_get_contents($icon).'</span>';
+            $output .= '<span class="chev-down">'.hod_inline_svg($icon).'</span>';
         endif;
 
         $output .= '</a>';
