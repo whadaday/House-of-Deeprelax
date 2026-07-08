@@ -26,25 +26,28 @@ add_action('after_setup_theme', function () {
 }, 20);
 
 // ── HOD-18/24: revisions optimaliseren (recipe-revisions-optimizer, §14) ──
-// De count-cap alléén hield de DB NIET klein: WP kopieert bij elke save álle
-// ACF-flexcontent-meta naar de revision (~1800 meta-rijen/save op contentrijke
-// pagina's — de wp_postmeta-tabel liep zo naar honderden MB). Drie
-// samenwerkende filters lossen dat op zonder preview te breken:
-//   1. cap het aantal revisions per type (vangnet);
-//   2. sla revision-creatie over als alléén meta wijzigde (niet de content);
-//   3. houd postmeta volledig uit revisions (de echte bottleneck).
+// Model = identiek aan de referentie steffy.nl ("werkt goed"):
+//   • Globale cap WP_POST_REVISIONS = 3 in wp-config → geen enkele post loopt
+//     ooit vol (was 117/pagina, ~1800 meta-rijen/save).
+//   • De drie lean-filters hieronder draaien ALLÉÉN op 'page' — het zwaarste
+//     flex-type dat we bewust zonder revisie-geschiedenis houden. Alle andere
+//     content-types (landingpage/book/guide/…) vallen terug op normale WP-
+//     revisies MÉT inhoud (gecapt op 3), zodat de klant dáár wél kan
+//     terugrollen. Zónder deze scoping zag je overal 0 revisies.
+// De filters: 1) cap 'page' op 1; 2) skip revisie als alléén ACF-meta wijzigde;
+// 3) houd postmeta uit 'page'-revisions (de bloat-bottleneck).
 // Zie docs/plan/recipe-revisions-optimizer.md.
 
-// Alle post-types met het 'content'-flexfield (zie beam_blocks-location in
-// theme-blocks.php). Buiten deze lijst blijft WP-default gedrag intact.
+// Alléén 'page' krijgt de lean-behandeling (net als steffy.nl). Andere types
+// houden normale, gecapte revisies mét inhoud.
 function hod_revisioned_flex_types() {
-    return array('page', 'block', 'guide', 'book', 'landingpage');
+    return array('page');
 }
 
-// 1. Max # revisions per type. 5 is nu goedkoop: er gaat geen meta meer mee.
+// 1. Cap 'page' op 1 revisie (preview blijft werken); goedkoop want geen meta.
 add_filter('wp_revisions_to_keep', function ($num, $post) {
     if (!$post) { return $num; }
-    return in_array($post->post_type, hod_revisioned_flex_types(), true) ? 5 : $num;
+    return in_array($post->post_type, hod_revisioned_flex_types(), true) ? 1 : $num;
 }, 10, 2);
 
 // 2. Skip de revision-creatie als alleen ACF-meta wijzigde, niet de
