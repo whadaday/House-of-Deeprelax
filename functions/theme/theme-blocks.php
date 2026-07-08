@@ -464,4 +464,3 @@ function load_templates_ajax_handler() {
 }
 
 add_action('wp_ajax_load_templates', 'load_templates_ajax_handler');
-add_action('wp_ajax_nopriv_load_templates', 'load_templates_ajax_handler');

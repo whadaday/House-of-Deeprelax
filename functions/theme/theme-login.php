@@ -52,7 +52,7 @@ function customize_login_logo() {
   if($logo):
     echo '<style type="text/css">
                 h1 a {
-                    background-image:url('.$logo.') !important;
+                    background-image:url('.esc_url($logo).') !important;
                     background-size:contain !important;
                     height:60px !important;
                     width:300px !important;
