@@ -210,3 +210,26 @@ function modify_headings_for_seo($value, $post_id, $field) {
     // Return the modified value
     return $value;
 }
+
+/* ACF query-tuning (§13.1-13.3) ---------------------------------------------
+ * Relationship/Post Object/Page Link pickers draaien een WP_Query per (AJAX-)
+ * load. Zonder deze flags telt WP alle rijen (found_rows) en primet meta+term-
+ * caches die de picker niet toont — 50-80% overhead op edit-screens. */
+function hod_acf_query_light($args, $field, $post_id) {
+    $args['no_found_rows']          = true;
+    $args['update_post_meta_cache'] = false;
+    $args['update_post_term_cache'] = false;
+    return $args;
+}
+add_filter('acf/fields/relationship/query', 'hod_acf_query_light', 10, 3);
+add_filter('acf/fields/post_object/query',  'hod_acf_query_light', 10, 3);
+add_filter('acf/fields/page_link/query',    'hod_acf_query_light', 10, 3);
+
+/* ACF UI cleanup (§12.8.1-12.8.3) -------------------------------------------
+ * CPT's + options-pages worden in PHP geregistreerd (theme-blocks/-banners/
+ * -options e.d.), niet via de ACF-UI. De UI-schermen uitzetten scheelt admin-
+ * bloat en voorkomt een tweede source-of-truth. Field-settings-tabs uit = minder
+ * DOM op zware veldgroep-schermen. */
+add_filter('acf/settings/enable_post_types',              '__return_false');
+add_filter('acf/settings/enable_options_pages_ui',        '__return_false');
+add_filter('acf/field_group/disable_field_settings_tabs', '__return_true');

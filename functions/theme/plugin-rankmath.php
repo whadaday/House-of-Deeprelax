@@ -249,7 +249,10 @@ class PLL_RankMath {
                     // Exclude cases where a post type archive is attached to a page (ex: WooCommerce).
                     $slug = true === $post_type_obj->has_archive ? $post_type_obj->rewrite['slug'] : $post_type_obj->has_archive;
 
-                    if ( ! wpcom_vip_get_page_by_path( $slug ) ) {
+                    // get_page_by_path (core) i.p.v. wpcom_vip_get_page_by_path
+                    // (VIP-only, bestaat hier NIET → latente fatal in de sitemap-
+                    // generatie). Zelfde semantiek: WP_Post|null.
+                    if ( ! get_page_by_path( $slug ) ) {
                         // The post type archive in the current language is already added by WPSEO.
                         $languages = wp_list_filter( $languages, [ 'slug' => pll_current_language() ], 'NOT' );
                         foreach ( $languages as $lang ) {

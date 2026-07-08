@@ -6,6 +6,8 @@ function custom_mime_types( $mimes ) {
     $mimes['svg']   = 'image/svg+xml';
     $mimes['svgz']  = 'image/svg+xml';
     $mimes['woff2'] = 'font/woff2';
+    $mimes['woff']  = 'font/woff';
+    $mimes['ttf']   = 'font/ttf';
  
     // Optional. Remove a mime type.
     // unset( $mimes['exe'] );
