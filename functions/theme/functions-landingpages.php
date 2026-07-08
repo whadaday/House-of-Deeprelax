@@ -84,19 +84,17 @@ function landingpage_custom_rewrite_rules() {
 }
 add_action('init', 'landingpage_custom_rewrite_rules');
 
-add_action( 'save_post_landingpage', 'reset_permalinks_on_landingpage_save', 10, 3 );
-
-function reset_permalinks_on_landingpage_save( $post_id, $post, $update ) {
-    // Voorkom onnodige uitvoering tijdens autosave of wanneer een revisie wordt opgeslagen
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+// Ververs de rewrite-rules ALLÉÉN als een landingpage-slug nieuw is of wijzigt —
+// dán verandert de permalink-regel. Voorheen draaide flush_rewrite_rules() bij
+// ÉLKE landingpage-save (ook pure content-edits); dat is onnodige overhead per
+// save. Via post_updated hebben we de oude slug ($post_before) om te vergelijken.
+function reset_permalinks_on_landingpage_save( $post_id, $post_after, $post_before ) {
+    if ( $post_after->post_type !== 'landingpage' ) {
         return;
     }
-
-    // Zorg dat het om het juiste post type gaat
-    if ( $post->post_type !== 'landingpage' ) {
-        return;
+    // Alleen flushen bij een gewijzigde/nieuwe slug (nieuwe permalink-regel nodig).
+    if ( $post_before->post_name !== $post_after->post_name ) {
+        flush_rewrite_rules( false ); // soft flush (geen htaccess) — voldoende
     }
-
-    // Flush de rewrite regels (permalinks)
-    flush_rewrite_rules();
 }
+add_action( 'post_updated', 'reset_permalinks_on_landingpage_save', 10, 3 );
