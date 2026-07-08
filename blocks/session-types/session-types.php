@@ -69,7 +69,7 @@
 								<h3><?php echo $title; ?></h3>
 								<?php if($text): ?><p><?php echo $text; ?></p><?php endif; ?>
 								<div class="content-action" data-btn-color="color">
-									<a href="<?php echo $link; ?>" class="btn"><?php echo $btnText; ?></a>
+									<a href="<?php echo esc_url($link); ?>" class="btn"><?php echo $btnText; ?></a>
 								</div>
 							</div>
 				<?php 

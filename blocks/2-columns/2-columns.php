@@ -74,7 +74,7 @@
 					<picture class="picture-lazy" <?php if($crop): ?>data-crop="<?php echo $crop; ?>"<?php endif; ?>>
 					    <?php /*<source media="(min-width: 768px)" srcset="<?php echo $image['sizes']['large']; ?>" /> */ ?>
 					    <img
-					    	data-src="<?php echo $imageOverlay['sizes']['large']; ?>"
+					    	data-src="<?php echo esc_url($imageOverlay['sizes']['large']); ?>"
 					    	class="lazy"
 					    	alt="<?php echo esc_attr($imageOverlay['alt']); ?>"
 					    	width="<?php echo $imageOverlay['sizes']['large-width']; ?>"

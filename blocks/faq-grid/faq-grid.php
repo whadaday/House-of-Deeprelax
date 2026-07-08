@@ -32,7 +32,7 @@
 						<?php $i++; endforeach; ?>
 					</ul>
 					<div class="content-action">
-						<a class="btn" href="<?php echo $url; ?>">Bekijk alle vragen</a>
+						<a class="btn" href="<?php echo esc_url($url); ?>">Bekijk alle vragen</a>
 					</div>
 				</div>
 			</div>

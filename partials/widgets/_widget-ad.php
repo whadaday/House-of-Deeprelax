@@ -11,7 +11,7 @@
 ?>
 
 <div class="widget-ad">
-    <a href="<?php echo $link_url; ?>" class="widget-link" target="<?php echo $link_target; ?>">
+    <a href="<?php echo esc_url($link_url); ?>" class="widget-link" target="<?php echo $link_target; ?>">
 		<figure class="widget-image img-background" data-crop="<?php echo $crop; ?>" style="background-image: url('<?php echo $imageUrl; ?>');"></figure>
 	</a>
     <div class="widget-content" data-color="<?php echo $color; ?>" data-text-align="<?php echo $align; ?>">
@@ -19,7 +19,7 @@
             <p class="widget-text"><?php echo $text; ?></p>
 
             <div class="content-action" data-btn-color="color">
-                <a href="<?php echo $link_url; ?>" class="btn" target="<?php echo $link_target; ?>"><?php echo $link_title; ?></a>
+                <a href="<?php echo esc_url($link_url); ?>" class="btn" target="<?php echo $link_target; ?>"><?php echo $link_title; ?></a>
             </div>
 		</div>
 </div>

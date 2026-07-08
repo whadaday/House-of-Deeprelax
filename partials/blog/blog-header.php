@@ -54,7 +54,7 @@
 								else:
 							?>
 					          		<?php if(isset($categoryID)): ?>
-					          			<a class="card-category" href="<?php echo $catLink; ?>"><?php echo $category->name; ?></a>
+					          			<a class="card-category" href="<?php echo esc_url($catLink); ?>"><?php echo $category->name; ?></a>
 					          		<?php endif; ?>
 				          	<?php endif; ?>
 			          		<?php /*<span class="card-date"><?php echo $date; ?></span>*/ ?>

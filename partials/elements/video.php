@@ -13,9 +13,9 @@
         loop muted playsinline disablepictureinpicture autoplay
         type="video/mp4">
         <?php if($lazy): ?>
-          <source data-src="<?php echo $url; ?>" type="video/mp4">
+          <source data-src="<?php echo esc_url($url); ?>" type="video/mp4">
         <?php else: ?>
-          <source src="<?php echo $url; ?>" type="video/mp4">
+          <source src="<?php echo esc_url($url); ?>" type="video/mp4">
         <?php endif; ?>
       </video>
 

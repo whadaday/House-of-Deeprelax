@@ -30,7 +30,7 @@
 	?>
 		<div class="footer-top">
 			<?php if($icon): ?>
-				<a class="site-icon" href="<?php echo $logoUrl; ?>" title="<?php echo $siteName; ?>">
+				<a class="site-icon" href="<?php echo esc_url($logoUrl); ?>" title="<?php echo $siteName; ?>">
 					<?php echo hod_inline_svg($icon); ?>
 				</a>
 			<?php endif; ?>

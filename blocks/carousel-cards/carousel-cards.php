@@ -82,7 +82,7 @@
 						<div class="content content-post" data-color-text="light">
 
 							<?php if($link): ?>
-								<a class="card-link" href="<?php echo $link; ?>"></a>
+								<a class="card-link" href="<?php echo esc_url($link); ?>"></a>
 							<?php endif; ?>
 							<div class="card-post">
 								<?php

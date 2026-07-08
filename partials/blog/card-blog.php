@@ -20,7 +20,7 @@
 ?>
 <div class="card-blog">
   
-  <a class="card-link" href="<?php echo $link; ?>" aria-label="<?php echo $title; ?>"></a>
+  <a class="card-link" href="<?php echo esc_url($link); ?>" aria-label="<?php echo $title; ?>"></a>
     
     <div class="card-image-holder">
       <?php 

@@ -44,7 +44,7 @@
 						
 						<div class="swiper-slide">
 							<div class="content">
-								<img src="<?php echo $logo['sizes']['large']; ?>" alt="<?php echo $logo['alt']; ?>" />
+								<img src="<?php echo esc_url($logo['sizes']['large']); ?>" alt="<?php echo $logo['alt']; ?>" />
 							</div>
 						</div>
 					<?php endforeach; ?>

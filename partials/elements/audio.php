@@ -13,7 +13,7 @@
 	?>
 		<div class="player-holder">
 			<?php if($title): ?><span class="player-title"><?php echo $title; ?></span><?php endif; ?>
-			<audio class="audio-player" src="<?php echo $audio['url']; ?>"></audio>
+			<audio class="audio-player" src="<?php echo esc_url($audio['url']); ?>"></audio>
 			<div class="controls">
 				<div class="timeline-holder">
 					<input type="range" class="timeline" max="100" value="0" aria-label="Afspeelvoortgang">

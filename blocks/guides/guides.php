@@ -107,7 +107,7 @@
 							<h3><?php echo $title; ?></h3>
 							<?php if($text): ?><p><?php echo $text; ?></p><?php endif; ?>
 							<div class="content-action" data-btn-color="dark">
-								<a href="<?php echo $link; ?>" class="btn">Naar de guide</a>
+								<a href="<?php echo esc_url($link); ?>" class="btn">Naar de guide</a>
 							</div>
 						</div>
 				<?php 

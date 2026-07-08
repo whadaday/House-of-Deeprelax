@@ -7,15 +7,6 @@
   &:last-child {
     margin-bottom: 0;
   }
-  // HOD-30: zichtbare focus-ring (was outline:none op de universele selector,
-  // waardoor toetsenbord-focus site-breed onzichtbaar was — WCAG 2.4.7).
-  // Vaste, contrastrijke kleur (niet currentColor: dat is onzichtbaar bij bv.
-  // witte tekst op een lichte achtergrond). Blauw contrasteert met de warme
-  // theme-tinten (fix audit r1).
-  &:focus-visible {
-    outline: 2px solid #1d4ed8;
-    outline-offset: 2px;
-  }
 
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;

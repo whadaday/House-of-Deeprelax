@@ -35,7 +35,7 @@
 			<picture class="picture-lazy" <?php if($imageMobileCrop): ?>data-crop="<?php echo $imageMobileCrop; ?>"<?php endif; ?>>
 			    <source media="(max-width: 786px)" srcset="<?php echo $imageMobile['sizes']['medium_large']; ?> 1x, <?php echo $imageMobile['sizes']['1536x1536']; ?> 2x">
 			    <img
-			    	data-src="<?php echo $imageMobile['sizes']['1536x1536']; ?>"
+			    	data-src="<?php echo esc_url($imageMobile['sizes']['1536x1536']); ?>"
 			    	class="lazy"
 			    	alt="<?php echo esc_attr($imageMobile['alt']); ?>"
 			    	width="<?php echo $imageMobile['sizes']['1536x1536-width']; ?>"
@@ -91,7 +91,7 @@
 				<source media="(max-width: 787px)" srcset="<?php echo $image['sizes']['medium_large']; ?> 1x, <?php echo $image['sizes']['1536x1536']; ?> 2x">
 
 		    <img
-		    	data-src="<?php echo $image['sizes']['cover']; ?>"
+		    	data-src="<?php echo esc_url($image['sizes']['cover']); ?>"
 		    	class="lazy"
 		    	alt="<?php echo esc_attr($image['alt']); ?>"
 		    	width="<?php echo $image['sizes']['cover-width']; ?>"

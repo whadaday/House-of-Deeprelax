@@ -22,7 +22,7 @@
 				$link       = get_the_permalink($post_id);
   				$title      = get_the_title($post_id);
 			?>
-				<li><a href="<?php echo $link; ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></li>
+				<li><a href="<?php echo esc_url($link); ?>" title="<?php echo $title; ?>"><?php echo $title; ?></a></li>
 			<?php endforeach; ?>
 		</ul>
     </div>

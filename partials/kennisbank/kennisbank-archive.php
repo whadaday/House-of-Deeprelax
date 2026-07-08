@@ -85,7 +85,7 @@
         		?>
 
         			<div class="kennisbank-article">
-        				<p><a href="<?php echo $link; ?>"><strong><?php echo $title; ?></strong></a><br />
+        				<p><a href="<?php echo esc_url($link); ?>"><strong><?php echo $title; ?></strong></a><br />
         				<?php if($excerpt): echo $excerpt; endif; ?></p>
         			</div>
 

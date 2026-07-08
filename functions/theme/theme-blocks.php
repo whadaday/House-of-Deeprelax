@@ -404,12 +404,16 @@ add_filter('acf/prepare_field/name=block-templates', 'acf_load_block_templates')
 
 function load_templates_ajax_handler() {
 
+    // Alleen bewerkers: dit endpoint leest ACF-block-content uit; geen anonieme
+    // toegang (fix audit r2 — was nopriv geregistreerd → IDOR/info-disclosure).
+    if ( ! current_user_can('edit_posts') ) {
+        wp_send_json_error('forbidden', 403);
+    }
+
     if (!check_ajax_referer('block-templates-nonce', 'security', false)): // set up our security nonce
         wp_send_json_error('Invalid security token sent.');
         wp_die(); // if no match, exit
     endif;
-
-    $post_id            = $_POST['post_id'];
     $block_templates_id = intval($_POST['block_templates']);
 
     // $contentBlocksObject = get_field_object('content', $block_templates_id);

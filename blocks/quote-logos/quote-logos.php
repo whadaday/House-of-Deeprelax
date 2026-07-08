@@ -34,7 +34,7 @@
 				<?php foreach($logos as $logo): ?>
 					<div class="column column-logo">
 						<div class="content content-logo">
-							<img class="logo" src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>">
+							<img class="logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>">
 						</div>
 					</div>
 				<?php endforeach; ?>

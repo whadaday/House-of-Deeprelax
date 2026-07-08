@@ -46,7 +46,7 @@
 					<div class="column column-logo">
 						<div class="content">
 							<?php if($logo): ?>
-								<a class="site-logo logo-primary" href="<?php echo $logoUrl; ?>" title="<?php echo $siteName; ?>">
+								<a class="site-logo logo-primary" href="<?php echo esc_url($logoUrl); ?>" title="<?php echo $siteName; ?>">
 									<?php echo file_get_contents($logo); ?>
 								</a>
 							<?php endif; ?>

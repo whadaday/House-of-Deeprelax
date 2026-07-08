@@ -52,7 +52,7 @@
                           <h4>Meest gelezen</h4>
                           <ol class="list-articles">
                             <?php foreach($mostRead as $article): ?>
-                              <li><a href="<?php echo get_the_permalink($article); ?>"><?php echo get_the_title($article); ?></li></a>
+                              <li><a href="<?php echo get_the_permalink($article); ?>"><?php echo get_the_title($article); ?></a></li>
                             <?php endforeach; ?>
                           </ol>
                         </div>

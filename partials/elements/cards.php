@@ -8,7 +8,7 @@
 		?>
 			<div class="swiper-slide">
 				<div class="deeprelax-card">
-					<a class="card-link" href="<?php echo $link; ?>" aria-label="<?php echo $card_title; ?>"></a>
+					<a class="card-link" href="<?php echo esc_url($link); ?>" aria-label="<?php echo $card_title; ?>"></a>
 					<div class="card-image-holder">
 			        	<?php
 							if($background == 'video'):

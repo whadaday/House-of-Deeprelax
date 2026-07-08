@@ -29,11 +29,11 @@
 						<div class="slide-content">
 
 							<?php if($categoryID): ?><span class="slide-subtitle"><?php echo $category->name; ?></span><?php endif; ?>
-							<a class="slide-content-link" href="<?php echo $link; ?>">
+							<a class="slide-content-link" href="<?php echo esc_url($link); ?>">
 								<span class="slide-title"><?php echo $title; ?></span>
 							</a>
 							<div class="content-action" data-align="center">
-								<a class="btn" data-btn-color="light" href="<?php echo $link; ?>">Lees verder</a>
+								<a class="btn" data-btn-color="light" href="<?php echo esc_url($link); ?>">Lees verder</a>
 					        </div>
 						</div>
 				<?php endforeach; ?>

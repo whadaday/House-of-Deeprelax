@@ -13,7 +13,7 @@
   ?>
 
     <li>
-      <a href="<?php echo $url; ?>" target="_blank">
+      <a href="<?php echo esc_url($url); ?>" target="_blank">
         <?php echo file_get_contents($icon); ?>
       </a>
     </li>

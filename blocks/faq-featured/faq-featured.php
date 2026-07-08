@@ -37,7 +37,7 @@
                         </a>
 
                     <?php else: ?>
-                    	<a class="faq-title" href="<?php echo $link; ?>"><?php echo $title; ?></a>
+                    	<a class="faq-title" href="<?php echo esc_url($link); ?>"><?php echo $title; ?></a>
                     <?php endif; ?>
 					<?php /*<div class="content-action">
 						<a class="link" href="<?php echo $url; ?>#<?php echo $faq; ?>">Lees verder</a>

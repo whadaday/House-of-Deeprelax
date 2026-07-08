@@ -35,7 +35,7 @@
       </div>
       <div class="column column-action">
         <div class="content-action">
-          <a href="<?php echo $categoryLink; ?>" class="link"><?php echo $linkText; ?></a>
+          <a href="<?php echo esc_url($categoryLink); ?>" class="link"><?php echo $linkText; ?></a>
         </div>
       </div>
     </div>

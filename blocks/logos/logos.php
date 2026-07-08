@@ -28,8 +28,8 @@
 			?>
 				<div class="column column-logo">
 					<div class="content content-logo">
-						<?php if($url): ?><a class="link-logo" href="<?php echo $url; ?>" target="_blank"><?php endif; ?>
-							<img class="logo" alt="<?php echo $image['alt']; ?>" src="<?php echo $image['sizes']['large']; ?>">
+						<?php if($url): ?><a class="link-logo" href="<?php echo esc_url($url); ?>" target="_blank"><?php endif; ?>
+							<img class="logo" alt="<?php echo esc_attr($image['alt']); ?>" src="<?php echo esc_url($image['sizes']['large']); ?>">
 						<?php if($url): ?></a><?php endif; ?>
 					</div>
 				</div>
@@ -45,8 +45,8 @@
 				$url = $logo['url'];
 			?>
 				<div class="swiper-slide">
-					<?php if($url): ?><a class="link-logo" href="<?php echo $url; ?>" target="_blank"><?php endif; ?>
-						<img class="logo" alt="<?php echo $image['alt']; ?>" src="<?php echo $image['sizes']['large']; ?>">
+					<?php if($url): ?><a class="link-logo" href="<?php echo esc_url($url); ?>" target="_blank"><?php endif; ?>
+						<img class="logo" alt="<?php echo esc_attr($image['alt']); ?>" src="<?php echo esc_url($image['sizes']['large']); ?>">
 					<?php if($url): ?></a><?php endif; ?>
 				</div>
 			<?php endforeach; ?>

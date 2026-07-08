@@ -15,6 +15,15 @@
 
 if (!defined('ABSPATH')) { exit; }
 
+// wp_kses draait de protocol-filter (javascript: strippen) alléén op de vaste
+// URI-attribuutlijst; xlink:href staat daar niet in. Voeg 'm toe zodat een
+// SVG-<use>/<pattern> met xlink:href="javascript:..." óók gefilterd wordt
+// (fix audit r2, defense-in-depth).
+add_filter('wp_kses_uri_attributes', function ($attrs) {
+    $attrs[] = 'xlink:href';
+    return array_unique($attrs);
+});
+
 /**
  * Sanitize een inline SVG-string tegen XSS. Retourneert '' bij lege input.
  *

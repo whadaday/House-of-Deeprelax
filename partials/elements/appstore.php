@@ -7,7 +7,7 @@
 
 	<ul class="list-apps">
 		<li class="dynamic-qr">
-			<img src="<?php echo esc_url($qr_src); ?>" alt="" />
+			<img src="<?php echo esc_url($qr_src); ?>" alt="QR-code om de app te downloaden" />
 			<p>Scan de QR-code met je telefoon en krijg direct toegang tot de Deeprelax-app.</p>
 		</li>
 		<li>

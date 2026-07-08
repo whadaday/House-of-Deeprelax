@@ -4,7 +4,7 @@ define('THEME_VERSION', $theme->Version);
 
 function theme_styles()
 {
-    wp_enqueue_style('main', get_template_directory_uri().'/style.css', array(), THEME_VERSION, 'all', 99);
+    wp_enqueue_style('main', get_template_directory_uri().'/style.css', array(), THEME_VERSION, 'all');
     // main.js hangt af van WP-core jQuery (geen dubbele jQuery meer in de
     // bundel — HOD-10) en laadt deferred in de footer (HOD-11).
     wp_enqueue_script('main', get_template_directory_uri().'/main.js', array('jquery'), THEME_VERSION, true);
@@ -15,7 +15,7 @@ function theme_styles()
     if($devMode):
         $jsFile = locate_template( 'assets/javascript/scripts/dev-mode.js', false, false );
         if (file_exists($jsFile)):
-            wp_enqueue_script('dev-mode', get_template_directory_uri() .'/assets/javascript/scripts/dev-mode.js', array(), THEME_VERSION, 'all');
+            wp_enqueue_script('dev-mode', get_template_directory_uri() .'/assets/javascript/scripts/dev-mode.js', array(), THEME_VERSION, true);
         endif;
     endif;
 }
