@@ -436,7 +436,13 @@ jQuery(function ($) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     let lazyImage = entry.target;
-                        lazyImage.src = lazyImage.dataset.src;
+                        // Guard: skip empty/null/undefined data-src — otherwise
+                        // img.src becomes "undefined"/"null" and the browser
+                        // fetches /{current-dir}/undefined (background 404).
+                        var imgSrc = lazyImage.dataset.src;
+                        if (imgSrc && imgSrc !== 'null' && imgSrc !== 'undefined') {
+                            lazyImage.src = imgSrc;
+                        }
 
                     var interval = setInterval(function () {
                         if (lazyImage.complete) {
@@ -469,7 +475,10 @@ jQuery(function ($) {
                     for (var source in entry.target.children) {
                         var videoSource = entry.target.children[source];
                         if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-                        videoSource.src = videoSource.dataset.src;
+                        var vidSrc = videoSource.dataset.src;
+                        if (vidSrc && vidSrc !== 'null' && vidSrc !== 'undefined') {
+                            videoSource.src = vidSrc;
+                        }
                         }
                     }
 
