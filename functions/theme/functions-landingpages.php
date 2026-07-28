@@ -84,17 +84,32 @@ function landingpage_custom_rewrite_rules() {
 }
 add_action('init', 'landingpage_custom_rewrite_rules');
 
-// Ververs de rewrite-rules ALLÉÉN als een landingpage-slug nieuw is of wijzigt —
-// dán verandert de permalink-regel. Voorheen draaide flush_rewrite_rules() bij
-// ÉLKE landingpage-save (ook pure content-edits); dat is onnodige overhead per
-// save. Via post_updated hebben we de oude slug ($post_before) om te vergelijken.
+// Ververs de rewrite-rules ALLÉÉN als een landingpage-slug of -status wijzigt —
+// dán verandert de permalink-set. Cruciaal: géén flush_rewrite_rules() hier.
+// Die regenereert de rules binnen DEZE request, met de landingpages zoals ze op
+// init geregistreerd stonden — dus van VÓÓR de save. De nieuwe slug ontbreekt
+// dan in de opgeslagen rules en de pagina geeft 404 tot een volgende flush.
+// delete_option() laat WP de rules lui regenereren op de eerstvolgende request,
+// waar init de actuele slugs wél kent.
 function reset_permalinks_on_landingpage_save( $post_id, $post_after, $post_before ) {
     if ( $post_after->post_type !== 'landingpage' ) {
         return;
     }
-    // Alleen flushen bij een gewijzigde/nieuwe slug (nieuwe permalink-regel nodig).
-    if ( $post_before->post_name !== $post_after->post_name ) {
-        flush_rewrite_rules( false ); // soft flush (geen htaccess) — voldoende
+    if ( $post_before->post_name !== $post_after->post_name
+        || $post_before->post_status !== $post_after->post_status ) {
+        delete_option( 'rewrite_rules' );
     }
 }
 add_action( 'post_updated', 'reset_permalinks_on_landingpage_save', 10, 3 );
+
+// Geplande publicatie (wp_publish_post via cron) vuurt géén post_updated —
+// vang statuswissels van/naar publish daarom ook via transition_post_status.
+function reset_permalinks_on_landingpage_status( $new_status, $old_status, $post ) {
+    if ( $post->post_type !== 'landingpage' || $new_status === $old_status ) {
+        return;
+    }
+    if ( $new_status === 'publish' || $old_status === 'publish' ) {
+        delete_option( 'rewrite_rules' );
+    }
+}
+add_action( 'transition_post_status', 'reset_permalinks_on_landingpage_status', 10, 3 );
