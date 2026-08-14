@@ -27,6 +27,10 @@ jobs:
     name: ${{ matrix.target.name }}
     strategy:
       fail-fast: false
+      # Max 2 tegelijk: 3+ gelijktijdige SSH-connects naar dezelfde Cloudways-
+      # server triggeren rate-limiting die de laatste verbinding dropt (connect
+      # timeout) — gezien 2026-08-14, 3× op rij exact de laatste matrix-job.
+      max-parallel: 2
       matrix:
         target: ${{ fromJson(needs.prepare.outputs.targets) }}
 
@@ -92,6 +96,23 @@ jobs:
           DEPLOYEOF
 
       - name: Deploy via rsync
+        id: rsync
+        continue-on-error: true
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
+          path: ./
+          remote_path: ${{ matrix.target.path }}
+          remote_host: ${{ matrix.target.host }}
+          remote_port: ${{ matrix.target.port }}
+          remote_user: ${{ matrix.target.user }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Retry: een connect-timeout duurt ~2 min — tegen die tijd zijn
+      # gelijktijdige matrix-jobs klaar en komt deze verbinding alleen aan,
+      # buiten de burst-rate-limiting van de server.
+      - name: Deploy via rsync (retry)
+        if: steps.rsync.outcome == 'failure'
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
