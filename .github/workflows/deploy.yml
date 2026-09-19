@@ -25,6 +25,12 @@ jobs:
     if: needs.prepare.outputs.targets != '[]' && needs.prepare.outputs.targets != ''
     runs-on: ubuntu-latest
     name: ${{ matrix.target.name }}
+    # De secrets-context mag niet in een step-if, wél in job-env. Vandaar deze
+    # omweg: hier één keer omzetten naar 'true'/'false', en de stappen hieronder
+    # toetsen op env. Zonder dit weigert GitHub het hele workflow-bestand.
+    env:
+      HEEFT_THEME_PLUGIN: ${{ secrets.BEAM_THEME_PLUGIN_KEY != '' }}
+      HEEFT_ADMIN_PLUGIN: ${{ secrets.BEAM_ADMIN_PLUGIN_KEY != '' }}
     strategy:
       fail-fast: false
       # Max 2 tegelijk: 3+ gelijktijdige SSH-connects naar dezelfde Cloudways-
@@ -100,7 +106,7 @@ jobs:
         continue-on-error: true
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
+          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='.mu-plugins' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
           path: ./
           remote_path: ${{ matrix.target.path }}
           remote_host: ${{ matrix.target.host }}
@@ -115,7 +121,7 @@ jobs:
         if: steps.rsync.outcome == 'failure'
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
+          switches: -rlvz -O --delete --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='.env' --exclude='src' --exclude='build' --exclude='*.map' --exclude='.DS_Store' --exclude='.claude' --exclude='.mu-plugins' --exclude='package.json' --exclude='package-lock.json' --exclude='tsconfig.json' --exclude='vite.config.*' --exclude='webpack.config.*' --exclude='tailwind.config.*' --exclude='postcss.config.*' --exclude='.eslintrc*' --exclude='.prettierrc*' --exclude='.editorconfig' --exclude='.gitignore' --exclude='README.md'
           path: ./
           remote_path: ${{ matrix.target.path }}
           remote_host: ${{ matrix.target.host }}
@@ -123,6 +129,102 @@ jobs:
           remote_user: ${{ matrix.target.user }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      # Mu-plugins die bij dit thema horen gaan mee met elke deploy.
+      #
+      # Alleen waar de repo er een sleutel voor heeft: staat het secret er niet,
+      # dan slaat de stap over. Zo blijft dit sjabloon universeel — een thema
+      # zonder eigen mu-plugins merkt er niets van — en hoeft er per repo niets
+      # aan de workflow te veranderen.
+      #
+      # Waarom dit moet: bij Beam levert het thema css en js achter schakelaars
+      # die in de mu-plugin zitten. Ging alleen het thema naar de server, dan
+      # verdween het gedrag. Dat gebeurde twee keer — eerst --section-padding
+      # site-breed, daarna verloor Woodbase zijn schermhoge footer.
+      #
+      # Read-only deploy keys, één per repo: een deploy key mag bij precies één
+      # repository horen. `path:` zet de bron buiten de theme-root.
+      #
+      # Bewust hier en niet bovenaan bij de theme-checkout: de build van het
+      # thema lint alles wat in de werkmap staat, en struikelde over
+      # bevindingen in de plugin-bron — die hoort niet bij deze build. Nu staan
+      # ze er pas als het thema al gebouwd en verstuurd is.
+      - name: Checkout beam-theme-options
+        if: env.HEEFT_THEME_PLUGIN == 'true'
+        uses: actions/checkout@v5
+        with:
+          repository: whadaday/Beam-Theme-Plugin
+          ssh-key: ${{ secrets.BEAM_THEME_PLUGIN_KEY }}
+          path: .mu-plugins/beam-theme-options
+
+      - name: Checkout beam-admin-options
+        if: env.HEEFT_ADMIN_PLUGIN == 'true'
+        uses: actions/checkout@v5
+        with:
+          repository: whadaday/Beam-Admin-Plugin
+          ssh-key: ${{ secrets.BEAM_ADMIN_PLUGIN_KEY }}
+          path: .mu-plugins/beam-admin-options
+
+      # De mu-plugins erachteraan, elk naar hun eigen map onder wp-content.
+      #
+      # Het pad komt uit dat van het thema: de matrix kent alleen de theme-root,
+      # en wp-content zit daarin. Zo hoeft DEPLOY_TARGETS niet te veranderen en
+      # blijft de lijst sites automatisch precies die met dit thema.
+      - name: Pad naar mu-plugins bepalen
+        if: env.HEEFT_THEME_PLUGIN == 'true' || env.HEEFT_ADMIN_PLUGIN == 'true'
+        id: paden
+        run: |
+          MU=$(echo "${{ matrix.target.path }}" | sed 's|/wp-content/themes/.*|/wp-content/mu-plugins|')
+          if [ "$MU" = "${{ matrix.target.path }}" ]; then
+            echo "::error::Kan wp-content niet afleiden uit '${{ matrix.target.path }}'."
+            exit 1
+          fi
+          echo "mu=$MU" >> "$GITHUB_OUTPUT"
+          echo "mu-plugins: $MU"
+
+      # --delete per plugin-map en niet op mu-plugins zelf: daarnaast staan de
+      # loader-stubs en de andere mu-plugins van WSM, die bij de site horen en
+      # niet bij deze repo's.
+      - name: Deploy beam-theme-options
+        if: env.HEEFT_THEME_PLUGIN == 'true'
+        id: rsync_theme_options
+        continue-on-error: true
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -rlvz -O --delete --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.DS_Store' --exclude='.claude' --exclude='README.md'
+          path: .mu-plugins/beam-theme-options/
+          remote_path: ${{ steps.paden.outputs.mu }}/beam-theme-options
+          remote_host: ${{ matrix.target.host }}
+          remote_port: ${{ matrix.target.port }}
+          remote_user: ${{ matrix.target.user }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy beam-admin-options
+        if: env.HEEFT_ADMIN_PLUGIN == 'true'
+        id: rsync_admin_options
+        continue-on-error: true
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -rlvz -O --delete --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.DS_Store' --exclude='.claude' --exclude='README.md'
+          path: .mu-plugins/beam-admin-options/
+          remote_path: ${{ steps.paden.outputs.mu }}/beam-admin-options
+          remote_host: ${{ matrix.target.host }}
+          remote_port: ${{ matrix.target.port }}
+          remote_user: ${{ matrix.target.user }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Een mislukte plugin-deploy mag niet als geslaagd doorgaan: dan staat er
+      # een nieuw thema op een oude plugin — precies de scheefstand die deze
+      # stappen moeten voorkomen.
+      - name: Mu-plugins gelukt?
+        if: ${{ steps.rsync_theme_options.outcome == 'failure' || steps.rsync_admin_options.outcome == 'failure' }}
+        run: |
+          echo "::error::Een mu-plugin is niet gedeployd (theme-options: ${{ steps.rsync_theme_options.outcome }}, admin-options: ${{ steps.rsync_admin_options.outcome }})."
+          echo "::error::Het thema staat er mogelijk wel op. Herstel met een nieuwe run."
+          exit 1
+
+      # Ná de mu-plugins: deze stap loopt over heel wp-content en moet draaien
+      # als alles er staat. Stond hij ervoor, dan bleven de zojuist
+      # gesynchroniseerde plugin-bestanden zonder group-write achter.
       - name: Fix file permissions
         uses: appleboy/ssh-action@v1
         with:
@@ -160,17 +262,10 @@ jobs:
             curl -s -o /dev/null http://localhost:8080/purge-all || true
             echo "Caches purged (Breeze page + minification + Varnish)"
 
-      - name: Notify deploy
-        if: always()
-        run: |
-          STATUS="${{ job.status }}"
-          SUBJECT="${STATUS^} — ${{ github.repository }} → ${{ matrix.target.name }}"
-          curl -s -X POST https://api.resend.com/emails \
-            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d "{
-              \"from\": \"WP Deploy <woof@builtwithbeam.com>\",
-              \"to\": [\"notifications@angelovaudo.com\"],
-              \"subject\": \"$SUBJECT\",
-              \"text\": \"Site: ${{ matrix.target.name }}\\nRepository: ${{ github.repository }}\\nBranch: ${{ github.ref_name }}\\nCommit: ${{ github.sha }}\\nStatus: $STATUS\\nDoor: ${{ github.actor }}\\n\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
-            }"
+      # Bewust GEEN meldstap. Elke deploy mailde zichzelf via Resend — per
+      # site, dus een gedeeld thema met acht sites stuurde acht berichten voor
+      # één commit, vrijwel altijd "success". WSM vat het sinds 19-09-2026 zelf
+      # samen: eens per vier uur één bericht, mislukte runs bovenaan, gelezen
+      # uit de GitHub Actions-API (scheduled/deploy-digest.ts). Die bron ziet
+      # óók de runs die hier nooit aan een meldstap toekomen — geannuleerd,
+      # getimeout, of gestrand op de YAML zelf.
